@@ -34,7 +34,7 @@ Almost all dependencies you can download from `yaourt`.
 | `mpd` | Server-side application for playing music | Music widgets |
 | `mpc` | Minimalist command line interface to MPD | Music widgets |
 | `maim` | Takes screenshots (improved `scrot`) | Screenshot keybinds |
-| (i3lock-fancy-multimonitor)[https://github.com/guimeira/i3lock-fancy-multimonitor] | Fancy i3lock | (explains itself) |
+| [i3lock-fancy-multimonitor](https://github.com/guimeira/i3lock-fancy-multimonitor) | Fancy i3lock | (explains itself) |
 | `scrot` | Takes screenshots | We need it for lockscreen |
 | `i3-lock` | Locks screen | We need it for lockscreen |
 | `feh` | Image viewer and wallpaper setter | Screenshot previews, wallpapers |
@@ -64,10 +64,30 @@ cp -r i3lock-fancy-multimonitor ~/.scripts
 chmod +x ~/.scripts/i3lock-fancy-multimonitor/lock
 ```
 
-+ Install polybar weather script
 + Copy `weather` from `.scripts` dir to `/usr/bin/weather`.
 
 ```
 cp -r ~/.scripts/weather /usr/bin/weather
 chmod +x /usr/bin/weather
 ```
+
++ Install `oh-my-zsh` additional plugins:
+
+```
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+source ~/.zshrc
+```
+
+## Some recommended applications
++ **Terminals**: Kitty / urxvt / st
++ **File managers**: Nautilus / Thunar
++ **Launchers**: Rofi / dmenu
++ **Browsers**: Google Chrome / Firefox (with Vimium extension)
++ **Editors**: VSCode / Vim / Atom
++ **Music players**: mpd (with ncmpcpp)
+
+### Eye-candy suggestions
+- `neofetch` - Display a ton of system info
+- [even-better-ls](https://github.com/illinoisjackson/even-better-ls) - Icons for the `ls` command
+- `cava` - Audio visualizer
