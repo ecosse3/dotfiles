@@ -65,7 +65,7 @@ chmod +x ~/.scripts/i3lock-fancy-multimonitor/lock
 ```
 
 + Install polybar weather script
-Copy `weather` from `.scripts` dir to `/usr/bin/weather`.
++ Copy `weather` from `.scripts` dir to `/usr/bin/weather`.
 
 ```
 cp -r ~/.scripts/weather /usr/bin/weather
