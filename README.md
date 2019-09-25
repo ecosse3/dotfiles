@@ -125,5 +125,6 @@ I use `super` AKA Windows key as my main modifier.
 + `super + s` - Stacking layout
 + `super + w` - Tabbed layout
 + `super + e` - Split layout
++ `super + shift + m` - Move current workspace to another monitor
 
 + ... And many many more.
