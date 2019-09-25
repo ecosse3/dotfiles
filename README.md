@@ -47,6 +47,7 @@ Almost all dependencies you can download from `yaourt`.
 + **NotoEmoji Nerd**
 ##### Monospace
 + **Fira Code**
++ **DejaVu Sans Mono**
 ##### Sans
 + **Google Sans**
 + **Roboto Condensed**
@@ -91,3 +92,33 @@ source ~/.zshrc
 - `neofetch` - Display a ton of system info
 - [even-better-ls](https://github.com/illinoisjackson/even-better-ls) - Icons for the `ls` command
 - `cava` - Audio visualizer
+- `lolcat` - For rainbow effect (ex. usage `neofetch|lolcat`)
+
+## Basic keybinds
+
+I use `super` AKA Windows key as my main modifier.
+
++ `super + enter` - Spawn terminal
++ `super + shift + enter` - Spawn google-chrome window
++ `super + m` - Open nautilus (file manager)
++ `super + d` - Launch rofi
++ `super + q` - Kill window
++ `super + control + space` - Toggle floating client
++ `super + [1-0]` - Change workspace
++ `super + shift + [1-0]` - Move focused window to workspace
++ `super + w` - Maximized / Monocle layout
++ `super + [arrow keys] / [hjkl]` - Change focus by direction
++ `super + shift + [arrow keys] / [hjkl]` - Move client by direction.
++ `super + r` - Resize mode
++ `super + f` - Toggle fullscreen
++ `super + h` - Split in horizontal orientation
++ `super + v` - Split in vertical orientation
++ `super + s` - Stacking layout
++ `super + w` - Tabbed layout
++ `super + e` - Split layout
++ `super + shift + s` - Screenshot
++ `super + ctrl + l` - Lock screen
++ `super + shift + minus` - Make the currently focused window a scratchpad
++ `super + minus` - Show scratchpad
++ `super + c` - Open calculator (rofi)
++ ... And many many more.
