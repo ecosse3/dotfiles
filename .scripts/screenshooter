@@ -1,0 +1,6 @@
+#!/bin/bash
+pkill compton
+maim -s --format=png /dev/stdout | xclip -selection clipboard -t image/png -i
+sleep 1
+notify-send -a Screenshot Captured -t 5000
+compton
