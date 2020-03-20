@@ -1,8 +1,8 @@
 [global]
-    font = Monospace 8
+    font = Roboto 8
     allow_markup = yes
 
-    icon_folders = /usr/share/icons/Notifications
+    icon_path = /usr/share/icons/ePapirus/24x24/status/:/usr/share/icons/ePapirus/16x16/devices/
     icon_position = left
     max_icon_size = 40
 
@@ -118,6 +118,9 @@
     # browser for opening urls in context menu
     browser = /usr/bin/google-chrome-stable -new-tab
 
+    # border radius
+    corner_radius = 5
+
 [frame]
     width = 0
     color = "#000000"
@@ -129,7 +132,7 @@
     # xev might be helpful to find names for keys
 
     # close notification
-    close = mod4+m
+    close = mod4+ctrl+shift+m
 
     # close all notifications
     #close_all = mod4+shift+m
@@ -143,12 +146,14 @@
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
     # Otherwise the '#' and following  would be interpreted as a comment.
-    background = "#149ee2"
+    background = "#E38400"
     foreground = "#ffffff"
     timeout = 10
 
+    #149ee2
+
 [urgency_normal]
-    background = "#149ee2"
+    background = "#E38400"
     foreground = "#ffffff"
     timeout = 10
 
@@ -194,3 +199,7 @@
     format = "<b>Now Playing</b>\n%s\n%b"
     timeout = 10
     urgency = normal
+
+[volume]
+    appname = notify-send-volume.sh
+    format = "%s"
