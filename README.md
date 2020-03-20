@@ -48,6 +48,7 @@ Almost all dependencies you can download from `yaourt`.
 | `feh`                                                                              | Image viewer and wallpaper setter                           | Screenshot previews, wallpapers |
 | `dunst`                                                                            | Notification daemon                                         | (explains itself)               |
 | `xautolock`                                                                        | An automatic X screen-locker                                | (explains itself)               |
+| `tilda`                                                                            | Terminal emulator needed to run cava                        | (explains itself)               |
 
 ### Fonts
 
