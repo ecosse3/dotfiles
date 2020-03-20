@@ -110,7 +110,7 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color      
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # wallpaper
-exec_always --no-startup-id feh --bg-scale wallpaper.png
+exec_always --no-startup-id feh --bg-scale $HOME/.wallpapers/wallpaper.jpg
 
 # gnome crap
 exec --no-startup-id /usr/lib/gsd-xsettings
@@ -273,7 +273,7 @@ bindsym $mod+z exec ~/.scripts/cava_visualizer
 bindsym $mod+m exec kitty --class=RANGER ranger
 
 # screenshot
-bindsym $mod+shift+s exec sh /home/ecosse/.scripts/screenshooter
+bindsym $mod+shift+s exec sh $HOME/.scripts/screenshooter
 #bindsym $mod+shift+s exec xfce4-screenshooter -r -o gthumb
 
 # lockscreen shortcut
@@ -283,7 +283,7 @@ bindsym $mod+ctrl+l exec ~/.scripts/i3lock-fancy-multimonitor/lock -p
 bindsym $mod+Shift+greater move container to output right
 bindsym $mod+Shift+less move container to output left
 
-# move workspace to different monitor bindsym $mod+Shift+m move workspace to output left
+# move workspace to different monitor
 bindsym $mod+Shift+m move workspace to output left
 
 # Make the currently focused window a scratchpad
