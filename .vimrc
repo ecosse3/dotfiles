@@ -105,6 +105,12 @@ vnoremap K :m '<-2<CR>gv=gv
 map <C-e> :NERDTreeToggle<CR>
 map <leader> <Plug>(easymotion-prefix)
 
+"Git
+nnoremap gs :Gstatus<CR>
+nnoremap gc :Gcommit<CR>
+nnoremap gd :Gdiff<CR>
+nnoremap ga :Git add %:p<CR><CR>
+
 "Tabs
 nnoremap H gT
 nnoremap L gt
