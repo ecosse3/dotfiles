@@ -24,37 +24,72 @@ highlight ColorColumn ctermbg=0
 " ---------------------- Plugins (VimPlug) ----------------------
 call plug#begin('~/.vim/plugged')
 
+" General
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'luochen1990/rainbow'
 Plug 'jremmen/vim-ripgrep'
-Plug 'tpope/vim-fugitive'
 Plug 'vim-utils/vim-man'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mbbill/undotree'
-Plug 'tpope/vim-surround'
 Plug 'easymotion/vim-easymotion'
 Plug 'ThePrimeagen/vim-be-good'
 Plug 'scrooloose/nerdTree'
-Plug 'jiangmiao/auto-pairs'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
 
-"Snippets & Language
+" Snippets & Language
 Plug 'honza/vim-snippets'
+Plug 'yuezk/vim-js'
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'mattn/emmet-vim'
 Plug 'mlaursen/vim-react-snippets'
 Plug 'potatoesmaster/i3-vim-syntax'
+Plug 'prettier/vim-prettier', { 'do': 'npm install' }
+Plug 'jiangmiao/auto-pairs'
+
+" Tags
+Plug 'tpope/vim-surround'
+Plug 'alvan/vim-closetag'
+
+" Themes
+Plug 'morhetz/gruvbox'
+Plug 'joshdick/onedark.vim'
+Plug 'dracula/vim', {'as': 'dracula'}
+Plug 'mhartington/oceanic-next'
 
 " Colorscheme
 Plug 'powerline/powerline'
 Plug 'ryanoasis/vim-devicons'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'morhetz/gruvbox'
-Plug 'joshdick/onedark.vim'
-Plug 'dracula/vim', {'as': 'dracula'}
-Plug 'mhartington/oceanic-next'
+Plug 'ap/vim-css-color'
+
+" Fzf
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+"{{{
+    let $FZF_DEFAULT_COMMAND="fd --type f --exclude .git"
+    let $FZF_DEFAULT_OPTS="--preview '[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --style=numbers --color=always {} || highlight -O ansi -l {} || coderay {} || rougify {} || cat {}) 2> /dev/null'"
+    let g:fzf_layout = { 'down': '30%' }
+    let g:fzf_nvim_statusline = 0
+    let g:fzf_colors =
+    \ { 'fg':      ['fg', 'Normal'],
+      \ 'bg':      ['bg', 'Normal'],
+      \ 'hl':      ['fg', 'Comment'],
+      \ 'fg+':     ['fg', 'Conditional', 'CursorColumn', 'Normal'],
+      \ 'bg+':     ['bg', 'Conditional', 'Conditional'],
+      \ 'hl+':     ['fg', 'Statement'],
+      \ 'info':    ['fg', 'PreProc'],
+      \ 'border':  ['fg', 'Ignore'],
+      \ 'prompt':  ['fg', 'Conditional'],
+      \ 'pointer': ['fg', 'Exception'],
+      \ 'marker':  ['fg', 'Keyword'],
+      \ 'spinner': ['fg', 'Label'],
+      \ 'header':  ['fg', 'Comment'] }
+"}}}
 
 call plug#end()
 
@@ -78,8 +113,9 @@ let g:netrw_winsize = 25
 let g:rainbow_active = 1
 
 let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-emmet', 'coc-tslint', 'coc-prettier', 'coc-angular', 'coc-snippets']
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
+"command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
+let g:closetag_filetypes = 'html,xhtml,js,jsx,tsx,xml'
 
 " --------------------- Remaps ---------------------
 nnoremap <leader>h :wincmd h<CR>
@@ -102,18 +138,25 @@ nnoremap <silent> <Leader>- :vertical resize -5<CR>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
-map <C-e> :NERDTreeToggle<CR>
+map <C-e> :NERDTreeFind<CR>
 map <leader> <Plug>(easymotion-prefix)
 
+nnoremap <silent> <c-p> :Files<CR>
+
 "Git
-nnoremap gs :Gstatus<CR>
-nnoremap gc :Gcommit<CR>
-nnoremap gd :Gdiff<CR>
-nnoremap ga :Git add %:p<CR><CR>
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gc :Gcommit<CR>
+nnoremap <leader>ga :Git add %:p<CR><CR>
 
 "Tabs
 nnoremap H gT
 nnoremap L gt
+
+"Buffers
+nnoremap <silent> <Tab> :bn<CR>
+nnoremap <silent> gn :bn<CR>
+nnoremap <silent> <S-Tab> :bp<CR>
+nnoremap <silent> gp :bp<CR>
 
 "CoC
 inoremap <buffer> <silent><expr> <TAB>
@@ -149,3 +192,16 @@ endfun
 autocmd BufWritePre * :call TrimWhitespace()
 "autocmd FileType typescript :call GoYCM()
 "autocmd FileType cpp,cxx,h,hpp,c :call GoCoc()
+
+" after a re-source, fix syntax matching issues (concealing brackets):
+if exists('g:loaded_webdevicons')
+    call webdevicons#refresh()
+endif
+
+augroup nerdtreeconcealbrackets
+      autocmd!
+      autocmd FileType nerdtree syntax match hideBracketsInNerdTree "\]" contained conceal containedin=ALL
+      autocmd FileType nerdtree syntax match hideBracketsInNerdTree "\[" contained conceal containedin=ALL
+      autocmd FileType nerdtree setlocal conceallevel=2
+      autocmd FileType nerdtree setlocal concealcursor=nvic
+augroup END
