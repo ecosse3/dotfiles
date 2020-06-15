@@ -17,8 +17,9 @@
 ;==========================================================
 
 [colors]
-;background = ${xrdb:color0:#222}
+;background = ${xrdb:color0:#282c34}
 background = #44000000
+background-no-compton = ${xrdb:color0:#282c34}
 background-alt = #282a36
 ;foreground = ${xrdb:color7:#222}
 foreground = #f8f8f2
@@ -30,13 +31,19 @@ underline = #99ffffff
 black = #000
 white = #ffffff
 
-[bar/example]
+[global/wm]
+margin-top = 5
+margin-bottom = 0
+
+[bar/main]
 monitor = ${env:MONITOR:}
+;override-redirect = true
+;wm-restack = i3
+;offset-x = 40
+;offset-y = 16
 width = 100%
 height = 40
-;offset-x = 10%
-;offset-y = 10%
-radius = 0
+radius = 5
 fixed-center = true
 
 background = ${colors.background}
@@ -45,8 +52,52 @@ foreground = ${colors.foreground}
 line-size = 3
 line-color = #f00
 
-border-size = 0
+border-top-size = 20
+border-left-size = 40
+border-right-size = 40
 border-color = #00000000
+
+padding-left = 2
+padding-right = 2
+
+module-margin-left = 0
+module-margin-right = 2
+
+font-0 = "Fira Code:size=10;3"
+font-1 = "Font Awesome 5 Free:style=Solid:pixelsize=10;3"
+font-2 = "Font Awesome 5 Free:style=Regular:pixelsize=10;3"
+font-3 = "Font Awesome 5 Brands:pixelsize=10;3"
+font-4 = "NotoEmoji Nerd Font Mono:style=Book:size=10;3"
+
+modules-left = player-mpris-tail weather
+modules-center = i3
+modules-right = pulseaudio memory cpu wlan arch-updates battery date powermenu
+
+tray-position = left
+tray-padding = 2
+tray-offset-x = 0
+tray-offset-y = 0
+tray-scale = 1.0
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[bar/main-no-compton]
+monitor = ${env:MONITOR:}
+;override-redirect = true
+;wm-restack = i3
+;offset-x = 40
+;offset-y = 16
+width = 100%
+height = 40
+radius = 0
+fixed-center = true
+
+background = ${colors.background-no-compton}
+foreground = ${colors.foreground}
+
+line-size = 3
+line-color = #f00
 
 padding-left = 2
 padding-right = 2
@@ -258,7 +309,7 @@ interval = 1
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 ;format-underline = ${colors.underline}
-label = %gb_used% / %gb_total%
+label = %percentage_used%%
 format-underline = #ffb86c
 
 [module/eth]
@@ -460,9 +511,6 @@ screenchange-reload = true
 ;compositing-border = over
 ;pseudo-transparency = false
 
-[global/wm]
-margin-top = 5
-margin-bottom = 5
 
 ; vim:ft=dosini
 
