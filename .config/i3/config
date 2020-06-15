@@ -2,6 +2,8 @@
 ###### i3-GAPS ECOSSE CONFIG FILE ######
 ########################################
 
+# Mod1 - ALT
+# Mod4 - WIN
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -50,6 +52,11 @@ bindsym $mod+Shift+7 move container to workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
+
+# change window size and center
+bindsym $mod+F1 floating enable; resize set 850 450; move position center
+bindsym $mod+F2 floating enable; resize set 1150 750; move position center
+bindsym $mod+F3 floating enable; resize set 1450 940; move position center
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -110,7 +117,7 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color      
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # wallpaper
-exec_always --no-startup-id feh --bg-scale $HOME/.wallpapers/wallpaper.jpg
+exec_always --no-startup-id feh --bg-scale /home/ecosse/Obrazy/Wallpapers/cshmo7gmhek41.png
 
 # gnome crap
 exec --no-startup-id /usr/lib/gsd-xsettings
@@ -122,7 +129,7 @@ exec --no-startup-id compton
 exec --no-startup-id spotify
 exec --no-startup-id mailspring
 exec --no-startup-id google-chrome-stable
-exec --no-startup-id tilda -c cava
+#exec --no-startup-id tilda -c cava
 
 # autolock
 exec xautolock -time 15 -locker "~/.scripts/i3lock-fancy-multimonitor/lock"
@@ -131,10 +138,15 @@ exec xautolock -time 15 -locker "~/.scripts/i3lock-fancy-multimonitor/lock"
 exec --no-startup-id xrandr --output HDMI-1 --right-of eDP-1 --primary
 
 # Blurme
-exec --no-startup-id ~/.scripts/blurme
+exec --no-startup-id ~/.scripts/blurme -t 0.005
 
 # Mouse sensivity
 exec xinput set-prop "MX Master 2S Mouse" "Coordinate Transformation Matrix" 2.400000, 0.000000, 0.000000, 0.000000, 2.400000, 0.000000, 0.000000, 0.000000, 1.000000
+
+# Screen delay movement
+# 200 delay
+# 40 interval
+exec --no-startup-id xset r rate 200 40
 
 ###########################
 ###### CONTROLS ######
@@ -162,10 +174,6 @@ for_window [class=".*"] border pixel 0
 gaps inner 30
 gaps outer 10
 
-# opening apps in floating mode and resize
-for_window [class="Nautilus"] floating enable
-for_window [class="Nautilus"] resize set 1120 600
-
 # default workspaces
 assign [class="Google-chrome"] $ws1
 assign [class="kitty"] $ws2
@@ -173,19 +181,41 @@ assign [class="Atom"] $ws3
 assign [class="CLion"] $ws3
 assign [class="^jetbrains-.+"] $ws3
 assign [class="Code"] $ws3
+for_window [class="RANGER"] move to workspace $ws4
 assign [class="GitKraken"] $ws6
 assign [class="Steam"] $ws7
 assign [class="discord"] $ws9
 assign [class="Telegram"] $ws9
 assign [class="Slack"] $ws9
+assign [class="Skype"] $ws9
 assign [class="Mailspring"] $ws5
+assign [class="Spotify"] $ws10
+assign [class="Tilda"] $ws10
+
+# opening apps in floating mode and resize
+for_window [class="Nautilus"] floating enable
+for_window [class="Nautilus"] resize set 1120 600
+
+for_window [class="Spotify"] floating enable
 for_window [class="Spotify"] move to workspace $ws10
-for_window [class="RANGER"] move to workspace $ws4
+for_window [class="Spotify"] move position center
+for_window [class="Spotify"] resize set 1500 800
+for_window [class="Spotify"] move up 180px; move left 350px
+
+for_window [class="Tilda"] floating enable
+for_window [class="Tilda"] move to workspace $ws10
 
 # i guess putting workspaces on different monitors
 workspace $ws1 output HDMI-1
 workspace $ws2 output eDP-1
 workspace $ws3 output HDMI-1
+workspace $ws4 output HDMI-1
+workspace $ws5 output HDMI-1
+workspace $ws6 output HDMI-1
+workspace $ws7 output HDMI-1
+workspace $ws8 output HDMI-1
+workspace $ws9 output HDMI-1
+workspace $ws10 output eDP-1
 
 # IntelliJ focus
 for_window [class="^jetbrains-.+"][window_type=dialog] focus
@@ -273,7 +303,7 @@ bindsym $mod+z exec ~/.scripts/cava_visualizer
 bindsym $mod+m exec kitty --class=RANGER ranger
 
 # screenshot
-bindsym $mod+shift+s exec sh $HOME/.scripts/screenshooter
+bindsym $mod+shift+s exec sh /home/ecosse/.scripts/screenshooter
 #bindsym $mod+shift+s exec xfce4-screenshooter -r -o gthumb
 
 # lockscreen shortcut
@@ -283,7 +313,7 @@ bindsym $mod+ctrl+l exec ~/.scripts/i3lock-fancy-multimonitor/lock -p
 bindsym $mod+Shift+greater move container to output right
 bindsym $mod+Shift+less move container to output left
 
-# move workspace to different monitor
+# move workspace to different monitor bindsym $mod+Shift+m move workspace to output left
 bindsym $mod+Shift+m move workspace to output left
 
 # Make the currently focused window a scratchpad
@@ -294,6 +324,10 @@ bindsym $mod+minus scratchpad show
 
 # Calculator
 bindsym $mod+c exec rofi -show calc -theme onedark -show-icons
+
+# Farge Color Picker
+bindsym $mod+Shift+f --release exec farge --notify --expire-time 5000
+for_window [title="Farge"] floating enable
 
 # Rounded corners
 border_radius 5
