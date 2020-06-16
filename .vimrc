@@ -177,7 +177,7 @@ nnoremap <Leader>p :Prettier --single-quote<CR>
 
 "Fzf
 nnoremap <silent> <c-p> :Files<CR>
-nnoremap <silent> <Leader>rg :Rg<CR>
+nnoremap <silent> <s-p> :Rg<CR>
 
 "Git
 nnoremap <Leader>gs :Gstatus<CR>
@@ -209,6 +209,7 @@ vmap <Leader>f  <Plug>(coc-format-selected)
 nmap <Leader>f  <Plug>(coc-format-selected)
 
 nmap <Leader>rf <Plug>(coc-refactor)
+nmap <Leader>qf <Plug>(coc-fix-current)
 nmap <C-Space> <Plug>(coc-codeaction)
 
 " GoTo code navigation.
