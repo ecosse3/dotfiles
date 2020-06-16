@@ -2,9 +2,10 @@
 
 syntax on                       " Enables syntax highlighting
 
+set hidden                      " Required to keep multiple buffers open multiple buffers
 set encoding=utf-8              " The encoding displayed
 set fileencoding=utf-8          " The encoding written to file
-set hidden                      " Required to keep multiple buffers open multiple buffers
+set cmdheight=2                 " Give more space for displaying messages
 set splitright                  " Vertical splits will automatically be to the right
 set updatetime=300              " Faster completion
 set timeoutlen=500              " Faster completion
@@ -140,7 +141,7 @@ let g:netrw_winsize = 25
 
 let g:rainbow_active = 1
 
-let g:coc_global_extensions = ['coc-explorer', 'coc-json', 'coc-tsserver', 'coc-emmet', 'coc-tslint', 'coc-prettier', 'coc-angular', 'coc-snippets', 'coc-css', 'coc-html']
+let g:coc_global_extensions = ['coc-explorer', 'coc-json', 'coc-tsserver', 'coc-emmet', 'coc-eslint', 'coc-tslint', 'coc-prettier', 'coc-angular', 'coc-snippets', 'coc-css', 'coc-html']
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 let g:closetag_filenames = '*.html,*.xhtml,*.js,*.jsx,*.tsx,*.xml'
@@ -208,12 +209,24 @@ nnoremap <buffer> <Leader>cr :CocRestart
 vmap <Leader>f  <Plug>(coc-format-selected)
 nmap <Leader>f  <Plug>(coc-format-selected)
 
+nmap <Leader>rn <Plug>(coc-rename)
 nmap <Leader>rf <Plug>(coc-refactor)
 nmap <Leader>qf <Plug>(coc-fix-current)
 nmap <C-Space> <Plug>(coc-codeaction)
 
+nnoremap <silent>K :call <SID>show_documentation()<CR>
+
+" Introduce function text object
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
+
+" Highlight the symbol and its references when holding the cursor
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
 " GoTo code navigation.
-nmap <buffer> <leader>gd <Plug>(coc-definition)
+nmap <buffer> <Leader>gd <Plug>(coc-definition)
 nmap <buffer> <Leader>gy <Plug>(coc-type-definition)
 nmap <buffer> <Leader>gi <Plug>(coc-implementation)
 nmap <buffer> <Leader>gr <Plug>(coc-references)
@@ -255,6 +268,15 @@ function! RipgrepFzf(query, fullscreen)
 endfunction
 
 command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+
+" Show documentation in preview window
+function! s:show_documentation()
+    if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+    else
+        call CocAction('doHover')
+    endif
+endfunction
 " --------------------- Startify ---------------------
 
 let g:startify_session_dir = '~/.config/nvim/session'
