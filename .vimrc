@@ -1,4 +1,6 @@
-" -------------------- General Settings --------------------- syntax on                       " Enables syntax highlighting
+" -------------------- General Settings ---------------------
+
+syntax on                       " Enables syntax highlighting
 
 set encoding=utf-8              " The encoding displayed
 set fileencoding=utf-8          " The encoding written to file
