@@ -1,6 +1,4 @@
-" -------------------- General Settings ---------------------
-
-syntax on                       " Enables syntax highlighting
+" -------------------- General Settings --------------------- syntax on                       " Enables syntax highlighting
 
 set encoding=utf-8              " The encoding displayed
 set fileencoding=utf-8          " The encoding written to file
@@ -9,12 +7,16 @@ set splitright                  " Vertical splits will automatically be to the r
 set updatetime=300              " Faster completion
 set timeoutlen=500              " Faster completion
 set clipboard=unnamedplus       " Copy-paste between vim and everything else
-set mouse=a                     " Enables mouse
+set mouse=a                     " Enable mouse
 set tabstop=4 softtabstop=4     " Inset 4 spaces for a tab
 set shiftwidth=4                " Change a number of space characeters inseted for indentation
 set expandtab                   " Converts tab to spaces
 set smartindent                 " Makes indenting smart
 set smartcase                   " Uses case in search
+set smarttab                    " Makes tabbing smarter will realize you have 2 vs 4
+set showtabline=2               " Always show tabs
+set noshowmode                  " Don't show things like -- INSERT -- anymore
+set autoindent                  " Good auto indent
 set nu                          " Shows current line number
 set relativenumber              " Enables relative number
 set noerrorbells                " Disables sound effect for errors
@@ -23,11 +25,12 @@ set nobackup                    " Recommended by coc
 set noswapfile                  " Recommended by coc
 set undodir=~/.vim/undodir      " Dir for undos
 set undofile                    " Sets undo to file
-set incsearch                   " Search is incremental
+set incsearch                   " Start searching before pressing enter
 set cursorline                  " Highlight of current line
 set termguicolors               " Takes colors from terminal
-set autowriteall                " Auto-saves buffers
 set formatoptions-=cro          " Stop newline continuation of comments
+set t_Co=256                    " Support 256 colors
+"set autowriteall               " Auto-saves buffers
 
 highlight ColorColumn ctermbg=0
 
@@ -43,7 +46,6 @@ Plug 'mbbill/undotree'
 Plug 'easymotion/vim-easymotion'
 Plug 'ThePrimeagen/vim-be-good'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'mhinz/vim-startify'
 
@@ -59,6 +61,11 @@ Plug 'mlaursen/vim-react-snippets'
 Plug 'potatoesmaster/i3-vim-syntax'
 Plug 'prettier/vim-prettier', { 'do': 'npm install' }
 Plug 'jiangmiao/auto-pairs'
+
+" Git
+Plug 'tpope/vim-fugitive'
+Plug 'mhinz/vim-signify'
+Plug 'rhysd/git-messenger.vim'
 
 " Tags
 Plug 'tpope/vim-surround'
@@ -105,14 +112,17 @@ Plug 'airblade/vim-rooter'
 call plug#end()
 
 
-" --------------------- Colorscheme ---------------------
+" --------------------- Colorscheme & Airline ---------------------
 colorscheme onedark
+
 let g:airline_theme='onedark'
+let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 
 " --------------------- Config ---------------------
 let mapleader = "\<Space>"
 
+let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
 let g:netrw_browse_split = 2
 let g:netrw_banner = 0
 let g:netrw_winsize = 25
@@ -125,6 +135,8 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 let g:closetag_filenames = '*.html,*.xhtml,*.js,*.jsx,*.tsx,*.xml'
 
 let g:prettier#config#single_quote = 'true'
+
+let g:signify_sign_delete = '-'
 
 " --------------------- Remaps ---------------------
 nnoremap <leader>h :wincmd h<CR>
@@ -182,8 +194,11 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
 map <silent> <c-e> :CocCommand explorer<CR>
 nnoremap <buffer> <Leader>cr :CocRestart
 
-vmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+vmap <Leader>f  <Plug>(coc-format-selected)
+nmap <Leader>f  <Plug>(coc-format-selected)
+
+nmap <Leader>rf <Plug>(coc-refactor)
+nmap <C-Space> <Plug>(coc-codeaction)
 
 " GoTo code navigation.
 nmap <buffer> <leader>gd <Plug>(coc-definition)
@@ -218,6 +233,16 @@ command! -bang -nargs=* Rg
   \   'rg --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview(), <bang>0)
 
+" advanced ripgrep integration
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 " --------------------- Startify ---------------------
 
 let g:startify_session_dir = '~/.config/nvim/session'
@@ -229,7 +254,7 @@ let g:startify_lists = [
           \ { 'type': 'bookmarks', 'header': ['   Bookmarks']                    },
           \ ]
 
-let g:startify_session_autoload = 1
+let g:startify_session_autoload = 0
 let g:startify_session_delete_buffers = 1
 let g:startify_change_to_vcs_root = 1
 let g:startify_fortune_use_unicode = 1
