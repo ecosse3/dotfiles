@@ -29,12 +29,15 @@ set undodir=~/.vim/undodir      " Dir for undos
 set undofile                    " Sets undo to file
 set incsearch                   " Start searching before pressing enter
 set cursorline                  " Highlight of current line
-set termguicolors               " Takes colors from terminal
 set formatoptions-=cro          " Stop newline continuation of comments
 set t_Co=256                    " Support 256 colors
 "set autowriteall               " Auto-saves buffers
 
-highlight ColorColumn ctermbg=0
+" Check if terminal has 24-bit color support
+if (has("termguicolors"))
+    set termguicolors
+    hi LineNr ctermbg=NONE guibg=NONE
+endif
 
 " ---------------------- Plugins (VimPlug) ----------------------
 call plug#begin('~/.vim/plugged')
@@ -116,6 +119,12 @@ call plug#end()
 
 " --------------------- Colorscheme & Airline ---------------------
 colorscheme onedark
+
+hi Comment cterm=italic
+
+let g:onedark_hide_endofbuffer=1
+let g:onedark_terminal_italics=1
+let g:onedark_termcolors=256
 
 let g:airline_theme='onedark'
 let g:airline#extensions#tabline#enabled = 1
