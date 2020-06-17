@@ -203,7 +203,8 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 inoremap <buffer> <silent><expr> <C-space> coc#refresh()
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
 
-map <silent> <c-e> :CocCommand explorer<CR>
+map <silent> <Leader>ce :CocCommand explorer<CR>
+map <silent> <c-e> :CocCommand explorer --position floating<CR>
 nnoremap <buffer> <Leader>cr :CocRestart
 
 vmap <Leader>f  <Plug>(coc-format-selected)
@@ -213,6 +214,9 @@ nmap <Leader>rn <Plug>(coc-rename)
 nmap <Leader>rf <Plug>(coc-refactor)
 nmap <Leader>qf <Plug>(coc-fix-current)
 nmap <C-Space> <Plug>(coc-codeaction)
+
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 nnoremap <silent>K :call <SID>show_documentation()<CR>
 
@@ -232,6 +236,9 @@ nmap <buffer> <Leader>gi <Plug>(coc-implementation)
 nmap <buffer> <Leader>gr <Plug>(coc-references)
 
 " --------------------- Functions & Settings ---------------------
+
+"map :q to buffer delete
+cnoreabbrev <expr> q getcmdtype() == ":" && (getcmdline() == 'q' && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) > 1) ? 'bd' : 'q'
 
 function! s:check_back_space() abort
     let col = col('.') - 1
