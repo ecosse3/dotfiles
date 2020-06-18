@@ -11,8 +11,8 @@ set updatetime=300              " Faster completion
 set timeoutlen=500              " Faster completion
 set clipboard=unnamedplus       " Copy-paste between vim and everything else
 set mouse=a                     " Enable mouse
-set tabstop=4 softtabstop=4     " Inset 4 spaces for a tab
-set shiftwidth=4                " Change a number of space characeters inseted for indentation
+set tabstop=2 softtabstop=2     " Insert 2 spaces for a tab
+set shiftwidth=2                " Change a number of space characeters inseted for indentation
 set expandtab                   " Converts tab to spaces
 set smartindent                 " Makes indenting smart
 set smartcase                   " Uses case in search
@@ -61,6 +61,7 @@ Plug 'yuezk/vim-js'
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
+Plug 'ianks/vim-tsx'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'mattn/emmet-vim'
 Plug 'mlaursen/vim-react-snippets'
@@ -141,7 +142,7 @@ let g:netrw_winsize = 25
 
 let g:rainbow_active = 1
 
-let g:coc_global_extensions = ['coc-explorer', 'coc-json', 'coc-tsserver', 'coc-emmet', 'coc-eslint', 'coc-tslint', 'coc-prettier', 'coc-angular', 'coc-snippets', 'coc-css', 'coc-html']
+let g:coc_global_extensions = ['coc-explorer', 'coc-json', 'coc-tsserver', 'coc-tslint-plugin', 'coc-eslint', 'coc-emmet', 'coc-prettier', 'coc-angular', 'coc-snippets', 'coc-css', 'coc-html']
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 let g:closetag_filenames = '*.html,*.xhtml,*.js,*.jsx,*.tsx,*.xml'
@@ -156,8 +157,12 @@ nnoremap <leader>j :wincmd j<CR>
 nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>l :wincmd l<CR>
 
+" Save by CTRL-S
+nnoremap <silent> <c-s> :w<CR>
+inoremap <silent> <c-s> <ESC> :w<CR>
+
+" Undotree
 nnoremap <leader>u :UndotreeShow<CR>
-nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
 
 " Make word uppercase
 inoremap <c-u> <ESC>viwUi
@@ -172,9 +177,11 @@ vnoremap K :m '<-2<CR>gv=gv
 
 "Easymotion
 map <silent> <Leader>e <Plug>(easymotion-bd-w)
+map f <Plug>(easymotion-lineforward)
+map F <Plug>(easymotion-linebackward)
 
 "Prettier
-nnoremap <Leader>p :Prettier --single-quote<CR>
+nnoremap <Leader>p :Prettier<CR>
 
 "Fzf
 nnoremap <silent> <c-p> :Files<CR>
@@ -191,11 +198,15 @@ nnoremap H gT
 nnoremap L gt
 
 "Buffers
+nnoremap <silent> <c-b> :Buffers<CR>
 nnoremap <silent> <Tab> :bn<CR>
 nnoremap <silent> gn :bn<CR>
 nnoremap <silent> <S-Tab> :bp<CR>
 nnoremap <silent> gp :bp<CR>
 nnoremap <silent> <s-q> :bd<CR>
+
+"Remove highlights
+nnoremap <silent> <F6> :noh<CR>
 
 "CoC
 inoremap <silent> <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -213,6 +224,7 @@ nmap <Leader>f  <Plug>(coc-format-selected)
 nmap <Leader>rn <Plug>(coc-rename)
 nmap <Leader>rf <Plug>(coc-refactor)
 nmap <Leader>qf <Plug>(coc-fix-current)
+nmap <Leader>ac <Plug>(coc-codeaction)
 nmap <C-Space> <Plug>(coc-codeaction)
 
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
