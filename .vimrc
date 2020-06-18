@@ -177,7 +177,7 @@ vnoremap K :m '<-2<CR>gv=gv
 
 "Easymotion
 map <silent> <Leader>e <Plug>(easymotion-bd-w)
-map f <Plug>(easymotion-lineforward)
+map f <Plug>(easymotion-bd-f)
 map F <Plug>(easymotion-linebackward)
 
 "Prettier
