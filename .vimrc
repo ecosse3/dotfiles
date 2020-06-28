@@ -12,8 +12,8 @@ set timeoutlen=500              " Faster completion
 set clipboard=unnamedplus       " Copy-paste between vim and everything else
 set mouse=a                     " Enable mouse
 set tabstop=2 softtabstop=2     " Insert 2 spaces for a tab
-set shiftwidth=2                " Change a number of space characeters inseted for indentation
-set expandtab                   " Converts tab to spaces
+" set shiftwidth=2                " Change a number of space characeters inseted for indentation
+" set expandtab                   " Converts tab to spaces
 set smartindent                 " Makes indenting smart
 set smartcase                   " Uses case in search
 set smarttab                    " Makes tabbing smarter will realize you have 2 vs 4
@@ -53,6 +53,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'ThePrimeagen/vim-be-good'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-sleuth'
 Plug 'mhinz/vim-startify'
 
 " Snippets & Language
@@ -67,6 +68,7 @@ Plug 'mattn/emmet-vim'
 Plug 'mlaursen/vim-react-snippets'
 Plug 'potatoesmaster/i3-vim-syntax'
 Plug 'prettier/vim-prettier', { 'do': 'npm install' }
+Plug 'sbdchd/neoformat'
 Plug 'jiangmiao/auto-pairs'
 
 " Git
@@ -136,6 +138,7 @@ let g:airline_powerline_fonts = 1
 let mapleader = "\<Space>"
 
 let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
+let g:netrw_fastbrowse = 0
 let g:netrw_browse_split = 2
 let g:netrw_banner = 0
 let g:netrw_winsize = 25
@@ -147,9 +150,18 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 let g:closetag_filenames = '*.html,*.xhtml,*.js,*.jsx,*.tsx,*.xml'
 
-let g:prettier#config#single_quote = 'true'
-
 let g:signify_sign_delete = '-'
+
+" --------------------- Neoformat ------------------
+autocmd FileType javascript setlocal formatprg=prettier\ --single-quote\ --trailing-comma\ es5
+autocmd FileType javascriptreact setlocal formatprg=prettier\ --single-quote\ --trailing-comma\ es5
+
+let g:neoformat_enabled_javascript = ['prettier-eslint', 'prettier']
+let g:neoformat_enabled_typescript = ['prettier', 'tslint']
+let g:neoformat_enabled_css = ['prettier-eslint', 'prettier']
+let g:neoformat_enabled_json = ['prettier-eslint', 'prettier']
+" Use formatprg when available
+let g:neoformat_try_formatprg = 1
 
 " --------------------- Remaps ---------------------
 nnoremap <leader>h :wincmd h<CR>
@@ -189,7 +201,7 @@ nnoremap <silent> <s-p> :Rg<CR>
 
 "Git
 nnoremap <Leader>gs :Gstatus<CR>
-nnoremap <Leader>gc :Gcommit<CR>
+nnoremap <Leader>gc :Gcommit -m "
 nnoremap <Leader>ga :Git add %:p<CR><CR>
 nnoremap <Leader>gl :Glog<CR>
 
@@ -246,6 +258,12 @@ nmap <buffer> <Leader>gd <Plug>(coc-definition)
 nmap <buffer> <Leader>gy <Plug>(coc-type-definition)
 nmap <buffer> <Leader>gi <Plug>(coc-implementation)
 nmap <buffer> <Leader>gr <Plug>(coc-references)
+
+" Don't yank on delete char
+nnoremap x "_x
+nnoremap X "_X
+vnoremap x "_x
+vnoremap X "_X
 
 " --------------------- Functions & Settings ---------------------
 
