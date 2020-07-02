@@ -58,13 +58,14 @@ Plug 'mhinz/vim-startify'
 
 " Snippets & Language
 Plug 'honza/vim-snippets'
+Plug 'ianks/vim-tsx'
 Plug 'yuezk/vim-js'
 Plug 'mxw/vim-jsx'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'pangloss/vim-javascript'
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'leafgarland/typescript-vim'
-Plug 'ianks/vim-tsx'
 Plug 'mattn/emmet-vim'
 Plug 'mlaursen/vim-react-snippets'
 Plug 'potatoesmaster/i3-vim-syntax'
@@ -315,6 +316,11 @@ function! s:show_documentation()
         call CocAction('doHover')
     endif
 endfunction
+
+" Breaking syntax highlighting in very long files
+autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
+
 " --------------------- Startify ---------------------
 
 let g:startify_session_dir = '~/.config/nvim/session'
