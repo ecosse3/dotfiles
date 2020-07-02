@@ -157,6 +157,11 @@ let g:signify_sign_delete = '-'
 " --------------------- Neoformat ------------------
 autocmd FileType javascript setlocal formatprg=prettier\ --single-quote\ --trailing-comma\ es5
 autocmd FileType javascriptreact setlocal formatprg=prettier\ --single-quote\ --trailing-comma\ es5
+autocmd FileType javascript.jsx setlocal formatprg=prettier\ --single-quote\ --trailing-comma\ es5
+
+autocmd FileType typescript setlocal formatprg=prettier\ --single-quote\ --trailing-comma\ es5
+autocmd FileType typescriptreact setlocal formatprg=prettier\ --single-quote\ --trailing-comma\ es5
+autocmd FileType typescript.tsx setlocal formatprg=prettier\ --single-quote\ --trailing-comma\ es5
 
 let g:neoformat_enabled_javascript = ['prettier-eslint', 'prettier']
 let g:neoformat_enabled_typescript = ['prettier', 'tslint']
