@@ -238,7 +238,7 @@ nmap <Leader>f  <Plug>(coc-format-selected)
 nmap <Leader>rn <Plug>(coc-rename)
 nmap <Leader>rf <Plug>(coc-refactor)
 nmap <Leader>qf <Plug>(coc-fix-current)
-nmap <Leader>ac <Plug>(coc-codeaction)
+nmap <Leader>do <Plug>(coc-codeaction)
 nmap <C-Space> <Plug>(coc-codeaction)
 
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
