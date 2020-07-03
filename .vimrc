@@ -322,10 +322,6 @@ function! s:show_documentation()
     endif
 endfunction
 
-" Breaking syntax highlighting in very long files
-autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
-autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
-
 " --------------------- Startify ---------------------
 
 let g:startify_session_dir = '~/.config/nvim/session'
