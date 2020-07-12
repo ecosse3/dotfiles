@@ -68,7 +68,7 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git sudo zsh-syntax-highlighting zsh-autosuggestions)
+plugins=(git sudo zsh-syntax-highlighting zsh-autosuggestions you-should-use)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -95,5 +95,13 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-alias zshconfig="mate ~/.zshrc"
+alias zshconfig="source ~/.zshrc"
+alias gpom="git push -u origin master"
+alias v="nvim"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/ecosse/.sdkman"
+[[ -s "/home/ecosse/.sdkman/bin/sdkman-init.sh" ]] && source "/home/ecosse/.sdkman/bin/sdkman-init.sh"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

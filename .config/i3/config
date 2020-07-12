@@ -4,7 +4,7 @@
 
 # Mod1 - ALT
 # Mod4 - WIN
-set $mod Mod4
+set $mod Mod1
 
 # Font for window titles. Will also be used by the bar unless a different font
 font pango:Noto Sans Display 12
@@ -29,6 +29,11 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
+# i guess putting workspaces on different monitors
+workspace $ws1 output HDMI-1
+workspace $ws2 output eDP-1
+workspace $ws3 output HDMI-1
+
 # switch to workspace
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
@@ -52,6 +57,49 @@ bindsym $mod+Shift+7 move container to workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
+
+###########################
+###### i3gaps stuff ######
+###########################
+
+# disable window titlebars
+for_window [class=".*"] border pixel 0
+gaps inner 30
+gaps outer 10
+
+# default workspaces
+assign [class="Google-chrome"] $ws1
+assign [class="kitty"] $ws2
+assign [class="Atom"] $ws3
+assign [class="CLion"] $ws3
+assign [class="^jetbrains-.+"] $ws3
+assign [class="Code"] $ws3
+for_window [class="RANGER"] move to workspace $ws4
+assign [class="GitKraken"] $ws6
+assign [class="Steam"] $ws7
+assign [class="discord"] $ws9
+assign [class="Telegram"] $ws9
+assign [class="Slack"] $ws9
+assign [class="Skype"] $ws9
+assign [class="Mailspring"] $ws5
+assign [class="Spotify"] $ws10
+assign [class="Tilda"] $ws10
+
+# opening apps in floating mode and resize
+for_window [class="Nautilus"] floating enable
+for_window [class="Nautilus"] resize set 1120 600
+
+for_window [class="Spotify"] floating enable
+for_window [class="Spotify"] move to workspace $ws10
+for_window [class="Spotify"] move position center
+for_window [class="Spotify"] resize set 1500 800
+for_window [class="Spotify"] move up 180px; move left 350px
+
+for_window [class="Tilda"] floating enable
+for_window [class="Tilda"] move to workspace $ws10
+
+# IntelliJ focus
+for_window [class="^jetbrains-.+"][window_type=dialog] focus
 
 # change window size and center
 bindsym $mod+F1 floating enable; resize set 850 450; move position center
@@ -123,7 +171,7 @@ exec_always --no-startup-id feh --bg-scale /home/ecosse/Obrazy/Wallpapers/cshmo7
 exec --no-startup-id /usr/lib/gsd-xsettings
 
 # compositor
-exec --no-startup-id compton
+# exec --no-startup-id compton
 
 # execute default apps on startup
 exec --no-startup-id spotify
@@ -146,7 +194,7 @@ exec xinput set-prop "MX Master 2S Mouse" "Coordinate Transformation Matrix" 2.4
 # Screen delay movement
 # 200 delay
 # 40 interval
-exec --no-startup-id xset r rate 200 40
+exec_always --no-startup-id xset r rate 200 40
 
 ###########################
 ###### CONTROLS ######
@@ -166,61 +214,6 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 ###########################
-###### i3gaps stuff ######
-###########################
-
-# disable window titlebars
-for_window [class=".*"] border pixel 0
-gaps inner 30
-gaps outer 10
-
-# default workspaces
-assign [class="Google-chrome"] $ws1
-assign [class="kitty"] $ws2
-assign [class="Atom"] $ws3
-assign [class="CLion"] $ws3
-assign [class="^jetbrains-.+"] $ws3
-assign [class="Code"] $ws3
-for_window [class="RANGER"] move to workspace $ws4
-assign [class="GitKraken"] $ws6
-assign [class="Steam"] $ws7
-assign [class="discord"] $ws9
-assign [class="Telegram"] $ws9
-assign [class="Slack"] $ws9
-assign [class="Skype"] $ws9
-assign [class="Mailspring"] $ws5
-assign [class="Spotify"] $ws10
-assign [class="Tilda"] $ws10
-
-# opening apps in floating mode and resize
-for_window [class="Nautilus"] floating enable
-for_window [class="Nautilus"] resize set 1120 600
-
-for_window [class="Spotify"] floating enable
-for_window [class="Spotify"] move to workspace $ws10
-for_window [class="Spotify"] move position center
-for_window [class="Spotify"] resize set 1500 800
-for_window [class="Spotify"] move up 180px; move left 350px
-
-for_window [class="Tilda"] floating enable
-for_window [class="Tilda"] move to workspace $ws10
-
-# i guess putting workspaces on different monitors
-workspace $ws1 output HDMI-1
-workspace $ws2 output eDP-1
-workspace $ws3 output HDMI-1
-workspace $ws4 output HDMI-1
-workspace $ws5 output HDMI-1
-workspace $ws6 output HDMI-1
-workspace $ws7 output HDMI-1
-workspace $ws8 output HDMI-1
-workspace $ws9 output HDMI-1
-workspace $ws10 output eDP-1
-
-# IntelliJ focus
-for_window [class="^jetbrains-.+"][window_type=dialog] focus
-
-###########################
 ###### BINDS ######
 ###########################
 
@@ -235,9 +228,7 @@ bindsym $mod+q kill
 
 # change focus
 bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+k focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -307,7 +298,7 @@ bindsym $mod+shift+s exec sh /home/ecosse/.scripts/screenshooter
 #bindsym $mod+shift+s exec xfce4-screenshooter -r -o gthumb
 
 # lockscreen shortcut
-bindsym $mod+ctrl+l exec ~/.scripts/i3lock-fancy-multimonitor/lock -p
+bindsym $mod+l exec ~/.scripts/i3lock-fancy-multimonitor/lock -p
 
 # move container to different monitors
 bindsym $mod+Shift+greater move container to output right
