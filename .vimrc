@@ -1,6 +1,7 @@
 " -------------------- General Settings ---------------------
 
 syntax on                       " Enables syntax highlighting
+filetype plugin indent on       " Enables plugin & indent
 
 set hidden                      " Required to keep multiple buffers open multiple buffers
 set encoding=utf-8              " The encoding displayed
@@ -32,12 +33,13 @@ set incsearch                   " Start searching before pressing enter
 set cursorline                  " Highlight of current line
 set formatoptions-=cro          " Stop newline continuation of comments
 set t_Co=256                    " Support 256 colors
+set backspace=indent,eol,start  " Making sure backspace works
 "set autowriteall               " Auto-saves buffers
 
 " Check if terminal has 24-bit color support
 if (has("termguicolors"))
     set termguicolors
-    hi LineNr ctermbg=NONE guibg=NONE
+    hi LineNr ctermbg=NONE ctermfg=15 ctermbg=7 guibg=NONE guifg=NONE gui=NONE
 endif
 
 " ---------------------- Plugins (VimPlug) ----------------------
@@ -46,7 +48,7 @@ call plug#begin('~/.vim/plugged')
 " General
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'luochen1990/rainbow'
-Plug 'jremmen/vim-ripgrep'
+" Plug 'jremmen/vim-ripgrep'
 Plug 'vim-utils/vim-man'
 Plug 'mbbill/undotree'
 Plug 'easymotion/vim-easymotion'
@@ -72,6 +74,7 @@ Plug 'potatoesmaster/i3-vim-syntax'
 Plug 'prettier/vim-prettier', { 'do': 'npm install' }
 Plug 'sbdchd/neoformat'
 Plug 'jiangmiao/auto-pairs'
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -87,13 +90,13 @@ Plug 'morhetz/gruvbox'
 Plug 'joshdick/onedark.vim'
 Plug 'dracula/vim', {'as': 'dracula'}
 Plug 'mhartington/oceanic-next'
+Plug 'skbolton/embark'
 
 " Colorscheme
 Plug 'powerline/powerline'
 Plug 'ryanoasis/vim-devicons'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'ap/vim-css-color'
 
 " Fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -154,14 +157,17 @@ let g:closetag_filenames = '*.html,*.xhtml,*.js,*.jsx,*.tsx,*.xml'
 
 let g:signify_sign_delete = '-'
 
-" --------------------- Neoformat ------------------
-autocmd FileType javascript setlocal formatprg=prettier\ --single-quote\ --trailing-comma\ es5
-autocmd FileType javascriptreact setlocal formatprg=prettier\ --single-quote\ --trailing-comma\ es5
-autocmd FileType javascript.jsx setlocal formatprg=prettier\ --single-quote\ --trailing-comma\ es5
+let g:Hexokinase_highlighters = ['foregroundfull']
+let g:Hexokinase_refreshEvents = ['TextChanged', 'InsertLeave']
 
-autocmd FileType typescript setlocal formatprg=prettier\ --single-quote\ --trailing-comma\ es5
-autocmd FileType typescriptreact setlocal formatprg=prettier\ --single-quote\ --trailing-comma\ es5
-autocmd FileType typescript.tsx setlocal formatprg=prettier\ --single-quote\ --trailing-comma\ es5
+" --------------------- Neoformat ------------------
+autocmd FileType javascript setlocal formatprg=prettier\ --single-quote\ --trailing-comma\ es6
+autocmd FileType javascriptreact setlocal formatprg=prettier\ --single-quote\ --trailing-comma\ es6
+autocmd FileType javascript.jsx setlocal formatprg=prettier\ --single-quote\ --trailing-comma\ es6
+
+autocmd FileType typescript setlocal formatprg=prettier\ --single-quote\ --trailing-comma\ es6
+autocmd FileType typescriptreact setlocal formatprg=prettier\ --single-quote\ --trailing-comma\ es6
+autocmd FileType typescript.tsx setlocal formatprg=prettier\ --single-quote\ --trailing-comma\ es6
 
 let g:neoformat_enabled_javascript = ['prettier-eslint', 'prettier']
 let g:neoformat_enabled_typescript = ['prettier', 'tslint']
@@ -187,8 +193,8 @@ nnoremap <leader>u :UndotreeShow<CR>
 inoremap <c-u> <ESC>viwUi
 nnoremap <c-u> viwU<ESC>
 
-nnoremap <silent> <Leader>+ :vertical resize +5<CR>
-nnoremap <silent> <Leader>- :vertical resize -5<CR>
+nnoremap <silent> <Leader>+ :vertical resize +2<CR>
+nnoremap <silent> <Leader>- :vertical resize -2<CR>
 
 "Move selected lines up-down
 vnoremap J :m '>+1<CR>gv=gv
@@ -199,8 +205,8 @@ map <silent> <Leader>e <Plug>(easymotion-bd-w)
 map f <Plug>(easymotion-bd-f)
 map F <Plug>(easymotion-linebackward)
 
-"Prettier
-nnoremap <Leader>p :Prettier<CR>
+"Neoformat
+nnoremap <Leader>gp :Neoformat<CR>
 
 "Fzf
 nnoremap <silent> <c-p> :Files<CR>
@@ -211,6 +217,8 @@ nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gc :Gcommit -m "
 nnoremap <Leader>ga :Git add %:p<CR><CR>
 nnoremap <Leader>gl :Glog<CR>
+nnoremap <Leader>gj :diffget //3<CR>
+nnoremap <Leader>gf :diffget //2<CR>
 
 "Tabs
 nnoremap H gT
@@ -343,7 +351,7 @@ let g:webdevicons_enable_startify = 1
 
 function! StartifyEntryFormat()
         return 'WebDevIconsGetFileTypeSymbol(absolute_path) ." ". entry_path'
-    endfunction
+endfunction
 
 let g:startify_bookmarks = [
             \ { 'c': '~/.config/i3/config' },
