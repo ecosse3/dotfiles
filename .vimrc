@@ -245,8 +245,8 @@ map <silent> <Leader>ce :CocCommand explorer<CR>
 map <silent> <c-e> :CocCommand explorer --position floating<CR>
 nnoremap <buffer> <Leader>cr :CocRestart
 
-vmap <Leader>f  <Plug>(coc-format-selected)
-nmap <Leader>f  <Plug>(coc-format-selected)
+vmap <Leader>f <Plug>(coc-format-selected)
+nmap <Leader>f <Plug>(coc-format-selected)
 
 nmap <Leader>rn <Plug>(coc-rename)
 nmap <Leader>rf <Plug>(coc-refactor)
