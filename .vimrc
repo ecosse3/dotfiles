@@ -233,7 +233,7 @@ nnoremap <silent> gp :bp<CR>
 nnoremap <silent> <s-q> :bd<CR>
 
 "Remove highlights
-nnoremap <silent> <F6> :noh<CR>
+nnoremap <silent> <CR> :noh<CR><CR>
 
 "CoC
 inoremap <silent> <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
