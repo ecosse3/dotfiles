@@ -69,6 +69,7 @@ gaps outer 10
 
 # default workspaces
 assign [class="Google-chrome"] $ws1
+for_window [class="Google-chrome"] move to workspace $ws1
 assign [class="kitty"] $ws2
 assign [class="Atom"] $ws3
 assign [class="CLion"] $ws3
@@ -88,11 +89,12 @@ assign [class="Tilda"] $ws10
 # opening apps in floating mode and resize
 for_window [class="Nautilus"] floating enable
 for_window [class="Nautilus"] resize set 1120 600
+for_window [class="Nautilus"] move position center
 
 for_window [class="Spotify"] floating enable
 for_window [class="Spotify"] move to workspace $ws10
-for_window [class="Spotify"] move position center
 for_window [class="Spotify"] resize set 1500 800
+for_window [class="Spotify"] move position center
 for_window [class="Spotify"] move up 180px; move left 350px
 
 for_window [class="Tilda"] floating enable
@@ -167,11 +169,17 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 # wallpaper
 exec_always --no-startup-id feh --bg-scale /home/ecosse/Obrazy/Wallpapers/cshmo7gmhek41.png
 
+# xclickroot open xmenu
+exec_always --no-startup-id xclickroot -r ~/.scripts/xmenu/xmenu &
+
 # gnome crap
 exec --no-startup-id /usr/lib/gsd-xsettings
 
 # compositor
 # exec --no-startup-id compton
+
+# Screen setup
+exec --no-startup-id xrandr --output HDMI-1 --right-of eDP-1 --primary
 
 # execute default apps on startup
 exec --no-startup-id spotify
@@ -181,9 +189,6 @@ exec --no-startup-id google-chrome-stable
 
 # autolock
 exec xautolock -time 15 -locker "~/.scripts/i3lock-fancy-multimonitor/lock"
-
-# Screen setup
-exec --no-startup-id xrandr --output HDMI-1 --right-of eDP-1 --primary
 
 # Blurme
 exec --no-startup-id ~/.scripts/blurme -t 0.005
@@ -277,25 +282,29 @@ bindsym $mod+space focus mode_toggle
 # rofi
 bindsym $mod+d exec rofi -show drun -theme onedark -show-icons
 
+# xmenu
+bindsym $mod+x exec ~/.scripts/xmenu/xmenu
+
 # webcam
 for_window [title="video0 - mpv"] floating enable
 for_window [title="video0 - mpv"] sticky enable
-bindsym $mod+x exec --no-startup-id ~/.scripts/webcam
+bindsym $mod+z exec --no-startup-id ~/.scripts/webcam
 
 # cava visualizer
-bindsym $mod+z exec ~/.scripts/cava_visualizer
+bindsym $mod+shift+z exec ~/.scripts/cava_visualizer
 
 # dmenu (a program launcher) *using rofi now*
 #bindsym $mod+d exec dmenu_run
 #bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # file-manager
-#bindsym $mod+m exec nautilus --browser
+# bindsym $mod+m exec nautilus --browser
 bindsym $mod+m exec kitty --class=RANGER ranger
 
 # screenshot
-bindsym $mod+shift+s exec sh /home/ecosse/.scripts/screenshooter
-#bindsym $mod+shift+s exec xfce4-screenshooter -r -o gthumb
+bindsym $mod+shift+s exec flameshot gui
+# bindsym $mod+shift+s exec sh /home/ecosse/.scripts/screenshooter
+# bindsym $mod+shift+s exec xfce4-screenshooter -r -o gthumb
 
 # lockscreen shortcut
 bindsym $mod+l exec ~/.scripts/i3lock-fancy-multimonitor/lock -p
