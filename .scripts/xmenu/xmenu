@@ -1,0 +1,18 @@
+#!/bin/sh
+
+cat <<EOF | xmenu | sh &
+IMG:/home/ecosse/.scripts/xmenu/icons/chrome.png	Google Chrome	google-chrome-stable
+IMG:/home/ecosse/.scripts/xmenu/icons/terminal.png	Terminal	kitty
+IMG:/home/ecosse/.scripts/xmenu/icons/folder.png	Files	nautilus
+
+IMG:/home/ecosse/.scripts/xmenu/icons/programming.png	Programming
+	IMG:/home/ecosse/.scripts/xmenu/icons/nvim.png	Neovim	kitty nvim
+	IMG:/home/ecosse/.scripts/xmenu/icons/code.png	Visual Studio Code	code
+	IMG:/home/ecosse/.scripts/xmenu/icons/eclipse.png	Eclipse	eclipse
+IMG:/home/ecosse/.scripts/xmenu/icons/chat.png	Messages
+	IMG:/home/ecosse/.scripts/xmenu/icons/slack.png	Slack	slack
+	IMG:/home/ecosse/.scripts/xmenu/icons/whatsapp.png	Whatsapp	whatsie
+	IMG:/home/ecosse/.scripts/xmenu/icons/teams.png	Teams	teams-for-linux
+	IMG:/home/ecosse/.scripts/xmenu/icons/skype.png	Skype	skype
+	IMG:/home/ecosse/.scripts/xmenu/icons/teamspeak.png	TeamSpeak 3	teamspeak3
+EOF
