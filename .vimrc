@@ -56,6 +56,7 @@ Plug 'ThePrimeagen/vim-be-good'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-repeat'
 Plug 'mhinz/vim-startify'
 
 " Snippets & Language
