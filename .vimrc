@@ -101,6 +101,7 @@ Plug 'vim-airline/vim-airline-themes'
 " Fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'stsewd/fzf-checkout.vim'
 Plug 'airblade/vim-rooter'
 "{{{
     let $FZF_DEFAULT_COMMAND="fd --hidden --type f --exclude .git"
@@ -200,6 +201,10 @@ nnoremap <silent> <Leader>- :vertical resize -2<CR>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
+"Keep visual mode indenting
+vnoremap < <gv
+vnoremap > >gv
+
 "Easymotion
 map <silent> <Leader>e <Plug>(easymotion-bd-w)
 map f <Plug>(easymotion-bd-f)
@@ -213,8 +218,9 @@ nnoremap <silent> <c-p> :Files<CR>
 nnoremap <silent> <s-p> :Rg<CR>
 
 "Git
+nnoremap <Leader>cc :Gcommit -m "
+nnoremap <Leader>gc :GCheckout<CR>
 nnoremap <Leader>gs :Gstatus<CR>
-nnoremap <Leader>gc :Gcommit -m "
 nnoremap <Leader>ga :Git add %:p<CR><CR>
 nnoremap <Leader>gl :Glog<CR>
 nnoremap <Leader>gj :diffget //3<CR>
