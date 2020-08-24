@@ -48,7 +48,6 @@ call plug#begin('~/.vim/plugged')
 " General
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'luochen1990/rainbow'
-" Plug 'jremmen/vim-ripgrep'
 Plug 'vim-utils/vim-man'
 Plug 'mbbill/undotree'
 Plug 'easymotion/vim-easymotion'
@@ -58,6 +57,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-repeat'
 Plug 'mhinz/vim-startify'
+Plug 'dhruvasagar/vim-table-mode'
 
 " Snippets & Language
 Plug 'honza/vim-snippets'
