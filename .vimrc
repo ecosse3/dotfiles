@@ -75,7 +75,8 @@ Plug 'potatoesmaster/i3-vim-syntax'
 Plug 'prettier/vim-prettier', { 'do': 'npm install' }
 Plug 'sbdchd/neoformat'
 Plug 'jiangmiao/auto-pairs'
-Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+Plug 'norcalli/nvim-colorizer.lua'
+Plug 'sheerun/vim-polyglot'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -106,8 +107,8 @@ Plug 'stsewd/fzf-checkout.vim'
 Plug 'airblade/vim-rooter'
 "{{{
     let $FZF_DEFAULT_COMMAND="fd --hidden --type f --exclude .git"
-    let $FZF_DEFAULT_OPTS="--preview '[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --style=numbers --color=always {} || highlight -O ansi -l {} || coderay {} || rougify {} || cat {}) 2> /dev/null'"
-    let g:fzf_layout = { 'down': '30%' }
+    let $FZF_DEFAULT_OPTS="--reverse || --preview '[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --style=numbers --color=always {} || highlight -O ansi -l {} || coderay {} || rougify {} || cat {}) 2> /dev/null'"
+    let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
     let g:fzf_nvim_statusline = 0
     let g:fzf_checkout_track_key = 'ctrl-t'
     let g:fzf_colors =
@@ -160,8 +161,7 @@ let g:closetag_filenames = '*.html,*.xhtml,*.js,*.jsx,*.tsx,*.xml'
 
 let g:signify_sign_delete = '-'
 
-let g:Hexokinase_highlighters = ['foregroundfull']
-let g:Hexokinase_refreshEvents = ['TextChanged', 'InsertLeave']
+lua require'colorizer'.setup()
 
 " --------------------- Neoformat ------------------
 autocmd FileType javascript setlocal formatprg=prettier\ --single-quote\ --trailing-comma\ es6
@@ -337,6 +337,12 @@ function! s:show_documentation()
         call CocAction('doHover')
     endif
 endfunction
+
+" Highlight on yank
+augroup highlight_yank
+  autocmd!
+  autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()
+augroup END
 
 " --------------------- Startify ---------------------
 
