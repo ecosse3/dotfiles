@@ -230,7 +230,7 @@ nnoremap <silent> <s-p> :Rg<CR>
 
 "Git
 nnoremap <Leader>cc :Gcommit -m "
-nnoremap <Leader>gc :GCheckout<CR>
+nnoremap <Leader>gc :GBranches<CR>
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>ga :Git add %:p<CR><CR>
 nnoremap <Leader>gl :Glog<CR>
