@@ -265,6 +265,10 @@ nmap <C-Space> <Plug>(coc-codeaction)
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
+" Refactor / Find word across project
+nnoremap <Leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
+nnoremap <Leader>pw :Rg <C-R>=expand("<cword>")<CR><CR>
+
 nnoremap <silent>K :call <SID>show_documentation()<CR>
 
 " Introduce function text object
