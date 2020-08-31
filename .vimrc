@@ -51,13 +51,13 @@ Plug 'luochen1990/rainbow'
 Plug 'vim-utils/vim-man'
 Plug 'mbbill/undotree'
 Plug 'easymotion/vim-easymotion'
-Plug 'ThePrimeagen/vim-be-good'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-repeat'
 Plug 'mhinz/vim-startify'
 Plug 'dhruvasagar/vim-table-mode'
+Plug 'ThePrimeagen/vim-be-good', {'do': './install.sh'}
 
 " Snippets & Language
 Plug 'honza/vim-snippets'
