@@ -97,9 +97,9 @@ Plug 'skbolton/embark'
 
 " Colorscheme
 Plug 'powerline/powerline'
-Plug 'ryanoasis/vim-devicons'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'ryanoasis/vim-devicons'
 
 " Fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -152,6 +152,7 @@ let g:onedark_termcolors=256
 let g:airline_theme='onedark'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#formatter = 'dir_filename_devicons'
 
 " --------------------- Config ---------------------
 let mapleader = "\<Space>"
