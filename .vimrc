@@ -152,7 +152,7 @@ let g:onedark_termcolors=256
 let g:airline_theme='onedark'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#formatter = 'dir_filename_devicons'
+let g:airline#extensions#tabline#formatter = 'react'
 
 " --------------------- Config ---------------------
 let mapleader = "\<Space>"
