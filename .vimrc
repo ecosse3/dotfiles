@@ -77,6 +77,7 @@ Plug 'sbdchd/neoformat'
 Plug 'jiangmiao/auto-pairs'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'sheerun/vim-polyglot'
+Plug 'jparise/vim-graphql'
 
 " Git
 Plug 'tpope/vim-fugitive'
