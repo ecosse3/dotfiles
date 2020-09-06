@@ -2,7 +2,7 @@
 
 [![Project Status: Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 ![Stars](https://img.shields.io/github/stars/ecosse3/dotfiles?label=%E2%AD%90%20Stars)
-![Follow](https://img.shields.io/github/followers/ecosse3?label=Please%20follow%20%20to%20support%20my%20work%20%F0%9F%99%8F&style=social)
+![Follow](https://img.shields.io/github/followers/ecosse3?label=Please%20follow%20%20to%20support%20my%20work&style=social)
 
 ## Screenshots
 Will be updated soon. I don't use VSCode anymore.
