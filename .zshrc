@@ -107,13 +107,14 @@ alias gpom="git push -u origin master"
 alias v="nvim"
 alias npm="sudo npm"
 alias snap="sudo snap"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/ecosse/.sdkman"
-[[ -s "/home/ecosse/.sdkman/bin/sdkman-init.sh" ]] && source "/home/ecosse/.sdkman/bin/sdkman-init.sh"
+alias l="colorls -lA --sd"
+alias ls="colorls"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/ecosse/.sdkman"
+[[ -s "/home/ecosse/.sdkman/bin/sdkman-init.sh" ]] && source "/home/ecosse/.sdkman/bin/sdkman-init.sh"
