@@ -1,11 +1,15 @@
-# dotfiles
+# i3 & neovim dotfiles
+
+[![Project Status: Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+![Stars](https://img.shields.io/github/stars/ecosse3/dotfiles?label=%E2%AD%90%20Stars)
+![Follow](https://img.shields.io/github/followers/ecosse3?label=Please%20follow%20%20to%20support%20my%20work%20%F0%9F%99%8F&style=social)
 
 ## Screenshots
+Will be updated soon. I don't use VSCode anymore.
 
 ![](./terminals.png)
 ![](./spotify.png)
 ![](./ranger.png)
-![](./code.png)
 ![](./clean_desktop.png)
 
 ## Some details
@@ -14,13 +18,14 @@
 -   **WM**: i3-gaps
 -   **Shell**: oh-my-zsh
 -   **Terminal**: Kitty
--   **File Manager**: Nautilus for GUI, Ranger for terminal
+-   **File Manager**: Ranger for terminal, Nautilus for GUI
 -   **Launcher**: Rofi
--   **Editor**: VS Code
+-   **Editor**: Neovim :heart:
 -   **Browser**: Google Chrome (from snap)
 -   **Theme**: Ant-Dracula
 -   **Icons**: Numix-Circle-Arc
--   **Terminal Font**: Fira Code
+-   **Terminal Font**: Fira Code Nerd Font
+-   **ZSH Theme**: powerlevel10k
 
 ## Dependencies
 
@@ -32,7 +37,7 @@ If you notice that something is missing, please contact me.
 Almost all dependencies you can download from `yaourt`.
 
 | Dependency                                                                         | Description                                                 | Why/Where is it needed?         |
-| ---------------------------------------------------------------------------------- | ----------------------------------------------------------- | ------------------------------- |
+|------------------------------------------------------------------------------------|-------------------------------------------------------------|---------------------------------|
 | `i3-gaps`                                                                          | Window manager                                              | (explains itself)               |
 | `polybar`                                                                          | Status bar                                                  | (explains itself)               |
 | `rofi`                                                                             | Window switcher, application launcher and dmenu replacement | (explains itself)               |
@@ -60,7 +65,7 @@ Almost all dependencies you can download from `yaourt`.
 
 ##### Monospace
 
--   **Fira Code**
+-   **Fira Code Nerd Font**
 -   **DejaVu Sans Mono**
 
 ##### Sans
@@ -74,7 +79,10 @@ Almost all dependencies you can download from `yaourt`.
 -   Backup your current i3 setup
 -   Copy my dotfiles
 
+
 -   Install i3lock-fancy-multimonitor:
+
+note: currently I'm using [i3lock-fancy](https://github.com/meskarune/i3lock-fancy/tree/dualmonitors) from dualmonitors branch which you have to build on your own. This below still looks and works good.
 
 ```
 git clone https://github.com/guimeira/i3lock-fancy-multimonitor.git
@@ -89,6 +97,7 @@ cp -r ~/.scripts/weather /usr/bin/weather
 chmod +x /usr/bin/weather
 ```
 
+-   Install [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) first
 -   Install `oh-my-zsh` additional plugins:
 
 ```
@@ -103,15 +112,15 @@ source ~/.zshrc
 -   **File managers**: Nautilus / Thunar
 -   **Launchers**: Rofi / dmenu
 -   **Browsers**: Google Chrome / Firefox (with Vimium extension)
--   **Editors**: VSCode / Vim / Atom
+-   **Editors**: Neovim / VSCode
 -   **Music players**: mpd (with ncmpcpp)
 
 ### Eye-candy suggestions
 
--   `neofetch` - Display a ton of system info
--   [even-better-ls](https://github.com/illinoisjackson/even-better-ls) - Icons for the `ls` command
--   `cava` - Audio visualizer (used for Spotify)
--   `lolcat` - For rainbow effect (ex. usage `neofetch|lolcat`)
+-   [neofetch](https://github.com/dylanaraps/neofetch) - Display a ton of system info
+-   [colorls](https://github.com/athityakumar/colorls) - Icons for the `ls` command
+-   [cava](https://github.com/karlstav/cava) - Audio visualizer (used for Spotify)
+-   [lolcat](https://github.com/busyloop/lolcat) - For rainbow effect (ex. usage `neofetch|lolcat`)
 
 ## Basic keybinds
 
