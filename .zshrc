@@ -96,13 +96,10 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
-# Example aliases
-alias zshconfig="source ~/.zshrc"
+# Aliases
+alias sozsh="source ~/.zshrc"
 alias gpom="git push -u origin master"
 alias v="nvim"
 alias npm="sudo npm"
@@ -110,10 +107,33 @@ alias snap="sudo snap"
 alias l="colorls -lA --sd"
 alias ls="colorls"
 
+# I'm retarded so I need this
+alias :q='exit'
+alias :wq='exit'
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# search and install packages with fzf
+yi() {
+	SELECTED_PKGS="$(yay -Slq | fzf --header='Install packages' -m --preview 'yay -Si {1}')"
+	if [ -n "$SELECTED_PKGS" ]; then
+		yay -S $(echo $SELECTED_PKGS)
+	fi
+}
+
+# search and remove packages with fzf
+yr() {
+	SELECTED_PKGS="$(yay -Qsq | fzf --header='Remove packages' -m --preview 'yay -Si {1}')"
+	if [ -n "$SELECTED_PKGS" ]; then
+		yay -Rns $(echo $SELECTED_PKGS)
+	fi
+}
+
+# remove unneeded packages
+autoremove() { sudo pacman -Rns $(pacman -Qdtq) }
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/home/ecosse/.sdkman"
