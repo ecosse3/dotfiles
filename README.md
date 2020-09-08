@@ -8,8 +8,10 @@
 Will be updated soon. I don't use VSCode anymore.
 
 ![](./terminals.png)
+![](./neovim.png)
 ![](./spotify.png)
 ![](./ranger.png)
+![](./lightdm.jpg)
 ![](./clean_desktop.png)
 
 ## Some details
