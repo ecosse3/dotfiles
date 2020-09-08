@@ -25,7 +25,8 @@ Will be updated soon. I don't use VSCode anymore.
 -   **Theme**: Ant-Dracula
 -   **Icons**: Numix-Circle-Arc
 -   **Terminal Font**: Fira Code Nerd Font
--   **ZSH Theme**: powerlevel10k
+-   **ZSH Theme**: [powerlevel10k](https://github.com/romkatv/powerlevel10)
+-   **lightdm Theme**: [Aether](https://github.com/NoiSek/Aether)
 
 ## Dependencies
 
@@ -34,14 +35,14 @@ If you install all of them you will have a (mostly) smooth out of the box experi
 Also if you are willing to edit a few configuration files, **which you will have to do** at some point, most of these dependencies can be replaced. For example you can replace `rofi` with `dmenu`,`maim` with `scrot`.
 
 If you notice that something is missing, please contact me.
-Almost all dependencies you can download from `yaourt`.
+Almost all dependencies you can download from `yaourt` or `yay`
 
 | Dependency                                                                         | Description                                                 | Why/Where is it needed?         |
 |------------------------------------------------------------------------------------|-------------------------------------------------------------|---------------------------------|
 | `i3-gaps`                                                                          | Window manager                                              | (explains itself)               |
 | `polybar`                                                                          | Status bar                                                  | (explains itself)               |
 | `rofi`                                                                             | Window switcher, application launcher and dmenu replacement | (explains itself)               |
-| `compton`                                                                          | X Compositor                                                | Makes transparency to windows   |
+| `compton` / `picom`                                                                | X Compositor                                                | Makes transparency to windows   |
 | `lm_sensors`                                                                       | CPU temperature sensor                                      | CPU temperature widgets         |
 | `pulseaudio`, `libpulse`                                                           | Sound system **(Installed by default on most distros)**     | Volume widgets and keybinds     |
 | `mpd`                                                                              | Server-side application for playing music                   | Music widgets                   |
@@ -54,6 +55,7 @@ Almost all dependencies you can download from `yaourt`.
 | `dunst`                                                                            | Notification daemon                                         | (explains itself)               |
 | `xautolock`                                                                        | An automatic X screen-locker                                | (explains itself)               |
 | `tilda`                                                                            | Terminal emulator needed to run cava                        | (explains itself)               |
+| `lightdm`                                                                          | Light display manager of login screen                       | (explains itself)               |
 
 ### Fonts
 
@@ -109,11 +111,12 @@ source ~/.zshrc
 ## Some recommended applications
 
 -   **Terminals**: Kitty / urxvt / st
--   **File managers**: Nautilus / Thunar
+-   **File managers**: Nautilus + ranger
 -   **Launchers**: Rofi / dmenu
 -   **Browsers**: Google Chrome / Firefox (with Vimium extension)
 -   **Editors**: Neovim / VSCode
 -   **Music players**: mpd (with ncmpcpp)
+-   **Activity monitor**: gotop
 
 ### Eye-candy suggestions
 
