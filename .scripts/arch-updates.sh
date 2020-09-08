@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if ! updates=$(yaourt -Qm 2> /dev/null | grep -v local | wc -l ); then
+if ! updates=$(yay -Qu --aur 2> /dev/null | grep -v local | wc -l ); then
     updates=0
 fi
 

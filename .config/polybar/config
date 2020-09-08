@@ -166,7 +166,7 @@ exec = ~/.scripts/arch-updates.sh
 interval = 600
 format-underline = #5963f0
 format-prefix = " "
-click-left = exec kitty yaourt -Syua --noconfirm | exec ~/.scripts/arch-updates.sh
+click-left = exec kitty yay -Syua --answerclean None --answerdiff None | exec ~/.scripts/arch-updates.sh
 
 [module/weather]
 type = custom/script
