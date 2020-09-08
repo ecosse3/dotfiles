@@ -11,6 +11,7 @@ Will be updated soon. I don't use VSCode anymore.
 ![](./neovim.png)
 ![](./spotify.png)
 ![](./ranger.png)
+![](./chrome.png)
 ![](./lightdm.jpg)
 ![](./clean_desktop.png)
 
