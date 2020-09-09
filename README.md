@@ -12,8 +12,9 @@ Will be updated soon. I don't use VSCode anymore.
 ![](./spotify.png)
 ![](./ranger.png)
 ![](./chrome.png)
-![](./lightdm.jpg)
 ![](./clean_desktop.png)
+![](./lightdm.jpg)
+![](./lightdm2.png)
 
 ## Some details
 
