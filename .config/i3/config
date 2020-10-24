@@ -108,6 +108,10 @@ for_window [class="Gimp-2.10"] move to workspace $ws8
 # IntelliJ focus
 for_window [class="^jetbrains-.+"][window_type=dialog] focus
 
+# another
+for_window [class="Git-gui--askpass"] floating enable
+for_window [class="Git-gui--askpass"] move position center
+
 # change window size and center
 bindsym $mod+F1 floating enable; resize set 850 450; move position center
 bindsym $mod+F2 floating enable; resize set 1150 750; move position center
@@ -120,7 +124,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -230,8 +234,8 @@ bindsym XF86AudioPrev exec playerctl previous
 # start a terminal
 bindsym $mod+Return exec kitty
 
-# start google chrome
-bindsym $mod+Shift+Return exec google-chrome-stable
+# duplicate terminal (using xcwd-git)
+bindsym $mod+Shift+Return exec kitty -d "`xcwd`"
 
 # kill focused window
 bindsym $mod+q kill
@@ -336,3 +340,6 @@ for_window [title="Farge"] floating enable
 
 # Rounded corners
 border_radius 5
+
+# Emoji
+bindsym $mod+Shift+e exec splatmoji type
