@@ -115,7 +115,7 @@ for_window [class="Git-gui--askpass"] move position center
 # change window size and center
 bindsym $mod+F1 floating enable; resize set 850 450; move position center
 bindsym $mod+F2 floating enable; resize set 1150 750; move position center
-bindsym $mod+F3 floating enable; resize set 1450 940; move position center
+bindsym $mod+F3 floating enable; resize set 1650 940; move position center
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -185,7 +185,7 @@ exec_always --no-startup-id xclickroot -r ~/.scripts/xmenu/xmenu &
 exec --no-startup-id /usr/lib/gsd-xsettings
 
 # compositor
-# exec --no-startup-id compton
+exec --no-startup-id picom
 
 # Screen setup
 exec --no-startup-id xrandr --output HDMI-1 --right-of eDP-1 --primary
@@ -208,19 +208,23 @@ exec xinput set-prop "MX Master 2S Mouse" "Coordinate Transformation Matrix" 2.4
 # Screen delay movement
 # 200 delay
 # 40 interval
-exec_always --no-startup-id xset r rate 240 90
+exec_always --no-startup-id xset r rate 200 90
 
 ###########################
 ###### CONTROLS ######
 ###########################
 
+# Brightness controls
+bindsym XF86MonBrightnessDown exec --no-startup-id ~/.scripts/brightness down
+bindsym XF86MonBrightnessUp exec --no-startup-id ~/.scripts/brightness up
+
 # Pulse Audio controls
 #bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
 #bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
 #bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle #mute sound
-bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.scripts/volume up #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id ~/.scripts/volume down #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id ~/.scripts/volume mute #mute sound volume
+bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.scripts/volume up
+bindsym XF86AudioLowerVolume exec --no-startup-id ~/.scripts/volume down
+bindsym XF86AudioMute exec --no-startup-id ~/.scripts/volume mute
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play-pause
