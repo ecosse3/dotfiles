@@ -113,9 +113,9 @@ for_window [class="Git-gui--askpass"] floating enable
 for_window [class="Git-gui--askpass"] move position center
 
 # change window size and center
-bindsym $mod+F1 floating enable; resize set 850 450; move position center
-bindsym $mod+F2 floating enable; resize set 1150 750; move position center
-bindsym $mod+F3 floating enable; resize set 1650 940; move position center
+bindsym $mod+F1 floating enable; move position center
+bindsym $mod+F2 floating enable; resize set 1920 1080; move position center
+bindsym $mod+F3 floating enable; resize set 2560 1240; move position center
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -134,16 +134,16 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 20 px or 20 ppt
-        bindsym k resize grow height 20 px or 20 ppt
-        bindsym l resize shrink height 20 px or 20 ppt
-        bindsym semicolon resize grow width 20 px or 20 ppt
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 20 px or 20 ppt
-        bindsym Down resize grow height 20 px or 20 ppt
-        bindsym Up resize shrink height 20 px or 20 ppt
-        bindsym Right resize grow width 20 px or 20 ppt
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
 
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
@@ -162,11 +162,11 @@ set $inactive-text-color #676E7D
 set $urgent-bg-color     #E53935
 
 #window colors
-#                       border              background         text                 indicator
-client.focused          $bg-color           $bg-color          $text-color          #00ff00
-client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
-client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
-client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #00ff00
+#                         border                background           text                   indicator
+client.focused            $bg-color             $bg-color            $text-color            #00ff00
+client.unfocused          $inactive-bg-color    $inactive-bg-color   $inactive-text-color   #00ff00
+client.focused_inactive   $inactive-bg-color    $inactive-bg-color   $inactive-text-color   #00ff00
+client.urgent             $urgent-bg-color      $urgent-bg-color     $text-color            #00ff00
 
 #######################################
 ###### EXEC PROGRAMS ON STARTUP ######
@@ -187,8 +187,8 @@ exec --no-startup-id /usr/lib/gsd-xsettings
 # compositor
 exec --no-startup-id picom
 
-# Screen setup
-exec --no-startup-id xrandr --output HDMI-1 --right-of eDP-1 --primary
+# screen setup
+exec --no-startup-id xrandr --output HDMI-0 --mode 3440x1440 --rate 144 --primary --output DP-0 --mode 1920x1080 --rate 120 --left-of HDMI-0
 
 # execute default apps on startup
 exec --no-startup-id spotify
@@ -199,7 +199,11 @@ exec --no-startup-id google-chrome-stable
 # autolock
 exec xautolock -time 15 -locker "~/.scripts/i3lock-fancy/i3lock-fancy-dualmonitor"
 
-# Blurme
+# disable power saving mode and screen time out
+exec xset s off
+exec xset -dpms
+
+# blurme
 exec --no-startup-id ~/.scripts/blurme -t 0.005
 
 # Mouse sensivity
