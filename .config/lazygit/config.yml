@@ -1,0 +1,31 @@
+git:
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never --24-bit-color=never
+git:
+    commitPrefixes:
+      dotfiles: # This is repository folder name
+        pattern: "^\\w+\\/(\\w+)"
+        replace: "#$1 "
+customCommands:
+  - key: 'b'
+    prompts:
+      - type: 'menu'
+        title: 'What kind of branch is it? (from {{ index .SelectedLocalBranch.Name }})'
+        options:
+          - name: 'bug'
+            value: 'bug'
+          - name: 'feature'
+            value: 'feature'
+          - name: 'hotfix'
+            value: 'hotfix'
+            description: 'If there is a need to fix a blocker, do a temporary patch, apply a critical framework or configuration change that should be handled immediately.'
+          - name: 'experimental'
+            value: 'experimental'
+            description: 'Any new feature or idea that is not part of a release or a sprint. A branch for playing around.'
+      - type: 'input'
+        title: 'What is the {{index .PromptResponses 0}} ID?'
+        initialValue: ''
+    command: "git checkout -b {{index .PromptResponses 0}}/{{index .PromptResponses 1}}"
+    context: 'localBranches'
+    loadingText: 'creating branch'
