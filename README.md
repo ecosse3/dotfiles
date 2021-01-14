@@ -5,10 +5,14 @@
 ![Follow](https://img.shields.io/github/followers/ecosse3?label=Please%20follow%20%20to%20support%20my%20work&style=social)
 
 ## Screenshots
-Will be updated soon. I don't use VSCode anymore.
+Neovim:
+
+![](./neovim.png)
+![](./neovim2.png)
+
+Manjaro:
 
 ![](./terminals.png)
-![](./neovim.png)
 ![](./spotify.png)
 ![](./ranger.png)
 ![](./chrome.png)
