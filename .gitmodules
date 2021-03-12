@@ -1,0 +1,3 @@
+[submodule "nvim"]
+	path = .config/nvim
+	url = https://github.com/ecosse3/nvim
