@@ -100,16 +100,31 @@ source $ZSH/oh-my-zsh.sh
 #
 # Aliases
 alias sozsh="source ~/.zshrc"
-alias gpom="git push -u origin master"
 alias v="nvim"
-alias npm="sudo npm"
-alias snap="sudo snap"
+alias vi="nvim"
+alias vim="nvim"
+alias snap="snap"
+alias snpm="sudo npm"
 alias l="colorls -lA --sd"
 alias ls="colorls"
+alias lg="lazygit"
 
 # I'm retarded so I need this
 alias :q='exit'
 alias :wq='exit'
+
+# React Native
+alias rn="npx react-native"
+alias rns="npx react-native start"
+alias rnscc="npx react-native start --reset-cache"
+alias rnand="npx react-native run-android"
+alias rnland="npx react-native log-android"
+alias rnios="npx react-native run-ios"
+alias rnlios="npx react-native log-ios"
+
+# Safe remove
+alias rm="safe-rm -I"
+
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -134,6 +149,13 @@ yr() {
 
 # remove unneeded packages
 autoremove() { sudo pacman -Rns $(pacman -Qdtq) }
+
+[ -z "$NVM_DIR" ] && export NVM_DIR="$HOME/.nvm"
+source /usr/share/nvm/nvm.sh
+source /usr/share/nvm/bash_completion
+source /usr/share/nvm/install-nvm-exec
+
+export PATH="$ANDROID_HOME/emulator:$PATH"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/home/ecosse/.sdkman"
