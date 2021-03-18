@@ -233,6 +233,9 @@ exec_always --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/porsche-rear-4k-
 # i3 autotiling
 exec_always --no-startup-id autotiling
 
+# set polish keyboard on startup & keybindings
+exec_always --no-startup-id setxkbmap -layout pl
+exec_always --no-startup-id setxkbmap -option caps:escape
 
 ###########################
 ###### CONTROLS ######
@@ -342,6 +345,7 @@ bindsym $mod+m exec kitty --class=RANGER ranger
 
 # screenshot
 bindsym $mod+shift+s exec flameshot gui
+bindsym $mod+shift+d exec flameshot screen -c
 # bindsym $mod+shift+s exec sh /home/ecosse/.scripts/screenshooter
 # bindsym $mod+shift+s exec xfce4-screenshooter -r -o gthumb
 
