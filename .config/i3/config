@@ -31,7 +31,7 @@ set $ws10 "10"
 
 # i guess putting workspaces on different monitors
 workspace $ws1 output DP-1
-workspace $ws2 output DP-0
+workspace $ws2 output DP-1
 workspace $ws3 output DP-1
 
 # switch to workspace
@@ -86,6 +86,9 @@ assign [class="Spotify"] $ws10
 assign [class="Tilda"] $ws10
 
 # opening apps in floating mode and resize
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="pop-up"] move position center
+
 for_window [class="Nautilus"] floating enable
 for_window [class="Nautilus"] resize set 1120 600
 for_window [class="Nautilus"] move position center
@@ -108,9 +111,7 @@ for_window [title="Android Emulator - Pixel_XL_API_30:5554"] floating enable
 bindsym $mod+F1 floating enable; move position center
 bindsym $mod+F2 floating enable; resize set 1920 1080; move position center
 bindsym $mod+F3 floating enable; resize set 2560 1240; move position center
-
-# reload the configuration file
-bindsym $mod+Shift+c reload
+bindsym $mod+F4 floating enable; resize set 2680 1350; move position 1950 60
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
@@ -143,10 +144,12 @@ mode "resize" {
         bindsym $mod+r mode "default"
 }
 
-bindsym $mod+r mode "resize"; exec notify-send -a "Resize mode" "Enabled" -t 2000
+# bindsym $mod+r mode "resize"; exec notify-send -a "Resize mode" "Enabled" -t 2000
+bindsym $mod+r mode "resize"
 
 # color variables
 
+set $bg-focused          #1F5379
 set $bg-color 	         #20212B
 set $inactive-bg-color	 #20212B
 set $text-color          #f3f4f5
@@ -156,7 +159,7 @@ set $indicator           #1F5379
 
 #window colors
 #                         border                background           text                   indicator
-client.focused            $urgent-bg-color      $urgnet-bg-color     $text-color            $indicator
+client.focused            $bg-focused           $bg-focused          $text-color            $indicator
 client.unfocused          $inactive-bg-color    $inactive-bg-color   $inactive-text-color   $indicator
 client.focused_inactive   $inactive-bg-color    $inactive-bg-color   $inactive-text-color   $indicator
 client.urgent             $urgent-bg-color      $urgent-bg-color     $text-color            $indicator
@@ -165,16 +168,19 @@ client.urgent             $urgent-bg-color      $urgent-bg-color     $text-color
 smart_borders on
 hide_edge_borders smart_no_gaps
 
-for_window [class=".*"] border pixel 4
-gaps inner 30
-gaps outer 10
+for_window [class=".*"] border pixel 3
+for_window [class="Chrome"] border none
+gaps inner 10
+gaps outer 5
 
 # switch gaps by bindsym
 set $mode_gaps Toggle gaps: (1) on (2) off
-bindsym $mod+equal mode "$mode_gaps"; exec notify-send -a "Gaps mode" " " "(1) - enable \n(2) - disable" -t 1000
+bindsym $mod+equal mode "$mode_gaps"
 mode "$mode_gaps" {
-    bindsym 1 mode "default", gaps inner all set 30, gaps outer all set 10, exec picom, exec $HOME/.config/polybar/launch.sh
-    bindsym 2 mode "default", gaps inner all set 1, gaps outer all set 1, exec pkill picom, exec $HOME/.config/polybar/launch.sh
+    # bindsym 1 mode "default", gaps inner all set 25, gaps outer all set 10, exec picom
+    # bindsym 2 mode "no_gaps", gaps inner all set 0, gaps outer all set 1, exec pkill picom
+    bindsym 1 mode "default", gaps inner all set 25, gaps outer all set 10
+    bindsym 2 mode "no_gaps", gaps inner all set 0, gaps outer all set 1
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
@@ -191,15 +197,20 @@ exec_always --no-startup-id xclickroot -r ~/.scripts/xmenu/xmenu &
 exec --no-startup-id /usr/lib/gsd-xsettings
 
 # compositor
-exec --no-startup-id picom
+# exec --no-startup-id picom
 
 # screen setup
+# exec_always --no-startup-id xrandr --setmonitor DP-1N 3440/797x1440/334+1920+0 DP-1
+# exec_always --no-startup-id xrandr --fb 3340x1440
+# exec_always --no-startup-id xrandr -s 0
+# exec_always --no-startup-id xrandr --output DP-1N --mode 3440x1440 --rate 100.00 --primary --output DP-0 --mode 1920x1080 --rate 120 --left-of DP-1
 exec_always --no-startup-id xrandr --output DP-1 --mode 3440x1440 --rate 100.00 --primary --output DP-0 --mode 1920x1080 --rate 120 --left-of DP-1
-# exec_always --no-startup-id xrandr --output DP-1 --mode 1720x1440 --rate 100.00 --primary --output DP-0 --mode 1920x1080 --rate 120 --left-of DP-1
+
+# laptop only
+# exec_always --no-startup-id xrandr --output DP-0 --mode 1920x1080 --rate 120 --primary
 
 # execute default apps on startup
 exec --no-startup-id spotify
-exec --no-startup-id mailspring
 exec --no-startup-id google-chrome-stable
 #exec --no-startup-id tilda -c cava
 
@@ -211,7 +222,7 @@ exec xset s off
 exec xset -dpms
 
 # blurme
-exec --no-startup-id ~/.scripts/blurme -t 0.005
+# exec --no-startup-id ~/.scripts/blurme -t 0.005
 
 # Mouse sensivity
 exec xinput set-prop "MX Master 2S Mouse" "Coordinate Transformation Matrix" 2.400000, 0.000000, 0.000000, 0.000000, 2.400000, 0.000000, 0.000000, 0.000000, 1.000000
@@ -225,10 +236,11 @@ exec_always --no-startup-id xset r rate 200 90
 exec openrgb --server --startminimized
 
 # polybar
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+# exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh --blocks
 
 # wallpaper
-exec_always --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/porsche-rear-4k-zv-3440x1440.jpg --bg-fill ~/Pictures/Wallpapers/3.jpg
+exec_always --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/wonder_woman_1984_gal_gadot-wallpaper-3440x1440.jpg --bg-fill ~/Pictures/Wallpapers/3.jpg
 
 # i3 autotiling
 exec_always --no-startup-id autotiling
@@ -236,6 +248,10 @@ exec_always --no-startup-id autotiling
 # set polish keyboard on startup & keybindings
 exec_always --no-startup-id setxkbmap -layout pl
 exec_always --no-startup-id setxkbmap -option caps:escape
+
+# clipboard daemon
+exec --no-startup-id greenclip daemon
+
 
 ###########################
 ###### CONTROLS ######
@@ -322,7 +338,8 @@ bindsym $mod+space focus mode_toggle
 #bindsym $mod+d focus child
 
 # rofi
-bindsym $mod+d exec rofi -show drun -theme onedark -show-icons
+# bindsym $mod+d exec rofi -show drun -theme onedark -show-icons
+bindsym $mod+d exec rofi -no-default-config -no-lazy-grab -show drun -modi drun -theme ~/.config/polybar/blocks/scripts/rofi/launcher.rasi
 
 # xmenu
 bindsym $mod+x exec ~/.scripts/xmenu/xmenu
@@ -366,14 +383,26 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 # Calculator
-bindsym $mod+c exec rofi -show calc -theme onedark -show-icons
+bindsym $mod+Shift+c exec rofi -show calc -theme ~/.config/polybar/blocks/scripts/rofi/launcher.rasi
+
+# Clipboard
+bindsym $mod+c exec rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}' -theme ~/.config/polybar/blocks/scripts/rofi/launcher.rasi
+
+# Clipboard clean
+bindsym $mod+ctrl+c exec pkill greenclip && greenclip clear && greenclip daemon &
+
+# Pass Manager
+bindsym $mod+p exec rofi-pass
 
 # Farge Color Picker
 bindsym $mod+Shift+f --release exec farge --notify --expire-time 5000
 for_window [title="Farge"] floating enable
 
 # Rounded corners
-border_radius 5
+border_radius 0
 
 # Emoji
-bindsym $mod+Shift+e exec splatmoji type
+bindsym $mod+Shift+e exec rofi -show emoji -modi emoji -theme onedark
+
+# Todo
+bindsym $mod+t exec rofi-todo -f ~/.config/rofi-todo/todo
