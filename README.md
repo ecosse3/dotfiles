@@ -21,7 +21,7 @@
 -   **Terminal**: Kitty
 -   **File Manager**: Ranger for terminal, Nautilus for GUI
 -   **Launcher**: Rofi
--   **Editor**: Neovim :heart: (Repo)[https://github.com/ecosse3/nvim]
+-   **Editor**: Neovim :heart: [Repo](https://github.com/ecosse3/nvim)
 -   **Browser**: Google Chrome (from snap)
 -   **Theme**: Ant-Dracula
 -   **Icons**: Numix-Circle-Arc
