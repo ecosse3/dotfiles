@@ -5,20 +5,13 @@
 ![Follow](https://img.shields.io/github/followers/ecosse3?label=Please%20follow%20%20to%20support%20my%20work&style=social)
 
 ## Screenshots
-Neovim:
-
-![](./neovim.png)
-![](./neovim2.png)
-
-Manjaro:
-
-![](./terminals.png)
-![](./spotify.png)
-![](./ranger.png)
-![](./chrome.png)
-![](./clean_desktop.png)
-![](./lightdm.jpg)
-![](./lightdm2.png)
+![](./screenshots/terminals.png)
+![](./screenshots/spotify.png)
+![](./screenshots/ranger.png)
+![](./screenshots/chrome.png)
+![](./screenshots/clean_desktop.png)
+![](./screenshots/lightdm.jpg)
+![](./screenshots/lightdm2.png)
 
 ## Some details
 
@@ -28,7 +21,7 @@ Manjaro:
 -   **Terminal**: Kitty
 -   **File Manager**: Ranger for terminal, Nautilus for GUI
 -   **Launcher**: Rofi
--   **Editor**: Neovim :heart:
+-   **Editor**: Neovim :heart: (Repo)[https://github.com/ecosse3/nvim]
 -   **Browser**: Google Chrome (from snap)
 -   **Theme**: Ant-Dracula
 -   **Icons**: Numix-Circle-Arc
