@@ -10,8 +10,8 @@
 ![](./screenshots/ranger.png)
 ![](./screenshots/chrome.png)
 ![](./screenshots/clean_desktop.png)
-![](./screenshots/lightdm.jpg)
-![](./screenshots/lightdm2.png)
+![](./screenshots/current/lightdm.jpg)
+![](./screenshots/current/lightdm2.png)
 
 ## Some details
 
