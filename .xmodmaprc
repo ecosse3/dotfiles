@@ -1,0 +1,17 @@
+! Defaults
+! keycode  64 = Alt_L Meta_L Alt_L Meta_L
+!   0xffe9 corresponds to 0xe
+! keycode  66 = Caps_Lock NoSymbol Caps_Lock
+!   0xffe5
+! keycode 133 = Super_L NoSymbol Super_L
+!   0xffeb corresponds to 0x5d
+! keycode  9 = Escape NoSymbol Escape
+!   0xff1b
+
+remove Lock = Caps_Lock
+keysym Caps_Lock = Escape
+add Lock = Caps_Lock
+
+remove Mod4 = Super_L
+keysym Super_L = Alt_L
+add Mod4 = Alt_L
