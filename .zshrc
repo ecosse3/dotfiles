@@ -75,7 +75,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git sudo zsh-syntax-highlighting zsh-autosuggestions you-should-use)
+plugins=(git sudo zsh-syntax-highlighting zsh-autosuggestions you-should-use zsh-z ssh-agent)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -108,6 +108,9 @@ alias snpm="sudo npm"
 alias l="colorls -lA --sd"
 alias ls="colorls"
 alias lg="lazygit"
+alias clear_teams_cache="rm -rf Application\ Cache/Cache/* blob_storage/* Cache/* Code\ Cache/js/* databases/* GPUCache/* IndexedDB/* Local\ Storage/*"
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
 
 # I'm retarded so I need this
 alias :q='exit'
@@ -121,9 +124,7 @@ alias rnand="npx react-native run-android"
 alias rnland="npx react-native log-android"
 alias rnios="npx react-native run-ios"
 alias rnlios="npx react-native log-ios"
-
-# Safe remove
-alias rm="safe-rm -I"
+alias rnemulator="emulator -avd Pixel_XL_API_30"
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -150,13 +151,50 @@ yr() {
 # remove unneeded packages
 autoremove() { sudo pacman -Rns $(pacman -Qdtq) }
 
+# colorls
+source $(dirname $(gem which colorls))/tab_complete.sh
+
+# nvm
 [ -z "$NVM_DIR" ] && export NVM_DIR="$HOME/.nvm"
 source /usr/share/nvm/nvm.sh
 source /usr/share/nvm/bash_completion
 source /usr/share/nvm/install-nvm-exec
 
+# calling nvm use automatically in directory with a .nvmrc file
+# place this after nvm initialization!
+autoload -U add-zsh-hook
+load-nvmrc() {
+  local node_version="$(nvm version)"
+  local nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$node_version" ]; then
+      nvm use
+    fi
+  elif [ "$node_version" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
+
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+
+# PATHs
 export PATH="$ANDROID_HOME/emulator:$PATH"
+export PATH="/home/ecosse/.gem/ruby/2.7.0/bin:$PATH"
+export PATH="$PATH:$(yarn global bin)"
+export GOPATH="$HOME/go"
+export GOROOT="/usr/lib/go"
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/home/ecosse/.sdkman"
 [[ -s "/home/ecosse/.sdkman/bin/sdkman-init.sh" ]] && source "/home/ecosse/.sdkman/bin/sdkman-init.sh"
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
