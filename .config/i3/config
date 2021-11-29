@@ -247,11 +247,9 @@ exec_always --no-startup-id autotiling
 
 # set polish keyboard on startup & keybindings
 exec_always --no-startup-id setxkbmap -layout pl
-exec_always --no-startup-id setxkbmap -option caps:escape
 
 # clipboard daemon
 exec --no-startup-id greenclip daemon
-
 
 ###########################
 ###### CONTROLS ######
