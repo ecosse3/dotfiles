@@ -9,7 +9,8 @@ usermodmap=$HOME/.Xmodmap
 sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
 
-DEFAULT_SESSION=gnome-session
+setxkbmap -option caps:escape
+setxkbmap -option altwin:swap_alt_win
 
 # merge in defaults and keymaps
 
@@ -23,7 +24,7 @@ fi
 
 if [ -f "$userresources" ]; then
     xrdb -merge "$userresources"
-fisetxkbmap -option caps:escape
+fi
 
 if [ -f "$usermodmap" ]; then
     xmodmap "$usermodmap"
@@ -37,6 +38,13 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
     done
     unset f
 fi
+
+xset s off &
+xset -dpms &
+
+# session
+
+DEFAULT_SESSION=i3
 
 get_session(){
 	local dbus_args=(--sh-syntax --exit-with-session)
@@ -62,10 +70,5 @@ get_session(){
 
 	echo "dbus-launch ${dbus_args[*]}"
 }
-
-xset s off &
-xset -dpms &
-
-xmodmap ~/.xmodmaprc
 
 exec $(get_session)
