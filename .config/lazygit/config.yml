@@ -1,3 +1,8 @@
+gui:
+  theme:
+    activeBorderColor:
+      - red
+      - bold
 git:
   paging:
     colorArg: always
@@ -6,7 +11,10 @@ git:
     commitPrefixes:
       dotfiles: # This is repository folder name
         pattern: "^\\w+\\/(\\w+)"
-        replace: "#$1 "
+        replace: "$1 - "
+      # palestra: # This is repository folder name
+      #   pattern: "^\\w+\\/(\\w+)"
+      #   replace: " (PAL-$1)"
 customCommands:
   - key: 'b'
     prompts:
