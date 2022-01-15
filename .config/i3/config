@@ -1,10 +1,11 @@
 ########################################
-###### i3-GAPS ECOSSE CONFIG FILE ######
+##### i3-GAPS ECOSSE CONFIG FILE ######
 ########################################
 
-# Mod1 - ALT
-# Mod4 - WIN
-set $mod Mod1
+# Mod1 - WIN
+# Mod4 - ALT
+# They are swapped because of "setxkbmap -option altwin:swap_lalt_lwin"
+set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 font pango:Noto Sans Display 12
@@ -29,12 +30,12 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
-# i guess putting workspaces on different monitors
+# I GUESS PUTTING WORKSPACES ON DIFFERENT MONITORS
 workspace $ws1 output DP-1
 workspace $ws2 output DP-1
 workspace $ws3 output DP-1
 
-# switch to workspace
+# SWITCH TO WORKSPACE
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace $ws3
@@ -47,7 +48,7 @@ bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws10
 bindsym $mod+Tab workspace back_and_forth
 
-# move focused container to workspace
+# MOVE FOCUSED CONTAINER TO WORKSPACE
 bindsym $mod+Shift+1 move container to workspace $ws1
 bindsym $mod+Shift+2 move container to workspace $ws2
 bindsym $mod+Shift+3 move container to workspace $ws3
@@ -63,7 +64,7 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 ###### i3gaps stuff ######
 ###########################
 
-# default workspaces
+# DEFAULT WORKSPACES
 assign [class="Google-chrome"] $ws1
 for_window [class="Google-chrome"] move to workspace $ws1
 assign [class="kitty"] $ws2
@@ -85,7 +86,7 @@ assign [class="TeamSpeak 3"] $ws9
 assign [class="Spotify"] $ws10
 assign [class="Tilda"] $ws10
 
-# opening apps in floating mode and resize
+# OPENING APPS IN FLOATING MODE AND RESIZE
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="pop-up"] move position center
 
@@ -107,19 +108,19 @@ for_window [class="Git-gui--askpass"] floating enable
 for_window [class="Git-gui--askpass"] move position center
 for_window [title="Android Emulator - Pixel_XL_API_30:5554"] floating enable
 
-# change window size and center
+# CHANGE WINDOW SIZE AND CENTER
 bindsym $mod+F1 floating enable; move position center
 bindsym $mod+F2 floating enable; resize set 1920 1080; move position center
 bindsym $mod+F3 floating enable; resize set 2560 1240; move position center
 bindsym $mod+F4 floating enable; resize set 2680 1350; move position 1950 60
 
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+# RESTART I3 INPLACE (PRESERVES YOUR LAYOUT/SESSION, CAN BE USED TO UPGRADE I3)
 bindsym $mod+Shift+r restart
 
-# exit i3 (logs you out of your X session)
+# EXIT I3 (LOGS YOU OUT OF YOUR X SESSION)
 #bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
-# resize window (you can also use the mouse for that)
+# RESIZE WINDOW (YOU CAN ALSO USE THE MOUSE FOR THAT)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
 
@@ -147,7 +148,7 @@ mode "resize" {
 # bindsym $mod+r mode "resize"; exec notify-send -a "Resize mode" "Enabled" -t 2000
 bindsym $mod+r mode "resize"
 
-# color variables
+# COLOR VARIABLES
 
 set $bg-focused          #1F5379
 set $bg-color 	         #20212B
@@ -157,14 +158,14 @@ set $inactive-text-color #676E7D
 set $urgent-bg-color     #E53935
 set $indicator           #1F5379
 
-#window colors
-#                         border                background           text                   indicator
+# WINDOW COLORS
+#                         BORDER                BACKGROUND           TEXT                   INDICATOR
 client.focused            $bg-focused           $bg-focused          $text-color            $indicator
 client.unfocused          $inactive-bg-color    $inactive-bg-color   $inactive-text-color   $indicator
 client.focused_inactive   $inactive-bg-color    $inactive-bg-color   $inactive-text-color   $indicator
 client.urgent             $urgent-bg-color      $urgent-bg-color     $text-color            $indicator
 
-# disable window titlebars and add border
+# DISABLE WINDOW TITLEBARS AND ADD BORDER
 smart_borders on
 hide_edge_borders smart_no_gaps
 
@@ -173,7 +174,7 @@ for_window [class="Chrome"] border none
 gaps inner 10
 gaps outer 5
 
-# switch gaps by bindsym
+# SWITCH GAPS BY BINDSYM
 set $mode_gaps Toggle gaps: (1) on (2) off
 bindsym $mod+equal mode "$mode_gaps"
 mode "$mode_gaps" {
@@ -190,26 +191,28 @@ mode "$mode_gaps" {
 ###### EXEC PROGRAMS ON STARTUP ######
 #######################################
 
-# xclickroot open xmenu
+# XCLICKROOT OPEN XMENU
 exec_always --no-startup-id xclickroot -r ~/.scripts/xmenu/xmenu &
 
-# gnome crap
+# GNOME CRAP
 exec --no-startup-id /usr/lib/gsd-xsettings
 
-# compositor
+# COMPOSITOR
 # exec --no-startup-id picom
 
-# screen setup
+# SCREEN SETUP
 # exec_always --no-startup-id xrandr --setmonitor DP-1N 3440/797x1440/334+1920+0 DP-1
 # exec_always --no-startup-id xrandr --fb 3340x1440
 # exec_always --no-startup-id xrandr -s 0
 # exec_always --no-startup-id xrandr --output DP-1N --mode 3440x1440 --rate 100.00 --primary --output DP-0 --mode 1920x1080 --rate 120 --left-of DP-1
+
+# exec_always --no-startup-id xrandr --output DP-0 --mode 1920x1080 --rate 120
 exec_always --no-startup-id xrandr --output DP-1 --mode 3440x1440 --rate 100.00 --primary --output DP-0 --mode 1920x1080 --rate 120 --left-of DP-1
 
 # laptop only
 # exec_always --no-startup-id xrandr --output DP-0 --mode 1920x1080 --rate 120 --primary
 
-# execute default apps on startup
+# EXECUTE DEFAULT APPS ON STARTUP
 exec --no-startup-id spotify
 exec --no-startup-id google-chrome-stable
 #exec --no-startup-id tilda -c cava
@@ -235,31 +238,27 @@ exec_always --no-startup-id xset r rate 200 90
 # OpenRGB Server
 exec openrgb --server --startminimized
 
-# polybar
-# exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+# POLYBAR
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh --blocks
 
-# wallpaper
+# WALLPAPER
 exec_always --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/wonder_woman_1984_gal_gadot-wallpaper-3440x1440.jpg --bg-fill ~/Pictures/Wallpapers/3.jpg
 
-# i3 autotiling
+# I3 AUTOTILING
 exec_always --no-startup-id autotiling
 
-# set polish keyboard on startup & keybindings
-exec_always --no-startup-id setxkbmap -layout pl
-
-# clipboard daemon
+# CLIPBOARD DAEMON
 exec --no-startup-id greenclip daemon
 
 ###########################
 ###### CONTROLS ######
 ###########################
 
-# Brightness controls
+# BRIGHTNESS CONTROLS
 bindsym XF86MonBrightnessDown exec --no-startup-id ~/.scripts/brightness down
 bindsym XF86MonBrightnessUp exec --no-startup-id ~/.scripts/brightness up
 
-# Pulse Audio controls
+# PULSE AUDIO CONTROLS
 #bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
 #bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
 #bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle #mute sound
@@ -267,7 +266,7 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.scripts/volume up
 bindsym XF86AudioLowerVolume exec --no-startup-id ~/.scripts/volume down
 bindsym XF86AudioMute exec --no-startup-id ~/.scripts/volume mute
 
-# Media player controls
+# MEDIA PLAYER CONTROLS
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
@@ -276,131 +275,121 @@ bindsym XF86AudioPrev exec playerctl previous
 ###### BINDS ######
 ###########################
 
-# start a terminal
+# START A TERMINAL
 bindsym $mod+Return exec kitty
 
-# duplicate terminal (using xcwd-git)
+# DUPLICATE TERMINAL (USING XCWD-GIT)
 bindsym $mod+Shift+Return exec kitty -d "`xcwd`"
 
-# kill focused window
+# KILL FOCUSED WINDOW
 bindsym $mod+q kill
 
-# change focus
+# CHANGE FOCUS
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
-# alternatively, you can use the cursor keys:
+# ALTERNATIVELY, YOU CAN USE THE CURSOR KEYS:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-# move focused window
+# MOVE FOCUSED WINDOW
 # bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
-# alternatively, you can use the cursor keys:
+# ALTERNATIVELY, YOU CAN USE THE CURSOR KEYS:
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-# split in horizontal orientation
+# SPLIT IN HORIZONTAL ORIENTATION
 bindsym $mod+Shift+h split h
 
-# split in vertical orientation
+# SPLIT IN VERTICAL ORIENTATION
 bindsym $mod+Shift+v split v
 
-# enter fullscreen mode for the focused container
+# ENTER FULLSCREEN MODE FOR THE FOCUSED CONTAINER
 bindsym $mod+f fullscreen toggle
 
-# change container layout (stacked, tabbed, toggle split)
+# CHANGE CONTAINER LAYOUT (STACKED, TABBED, TOGGLE SPLIT)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
-# toggle tiling / floating
+# TOGGLE TILING / FLOATING
 bindsym $mod+Shift+space floating toggle
 
-# change focus between tiling / floating windows
+# CHANGE FOCUS BETWEEN TILING / FLOATING WINDOWS
 bindsym $mod+space focus mode_toggle
 
-# focus the parent container
-#bindsym $mod+a focus parent
-
-# focus the child container
-#bindsym $mod+d focus child
-
-# rofi
+# ROFI
 # bindsym $mod+d exec rofi -show drun -theme onedark -show-icons
 bindsym $mod+d exec rofi -no-default-config -no-lazy-grab -show drun -modi drun -theme ~/.config/polybar/blocks/scripts/rofi/launcher.rasi
 
-# xmenu
+# XMENU
 bindsym $mod+x exec ~/.scripts/xmenu/xmenu
 
-# webcam
+# WEBCAM
 for_window [title="video0 - mpv"] floating enable
 for_window [title="video0 - mpv"] sticky enable
 bindsym $mod+z exec --no-startup-id ~/.scripts/webcam
 
-# cava visualizer
+# CAVA VISUALIZER
 bindsym $mod+shift+z exec ~/.scripts/cava_visualizer
 
-# dmenu (a program launcher) *using rofi now*
-#bindsym $mod+d exec dmenu_run
-#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-
-# file-manager
-# bindsym $mod+m exec nautilus --browser
+# FILE-MANAGER
 bindsym $mod+m exec kitty --class=RANGER ranger
 
-# screenshot
+# SCREENSHOT
 bindsym $mod+shift+s exec flameshot gui
 bindsym $mod+shift+d exec flameshot screen -c
-# bindsym $mod+shift+s exec sh /home/ecosse/.scripts/screenshooter
-# bindsym $mod+shift+s exec xfce4-screenshooter -r -o gthumb
 
-# lockscreen shortcut
+# LOCKSCREEN SHORTCUT
 bindsym $mod+Shift+semicolon exec ~/.scripts/i3lock-fancy/i3lock-fancy-dualmonitor
 
-# move container to different monitors
+# MOVE CONTAINER TO DIFFERENT MONITORS
 bindsym $mod+Shift+greater move container to output right
 bindsym $mod+Shift+less move container to output left
 
-# move workspace to different monitor bindsym $mod+Shift+m move workspace to output left
+# MOVE WORKSPACE TO DIFFERENT MONITOR BINDSYM $MOD+SHIFT+M MOVE WORKSPACE TO OUTPUT LEFT
 bindsym $mod+Shift+m move workspace to output left
 
-# Make the currently focused window a scratchpad
+# MAKE THE CURRENTLY FOCUSED WINDOW A SCRATCHPAD
 bindsym $mod+Shift+minus move scratchpad
 
-# Show the first scratchpad window
+# SHOW THE FIRST SCRATCHPAD WINDOW
 bindsym $mod+minus scratchpad show
 
-# Calculator
+# CALCULATOR
 bindsym $mod+Shift+c exec rofi -show calc -theme ~/.config/polybar/blocks/scripts/rofi/launcher.rasi
 
-# Clipboard
+# CLIPBOARD
 bindsym $mod+c exec rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}' -theme ~/.config/polybar/blocks/scripts/rofi/launcher.rasi
 
-# Clipboard clean
+# CLIPBOARD CLEAN
 bindsym $mod+ctrl+c exec pkill greenclip && greenclip clear && greenclip daemon &
 
-# Pass Manager
+# PASS MANAGER
 bindsym $mod+p exec rofi-pass
 
-# Farge Color Picker
+# FARGE COLOR PICKER
 bindsym $mod+Shift+f --release exec farge --notify --expire-time 5000
 for_window [title="Farge"] floating enable
 
-# Rounded corners
+# ROUNDED CORNERS
 border_radius 0
 
-# Emoji
+# EMOJI
 bindsym $mod+Shift+e exec rofi -show emoji -modi emoji -theme onedark
 
-# Todo
-bindsym $mod+t exec rofi-todo -f ~/.config/rofi-todo/todo
+# KEYBOARD STYLE
+exec_always --no-startup-id setxkbmap -layout pl -option caps:escape -option altwin:swap_lalt_lwin
+
+# DUNST
+bindsym $mod+period exec dunstctl context
