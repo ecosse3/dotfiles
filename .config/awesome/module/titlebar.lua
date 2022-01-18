@@ -57,36 +57,44 @@ local create_vertical_bar = function(c, pos, bg, size)
 	-- Check if passed position is valid
 	if (pos == 'top' or pos == 'bottom') then
 		pos = 'left'
-		bg = '#FF00FF'
-	end 
+		-- bg = '#FF00FF'
+	end
 
-	awful.titlebar(c, {position = pos, bg = bg, size = size}) : setup {
-		{
-			{
-				awful.titlebar.widget.closebutton(c),
-				awful.titlebar.widget.maximizedbutton(c),
-				awful.titlebar.widget.minimizebutton(c),
-				spacing = dpi(7),
-				layout  = wibox.layout.fixed.vertical
-			},
-			margins = dpi(10),
-			widget = wibox.container.margin
-		},
-		{
-			buttons = create_click_events(c),
-			layout = wibox.layout.flex.vertical
-		},
-		{
-			{
-				awful.titlebar.widget.ontopbutton(c),
-				awful.titlebar.widget.floatingbutton(c),
-				spacing = dpi(7),
-				layout  = wibox.layout.fixed.vertical
-			},
-			margins = dpi(10),
-			widget = wibox.container.margin
-		},
-		layout = wibox.layout.align.vertical
+	awful.titlebar(c, {position = pos, bg = "#00000000", size = size}) : setup {
+    {
+      {
+        {
+          awful.titlebar.widget.closebutton(c),
+          awful.titlebar.widget.maximizedbutton(c),
+          awful.titlebar.widget.minimizebutton(c),
+          spacing = dpi(7),
+          layout  = wibox.layout.fixed.vertical
+        },
+        margins = dpi(10),
+        widget = wibox.container.margin
+      },
+      {
+        buttons = create_click_events(c),
+        layout = wibox.layout.flex.vertical
+      },
+      {
+        {
+          awful.titlebar.widget.ontopbutton(c),
+          awful.titlebar.widget.floatingbutton(c),
+          spacing = dpi(7),
+          layout  = wibox.layout.fixed.vertical
+        },
+        margins = dpi(10),
+        widget = wibox.container.margin
+      },
+      layout = wibox.layout.align.vertical
+    },
+    bg = bg,
+    -- This is the anti-aliased shaped container that will have the purple color and will act as the titlebar's background with 9 as the corner radius.
+    shape = function(cr, width, height)
+      gears.shape.partially_rounded_rect(cr, width, height, true, false, false, true, 9)
+    end,
+    widget = wibox.container.background
 	}
 end
 
@@ -95,37 +103,45 @@ local create_horizontal_bar = function(c, pos, bg, size)
 	-- Check if passed position is valid
 	if (pos == 'left' or pos == 'right') then
 		pos = 'top'
-		bg = '#FF00FF'
-	end 
+		-- bg = '#FF00FF'
+	end
 
-	awful.titlebar(c, {position = pos, bg = bg, size = size}) : setup {
-		{
-			{
-				awful.titlebar.widget.closebutton(c),
-				awful.titlebar.widget.maximizedbutton(c),
-				awful.titlebar.widget.minimizebutton(c),
-				spacing = dpi(7),
-				layout  = wibox.layout.fixed.horizontal
-			},
-			margins = dpi(10),
-			widget = wibox.container.margin
-		},
-		{
-			buttons = create_click_events(c),
-			layout = wibox.layout.flex.horizontal
-		},
-		{
-			{
-				awful.titlebar.widget.ontopbutton(c),
-				awful.titlebar.widget.floatingbutton(c),
-				spacing = dpi(7),
-				layout  = wibox.layout.fixed.horizontal
-			},
-			margins = dpi(10),
-			widget = wibox.container.margin
-		},
-		layout = wibox.layout.align.horizontal
-	}
+	awful.titlebar(c, {position = pos, bg = "#00000000", size = size}) : setup {
+    {
+      {
+        {
+          awful.titlebar.widget.closebutton(c),
+          awful.titlebar.widget.maximizedbutton(c),
+          awful.titlebar.widget.minimizebutton(c),
+          spacing = dpi(7),
+          layout  = wibox.layout.fixed.horizontal
+        },
+        margins = dpi(10),
+        widget = wibox.container.margin
+      },
+      {
+        buttons = create_click_events(c),
+        layout = wibox.layout.flex.horizontal
+      },
+      {
+        {
+          awful.titlebar.widget.ontopbutton(c),
+          awful.titlebar.widget.floatingbutton(c),
+          spacing = dpi(7),
+          layout  = wibox.layout.fixed.horizontal
+        },
+        margins = dpi(10),
+        widget = wibox.container.margin
+      },
+      layout = wibox.layout.align.horizontal
+    },
+    bg = bg,
+    -- This is the anti-aliased shaped container that will have the purple color and will act as the titlebar's background with 9 as the corner radius.
+    shape = function(cr, width, height)
+      gears.shape.partially_rounded_rect(cr, width, height, true, false, false, true, 9)
+    end,
+    widget = wibox.container.background
+  }
 end
 
 local create_vertical_bar_dialog = function(c, pos, bg, size)
@@ -133,28 +149,36 @@ local create_vertical_bar_dialog = function(c, pos, bg, size)
 	-- Check if passed position is valid
 	if (pos == 'top' or pos == 'bottom') then
 		pos = 'left'
-		bg = '#FF00FF'
-	end 
+		-- bg = '#FF00FF'
+	end
 
-	awful.titlebar(c, {position = pos, bg = bg, size = size}) : setup {
-		{
-			{
-				awful.titlebar.widget.closebutton(c),
-				awful.titlebar.widget.minimizebutton(c),
-				awful.titlebar.widget.ontopbutton(c),
-				spacing = dpi(7),
-				layout  = wibox.layout.fixed.vertical
-			},
-			margins = dpi(10),
-			widget = wibox.container.margin
-		},
-		{
-			buttons = create_click_events(c),
-			layout = wibox.layout.flex.vertical
-		},
-		nil,
-		layout = wibox.layout.align.vertical
-	}
+	awful.titlebar(c, {position = pos, bg = "#00000000", size = size}) : setup {
+    {
+      {
+        {
+          awful.titlebar.widget.closebutton(c),
+          awful.titlebar.widget.minimizebutton(c),
+          awful.titlebar.widget.ontopbutton(c),
+          spacing = dpi(7),
+          layout  = wibox.layout.fixed.vertical
+        },
+        margins = dpi(10),
+        widget = wibox.container.margin
+      },
+      {
+        buttons = create_click_events(c),
+        layout = wibox.layout.flex.vertical
+      },
+      nil,
+      layout = wibox.layout.align.vertical
+    },
+    bg = bg,
+    -- This is the anti-aliased shaped container that will have the purple color and will act as the titlebar's background with 9 as the corner radius.
+    shape = function(cr, width, height)
+      gears.shape.partially_rounded_rect(cr, width, height, true, false, false, true, 9)
+    end,
+    widget = wibox.container.background
+  }
 end
 
 local create_horizontal_bar_dialog = function(c, pos, bg, size)
@@ -162,34 +186,42 @@ local create_horizontal_bar_dialog = function(c, pos, bg, size)
 	-- Check if passed position is valid
 	if (pos == 'left' or pos == 'right') then
 		pos = 'top'
-		bg = '#FF00FF'
-	end 
+		-- bg = '#FF00FF'
+	end
 
-	awful.titlebar(c, {position = pos, bg = bg, size = size}) : setup {
-		{
-			{
-				awful.titlebar.widget.closebutton(c),
-				awful.titlebar.widget.ontopbutton(c),
-				awful.titlebar.widget.minimizebutton(c),
-				spacing = dpi(7),
-				layout  = wibox.layout.fixed.horizontal
-			},
-			margins = dpi(10),
-			widget = wibox.container.margin
-		},
-		{
-			buttons = create_click_events(c),
-			layout = wibox.layout.flex.horizontal
-		},
-		nil,
-		layout = wibox.layout.align.horizontal
-	}
+	awful.titlebar(c, {position = pos, bg = '#00000000', size = size}) : setup {
+    {
+      {
+        {
+          awful.titlebar.widget.closebutton(c),
+          awful.titlebar.widget.ontopbutton(c),
+          awful.titlebar.widget.minimizebutton(c),
+          spacing = dpi(7),
+          layout  = wibox.layout.fixed.horizontal
+        },
+        margins = dpi(10),
+        widget = wibox.container.margin
+      },
+      {
+        buttons = create_click_events(c),
+        layout = wibox.layout.flex.horizontal
+      },
+      nil,
+      layout = wibox.layout.align.horizontal
+    },
+    bg = bg,
+    -- This is the anti-aliased shaped container that will have the purple color and will act as the titlebar's background with 9 as the corner radius.
+    shape = function(cr, width, height)
+      gears.shape.partially_rounded_rect(cr, width, height, true, false, false, true, 9)
+    end,
+    widget = wibox.container.background
+  }
 end
 
 client.connect_signal(
 	'request::titlebars',
 	function(c)
-		
+
 		-- Customize here
 		if c.type == 'normal' then
 
@@ -228,7 +260,7 @@ client.connect_signal(
 			elseif c.class == 'Google-chrome' or c.class == 'Chromium' then
 				create_vertical_bar(c, 'left',
 					beautiful.gtk.get_theme_variables().base_color, beautiful.titlebar_size)
-				
+
 			elseif c.class == 'TelegramDesktop' then
 				create_vertical_bar(c, 'left', '#17212b', beautiful.titlebar_size)
 
@@ -241,6 +273,9 @@ client.connect_signal(
 			elseif c.class == 'Nemo' then
 				create_horizontal_bar(c, 'top',
 					beautiful.gtk.get_theme_variables().base_color, beautiful.titlebar_size)
+
+      elseif c.name == 'Android Emulator - Pixel_XL_API_30:5554' then
+        return
 
 			else
 				create_vertical_bar(c, 'left', beautiful.background, beautiful.titlebar_size)
