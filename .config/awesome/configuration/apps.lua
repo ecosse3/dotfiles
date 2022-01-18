@@ -46,14 +46,24 @@ return {
 							' -show drun -theme ' .. config_dir ..
 							'/configuration/rofi/appmenu/rofi.rasi',
 
-		-- You can add more default applications here
-    rofi_pass = 'rofi-pass'
+    -- Rofi
+    rofi_pass = 'rofi-pass',
+    rofi_clipboard = 'rofi -modi "clipboard:greenclip print" -show clipboard ' ..
+              "-dpi " .. screen.primary.dpi ..
+							"-run-command '{cmd}' -theme " ..
+              config_dir .. "/configuration/rofi/global/search.rasi",
+    rofi_emoji = 'rofi -show emoji -modi emoji ' ..
+              '-dpi ' .. screen.primary.dpi .. ' ' ..
+              '-theme ' .. config_dir .. '/configuration/rofi/global/search.rasi',
+    -- Colorpick any color from screen
+    colorpicker = 'farge --notify --expire-time 5000',
 	},
 
 	-- List of apps to start once on start-up
+  -- Autostart
 	run_on_start_up = {
     -- Screen setup
-    'xrandr --dpi 110 --output DP-1 --mode 3440x1440 --rate 60.00 --primary --output DP-0 --mode 1920x1080 --rate 60 --left-of DP-1',
+    'xrandr --output DP-1 --mode 3440x1440 --rate 60 --dpi 110 --primary --output DP-0 --mode 1920x1080 --rate 60 --dpi 100 --left-of DP-1',
     'setxkbmap -layout pl -option caps:escape -option altwin:swap_lalt_lwin',
     -- Mouse
     'xinput set-prop "MX Master 2S Mouse" "Coordinate Transformation Matrix" 2.400000, 0.000000, 0.000000, 0.000000, 2.400000, 0.000000, 0.000000, 0.000000, 1.000000',
@@ -66,6 +76,8 @@ return {
 		'blueman-applet',
 		-- Music server
 		'mpd',
+    -- Clipboard daemon
+    'greenclip daemon',
 		-- Polkit and keyring
 		'/usr/bin/lxqt-policykit-agent &' ..
 		' eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg)',
