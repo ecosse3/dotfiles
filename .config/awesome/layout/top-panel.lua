@@ -35,7 +35,7 @@ local top_panel = function(s, offset)
 
 	panel:connect_signal(
 		'mouse::enter',
-		function() 
+		function()
 			local w = mouse.current_wibox
 			if w then
 				w.cursor = 'left_ptr'
@@ -51,17 +51,17 @@ local top_panel = function(s, offset)
 		widget = wibox.widget.systray
 	}
 
-	local clock 			= require('widget.clock')(s)
-	local layout_box 		= require('widget.layoutbox')(s)
-	local add_button 		= require('widget.open-default-app')(s)
-	s.tray_toggler  		= require('widget.tray-toggle')
-	s.updater 				= require('widget.package-updater')()
-	s.screen_rec 			= require('widget.screen-recorder')()
-	s.mpd       			= require('widget.mpd')()
-	s.bluetooth   			= require('widget.bluetooth')()
-	s.battery     			= require('widget.battery')()
-	s.network       		= require('widget.network')()
-	s.info_center_toggle	= require('widget.info-center-toggle')()
+	local clock          = require('widget.clock')(s)
+	local layout_box     = require('widget.layoutbox')(s)
+	local add_button     = require('widget.open-default-app')(s)
+	s.tray_toggler       = require('widget.tray-toggle')
+	s.updater            = require('widget.package-updater')()
+	s.screen_rec         = require('widget.screen-recorder')()
+	s.mpd                = require('widget.mpd')()
+	s.bluetooth          = require('widget.bluetooth')()
+	s.battery            = require('widget.battery')()
+	s.network            = require('widget.network')()
+	s.info_center_toggle = require('widget.info-center-toggle')()
 
 	panel : setup {
 		layout = wibox.layout.align.horizontal,
@@ -70,7 +70,7 @@ local top_panel = function(s, offset)
 			layout = wibox.layout.fixed.horizontal,
 			task_list(s),
 			add_button
-		}, 
+		},
 		clock,
 		{
 			layout = wibox.layout.fixed.horizontal,
