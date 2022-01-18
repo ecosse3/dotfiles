@@ -14,7 +14,7 @@ local media_buttons = ui_content.media_buttons
 local apps = require('configuration.apps')
 
 local update_cover = function()
-	
+
 	local extract_script = [=[
 		MUSIC_DIR="$(xdg-user-dir MUSIC)"
 		TMP_DIR="/tmp/awesomewm/${USER}/"
@@ -31,7 +31,7 @@ local update_cover = function()
 
 			SONG="$MUSIC_DIR/$(mpc -p 6600 --format "%file%" current)"
 			PICTURE_TAG="-Picture"
-			
+
 			if [[ "$SONG" == *".m4a" ]]; then
 				PICTURE_TAG="-CoverArt"
 			fi
@@ -54,7 +54,7 @@ local update_cover = function()
 
 			rm "$TMP_SONG"
 		fi
-			
+
 		img_data=$(identify $TMP_COVER_PATH 2>&1)
 
 		# Delete the cover.jpg if it's not a valid image
@@ -62,13 +62,13 @@ local update_cover = function()
 			rm $TMP_COVER_PATH
 		fi
 
-		if [ -f $TMP_COVER_PATH ]; then 
-			echo $TMP_COVER_PATH; 
+		if [ -f $TMP_COVER_PATH ]; then
+			echo $TMP_COVER_PATH;
 		fi
 	]=]
 
 	awful.spawn.easy_async_with_shell(
-		extract_script, 
+		extract_script,
 		function(stdout)
 			local album_icon = widget_icon_dir .. 'vinyl.svg'
 
@@ -77,10 +77,10 @@ local update_cover = function()
 			end
 
 			album_cover.cover:set_image(gears.surface.load_uncached(album_icon))
-			
+
 			album_cover:emit_signal('widget::redraw_needed')
 			album_cover:emit_signal('widget::layout_changed')
-			
+
 			collectgarbage('collect')
 		end
 	)
@@ -90,7 +90,7 @@ local update_progress_bar = function()
 	awful.spawn.easy_async_with_shell(
 		[[
 		mpc status | awk 'NR==2 { split($4, a); print a[1]}'  |  tr -d '[\%\(\)]'
-		]], 
+		]],
 		function(stdout)
 			local progress_bar = prog_bar.music_bar
 			if stdout ~= nil then
@@ -139,7 +139,7 @@ local update_file = function()
 	awful.spawn.easy_async_with_shell(
 		[[
 		mpc -f %file% current
-		]], 
+		]],
 		function(stdout)
 			file_name = stdout:gsub('%\n','')
 		end
@@ -154,28 +154,28 @@ local update_title = function()
 		mpc -f %title% current
 		]],
 		function(stdout)
-		
+
 			-- Remove new lines
 			local title = stdout:gsub('%\n', '')
 
 			local title_widget = song_info.music_title
 			local title_text = song_info.music_title:get_children_by_id('title')[1]
-			
+
 			-- Make sure it's not null
 			if not (title == nil or title == '') then
-				title_text:set_text(title)			
+				title_text:set_text(title)
 			else
 
 				awful.spawn.easy_async_with_shell(
 					[[
 					mpc -f %file% current
-					]], 
+					]],
 					function(stdout)
 
 						if not (stdout == nil or stdout == '') then
 
 							file_name = stdout:gsub('%\n','')
-			
+
 							file_name = file_name:sub(1, title:len() - 5) .. ''
 
 							title_text:set_text(file_name)
@@ -189,7 +189,7 @@ local update_title = function()
 						title_widget:emit_signal('widget::layout_changed')
 					end
 				)
-			
+
 			end
 
 			title_widget:emit_signal('widget::redraw_needed')
@@ -206,7 +206,7 @@ local update_artist = function()
 		mpc -f %artist% current
 		]],
 		function(stdout)
-		
+
 			-- Remove new lines
 			local artist = stdout:gsub('%\n', '')
 
@@ -217,14 +217,14 @@ local update_artist = function()
 			if not (artist == nil or artist == '') then
 
 				artist_text:set_text(artist)
-			
+
 			else
-				
+
 
 				awful.spawn.easy_async_with_shell(
 					[[
 					mpc -f %file% current
-					]], 
+					]],
 					function(stdout)
 						if not (stdout == nil or stdout == '') then
 
@@ -250,8 +250,8 @@ local update_volume_slider = function()
 	awful.spawn.easy_async_with_shell(
 		[[
 		mpc volume
-		]], 
-		function(stdout) 			
+		]],
+		function(stdout)
 			local volume_slider = vol_slider.vol_slider
 			if stdout:match('n/a') then
 				return
@@ -302,7 +302,7 @@ local check_random_status = function()
 		function(stdout)
 
 			local random_button_image = media_buttons.random_button_image.rand
-			
+
 			if stdout:match("on") then
 				random_button_image:set_image(widget_icon_dir .. 'random-on.svg')
 			else
@@ -316,7 +316,7 @@ vol_slider.vol_slider:connect_signal(
 	'property::value',
 	function()
 		awful.spawn.easy_async_with_shell(
-			'mpc volume ' .. vol_slider.vol_slider:get_value(), 
+			'mpc volume ' .. vol_slider.vol_slider:get_value(),
 			function() end
 		)
 	end
@@ -357,18 +357,18 @@ mpc idleloop player
 ]]
 
 local kill_mpd_change_event_listener = [[
-ps x | 
-grep "mpc idleloop player" | 
-grep -v grep | 
-awk '{print $1}' | 
+ps x |
+grep "mpc idleloop player" |
+grep -v grep |
+awk '{print $1}' |
 xargs kill
 ]]
 
 awful.spawn.easy_async_with_shell(
-	mpd_startup, 
+	mpd_startup,
 	function ()
 		awful.spawn.easy_async_with_shell(
-			kill_mpd_change_event_listener, 
+			kill_mpd_change_event_listener,
 			function ()
 				update_all_content()
 				awful.spawn.with_line_callback(
@@ -431,8 +431,8 @@ media_buttons.repeat_button:buttons(
 			nil,
 			function()
 				awful.spawn.easy_async_with_shell(
-					'mpc repeat', 
-					function () 
+					'mpc repeat',
+					function ()
 						check_repeat_status()
 					end
 				)
@@ -449,8 +449,8 @@ media_buttons.random_button:buttons(
 			nil,
 			function()
 				awful.spawn.easy_async_with_shell(
-					'mpc random', 
-					function () 
+					'mpc random',
+					function ()
 						check_random_status()
 					end
 				)

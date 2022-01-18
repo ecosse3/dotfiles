@@ -42,7 +42,7 @@ screen.connect_signal('request::desktop_decoration', function(s)
 	s.song_info = ui_content.song_info.music_info
 	s.media_buttons = ui_content.media_buttons.navigate_buttons
 	s.volume_slider  = ui_content.volume_slider.vol_slider
-	
+
 	s.musicpop : setup {
 		{
 			{
@@ -74,11 +74,11 @@ screen.connect_signal('request::desktop_decoration', function(s)
 
 		},
 		bg = beautiful.background,
-		shape = function(cr, width, height)
-			gears.shape.partially_rounded_rect(
-				cr, width, height, true, true, true, true, beautiful.groups_radius
-			)
-		end,
+		-- shape = function(cr, width, height)
+		-- 	gears.shape.partially_rounded_rect(
+		-- 		cr, width, height, true, true, true, true, beautiful.groups_radius
+		-- 	)
+		-- end,
 		widget = wibox.container.background()
 	}
 
@@ -112,8 +112,8 @@ screen.connect_signal('request::desktop_decoration', function(s)
 				music_box.visible = true
 				awful.placement.top_right(
 					music_box,
-					{ 
-						margins = { 
+					{
+						margins = {
 							top = dpi(5),
 							right = dpi(music_box_x or 5)
 						},
@@ -121,7 +121,7 @@ screen.connect_signal('request::desktop_decoration', function(s)
 				})
 			else
 				local widget_button = mouse.current_widget_geometry
-				
+
 				music_backdrop.visible = true
 				music_box:move_next_to(widget_button)
 				music_box_x = (focused.geometry.width - music_box.x) - music_box_width
@@ -155,4 +155,4 @@ music_func.toggle_music_box = toggle_music_box
 
 local mpd_updater = require('widget.mpd.mpd-music-updater')
 
-return music_func 
+return music_func

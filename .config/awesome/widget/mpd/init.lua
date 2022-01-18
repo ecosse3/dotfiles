@@ -39,6 +39,7 @@ local return_button = function()
 		preferred_positions = {'right', 'left', 'top', 'bottom'}
 	}
 
+
 	widget_button:buttons(
 		gears.table.join(
 			awful.button(
@@ -54,11 +55,11 @@ local return_button = function()
 	)
 
 	widget_button:connect_signal(
-		"mouse::enter", 
-		function() 
+		"mouse::enter",
+		function()
 			awful.spawn.easy_async_with_shell(
 				'mpc status',
-				function(stdout) 
+				function(stdout)
 				music_tooltip.text = string.gsub(stdout, '\n$', '')
 				end
 			)

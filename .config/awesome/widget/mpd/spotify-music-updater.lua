@@ -3,7 +3,7 @@ local awful = require('awful')
 local naughty = require('naughty')
 
 local config_dir = gears.filesystem.get_configuration_dir()
-local widget_icon_dir = config_dir .. 'widget/music/icons/'
+local widget_icon_dir = config_dir .. 'widget/mpd/icons/'
 
 local ui_content = require('widget.music.content')
 
@@ -27,7 +27,7 @@ media_buttons.random_button.visible = false
 local update_cover = function()
 	local get_art_url = [[
 	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get \
-	string:'org.mpris.MediaPlayer2.Player' string:'Metadata' | 
+	string:'org.mpris.MediaPlayer2.Player' string:'Metadata' |
 	egrep -A 1 "artUrl"| egrep -v "artUrl" | awk -F '"' '{print $2}' |
 	sed -e 's/open.spotify.com/i.scdn.co/g'
 	]]
@@ -35,7 +35,7 @@ local update_cover = function()
 	awful.spawn.easy_async_with_shell(
 		get_art_url,
 		function(link)
-			
+
 			local download_art = [[
 			tmp_dir="/tmp/awesomewm/${USER}/"
 			tmp_cover_path=${tmp_dir}"cover.jpg"
@@ -63,7 +63,7 @@ local update_cover = function()
 
 					album_cover:emit_signal("widget::redraw_needed")
 					album_cover:emit_signal("widget::layout_changed")
-					
+
 					collectgarbage('collect')
 				end
 			)
@@ -106,7 +106,7 @@ local update_artist = function()
 		egrep -A 2 "artist" | egrep -v "artist" | egrep -v "array" | awk -F '"' '{print $2}'
 		]],
 		function(stdout)
-		
+
 			-- Remove new lines
 			local artist = stdout:gsub('%\n', '')
 
@@ -161,10 +161,10 @@ END
 	]]
 
 	awful.spawn.easy_async_with_shell(
-		get_volume, 
+		get_volume,
 		function(stdout)
 			-- naughty.notification({message=stdout})
-			
+
 			local volume_slider = vol_slider.vol_slider
 
 			volume_slider:set_value(tonumber(stdout:match('%d+')))
@@ -176,13 +176,13 @@ end
 local check_if_playing = function()
 	awful.spawn.easy_async_with_shell(
 		[[
-		dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'PlaybackStatus' | 
+		dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'PlaybackStatus' |
 		grep -A 1 "string" | awk -F '"' '{print $2}'
 		]],
 		function(stdout)
 
 			local play_button_img = media_buttons.play_button_image.play
-		
+
 			if stdout:match("Playing") then
 				play_button_img:set_image(widget_icon_dir .. 'pause.svg')
 				update_volume_slider()
@@ -230,7 +230,7 @@ END
 	]]
 
 	awful.spawn.easy_async_with_shell(
-		set_volume, 
+		set_volume,
 		function(stdout) end
 	)
 
@@ -248,7 +248,7 @@ vol_slider.vol_slider:connect_signal(
 
 local update_all_content = function()
 	-- Add a delay
-	gears.timer.start_new(2, function() 
+	gears.timer.start_new(2, function()
 		update_title()
 		update_artist()
 		update_cover()
@@ -271,8 +271,8 @@ media_buttons.play_button:buttons(
 				awful.spawn.easy_async_with_shell(
 					[[
 					dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
-					]], 
-					function() 
+					]],
+					function()
 						check_if_playing()
 					end
 				)
@@ -292,8 +292,8 @@ media_buttons.next_button:buttons(
 				awful.spawn.easy_async_with_shell(
 					[[
 					dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
-					]], 
-					function() 
+					]],
+					function()
 						update_all_content()
 					end
 				)
@@ -313,8 +313,8 @@ media_buttons.prev_button:buttons(
 				awful.spawn.easy_async_with_shell(
 					[[
 					dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
-					]], 
-					function() 
+					]],
+					function()
 						update_all_content()
 					end
 				)
