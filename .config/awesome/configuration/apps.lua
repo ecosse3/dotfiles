@@ -12,7 +12,7 @@ return {
 		-- Default text editor
 		text_editor = 'nvim',
 		-- Default file manager
-		file_manager = 'nautilus',
+		file_manager = 'dolphin',
 		-- Default media player
 		multimedia = 'vlc',
 		-- Default game, can be a launcher like steam
