@@ -54,7 +54,7 @@ entry {
     expand: true;
     vertical-align: 0.5;
     horizontal-align: 0;
-    placeholder: "Global Search";
+    placeholder: "Search";
     placeholder-color: @foreground;
     blink: true;
 }

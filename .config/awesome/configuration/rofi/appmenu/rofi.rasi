@@ -2,7 +2,6 @@ configuration {
 	font: "Inter Regular 10";
 	show-icons: true;
 	drun-display-format: "{name}";
-	fullscreen: false;
 	threads: 0;
 	matching: "fuzzy";
 	scroll-method: 0;
@@ -14,6 +13,7 @@ configuration {
 * {
 	transparent: #00000000;
 	foreground: #00000000;
+  white: #FFFFFF;
 	background-selected: #F2F2F245;
 	background-active: #F2F2F230;
 	background-white: #F2F2F211;
@@ -37,7 +37,7 @@ prompt {
 button {
 	action: "ok";
 	str: " ";
-	font: "FantasqueSansMono Nerd Font 11";
+	font: "FiraCode Nerd Font 11";
 	expand: false;
 	text-color: @foreground;
 	background-color: @transparent;
@@ -109,11 +109,14 @@ element {
 }
 
 element-icon {
+  background-color: @transparent;
 	size: 72px;
 	border: 0;
 }
 
 element-text {
+  background-color: @transparent;
+  text-color: @white;
 	expand: true;
 	horizontal-align: 0.5;
 	vertical-align: 0.5;
