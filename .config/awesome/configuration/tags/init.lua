@@ -7,19 +7,19 @@ local apps = require('configuration.apps')
 local tags = {
 	{
 		type = 'internet',
-		icon = icons.web_browser,
+		icon = icons.web_browser_minimal,
 		default_app = apps.default.web_browser,
 		gap = beautiful.useless_gap
 	},
 	{
 		type = 'terminal',
-		icon = icons.terminal,
+		icon = icons.terminal_minimal,
 		default_app = apps.default.terminal,
 		gap = beautiful.useless_gap
 	},
 	{
 		type = 'code',
-		icon = icons.text_editor,
+		icon = icons.neovim_minimal,
 		default_app = apps.default.text_editor,
 		gap = beautiful.useless_gap
 	},
@@ -32,44 +32,37 @@ local tags = {
 	},
 	{
 		type = 'multimedia',
-		icon = icons.multimedia,
+		icon = icons.spotify_minimal,
 		default_app = apps.default.multimedia,
 		gap = beautiful.useless_gap,
 		layout = awful.layout.suit.floating
 	},
 	{
-		type = 'games',
-		icon = icons.games,
-		default_app = apps.default.game,
-		gap = beautiful.useless_gap,
-		layout = awful.layout.suit.floating
+	  type = 'social',
+	  icon = icons.social_minimal,
+	  default_app = 'discord',
+	  gap = beautiful.useless_gap
 	},
 	{
 		type = 'graphics',
-		icon = icons.graphics,
+		icon = icons.gimp_minimal,
 		default_app = apps.default.graphics,
 		gap = beautiful.useless_gap
 	},
-	{
-		type = 'sandbox',
-		icon = icons.sandbox,
-		default_app = apps.default.sandbox,
-		layout = awful.layout.suit.max,
-		gap = 0
-	},
+	-- {
+	-- 	type = 'sandbox',
+	-- 	icon = icons.sandbox,
+	-- 	default_app = apps.default.sandbox,
+	-- 	layout = awful.layout.suit.max,
+	-- 	gap = 0
+	-- },
 	{
 		type = 'any',
-		icon = icons.development,
+		icon = icons.development_minimal,
 		default_app = apps.default.development,
 		gap = beautiful.useless_gap,
 		layout = awful.layout.suit.floating
 	}
-	-- {
-	--   type = 'social',
-	--   icon = icons.social,
-	--   default_app = 'discord',
-	--   gap = beautiful.useless_gap
-	-- }
 }
 
 -- Set tags layout

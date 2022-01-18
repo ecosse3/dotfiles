@@ -71,7 +71,7 @@
          width="15.875"
          transform="rotate(45)"
          id="rect7"
-         style="fill:#5677fc;stroke-width:0.25099999;stroke-opacity:0.19599998;paint-order:markers stroke fill" />
+         style="fill:#FFFFFF;stroke-width:0.25099999;stroke-opacity:0.19599998;paint-order:markers stroke fill" />
     </clipPath>
     <linearGradient
        xlink:href="#a"
@@ -89,7 +89,7 @@
        d="m 3.44,282.448 c -0.294,0 -0.395,0.269 -0.53,0.53 H 2.117 a 0.528,0.528 0 0 0 -0.53,0.528 v 5.292 c 0,0.293 0.237,0.53 0.53,0.53 h 12.7 c 0.293,0 0.529,-0.237 0.529,-0.53 v -5.292 a 0.528,0.528 0 0 0 -0.53,-0.529 H 7.674 c -0.155,-0.249 -0.236,-0.53 -0.53,-0.53 z"
        id="path13"
        inkscape:connector-curvature="0"
-       style="fill:#5677fc;paint-order:markers stroke fill" />
+       style="fill:#FFFFFF;paint-order:markers stroke fill" />
     <path
        d="m 3.44,282.448 c -0.294,0 -0.395,0.269 -0.53,0.53 H 2.117 a 0.528,0.528 0 0 0 -0.53,0.528 v 5.292 c 0,0.293 0.237,0.53 0.53,0.53 h 12.7 c 0.293,0 0.529,-0.237 0.529,-0.53 v -5.292 a 0.528,0.528 0 0 0 -0.53,-0.529 H 7.674 c -0.155,-0.249 -0.236,-0.53 -0.53,-0.53 z"
        id="path15"
@@ -102,7 +102,7 @@
        y="283.771"
        ry="0.26499999"
        id="rect17"
-       style="fill:#ffffff;paint-order:markers stroke fill" />
+       style="fill:#CCCCCC;paint-order:markers stroke fill" />
     <rect
        width="15.875"
        height="9.5249996"
@@ -110,12 +110,12 @@
        y="285.358"
        ry="0.52899998"
        id="rect19"
-       style="fill:#5677fc;paint-order:markers stroke fill" />
+       style="fill:#FFFFFF;paint-order:markers stroke fill" />
     <path
        d="m 8.467,284.3 h 7.408 c 0.293,0 0.53,0.236 0.53,0.53 v 3.968 c 0,0.293 -0.237,0.529 -0.53,0.529 H 6.152 c -0.294,0 -0.677,-0.276 -0.53,-0.53 l 2.316,-3.968 C 8.085,284.576 8.174,284.3 8.467,284.3 Z"
        id="path21"
        inkscape:connector-curvature="0"
-       style="fill:#5677fc;paint-order:markers stroke fill" />
+       style="fill:#FFFFFF;paint-order:markers stroke fill" />
     <rect
        width="3.175"
        height="0.52899998"
