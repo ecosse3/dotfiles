@@ -12,7 +12,7 @@ return function(s, panel, action_bar_width)
 	local menu_icon = wibox.widget {
 		{
 			id = 'menu_btn',
-			image = icons.menu,
+			image = icons.cog_minimal,
 			resize = true,
 			widget = wibox.widget.imagebox
 		},
@@ -52,7 +52,7 @@ return function(s, panel, action_bar_width)
 	panel:connect_signal(
 		'closed',
 		function()
-			menu_icon.menu_btn:set_image(gears.surface(icons.menu))
+			menu_icon.menu_btn:set_image(gears.surface(icons.cog_minimal))
 		end
 	)
 
