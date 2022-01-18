@@ -12,13 +12,25 @@ local apps = require('configuration.apps')
 -- Key bindings
 local global_keys = awful.util.table.join(
 
-	-- Hotkeys
+  -- MOD+Shift+F - Colorpicker
 	awful.key(
-		{modkey},
-		'F1',
-		hotkeys_popup.show_help,
-		{description = 'show help', group = 'awesome'}
+		{modkey, 'Shift'},
+		'f',
+		function()
+			awful.spawn(apps.default.colorpicker, { floating = true })
+		end,
+		{description = 'colorpicker', group = 'launcher'}
 	),
+  -- MOD + SHIFT + E - Emoji picker
+	awful.key(
+		{modkey, 'Shift'},
+		'e',
+		function()
+			awful.spawn(apps.default.rofi_emoji)
+		end,
+		{description = 'emoji picker', group = 'launcher'}
+	),
+	-- MOD+P - Password manager
 	awful.key(
 		{modkey},
 		'p',
@@ -26,6 +38,22 @@ local global_keys = awful.util.table.join(
 			awful.spawn(apps.default.rofi_pass)
 		end,
 		{description = 'password manager', group = 'launcher'}
+	),
+  -- MOD + V - Clipboard
+	awful.key(
+		{modkey},
+		'v',
+		function()
+			awful.spawn(apps.default.rofi_clipboard)
+		end,
+		{description = 'clipboard manager', group = 'launcher'}
+	),
+  -- Help
+	awful.key(
+		{modkey},
+		'F1',
+		hotkeys_popup.show_help,
+		{description = 'show help', group = 'awesome'}
 	),
 	awful.key({modkey, 'Control'},
 		'r',
@@ -246,7 +274,7 @@ local global_keys = awful.util.table.join(
 		{},
 		'XF86AudioNext',
 		function()
-			awful.spawn('mpc next', false)
+			awful.spawn('playerctl next', false)
 		end,
 		{description = 'next music', group = 'hotkeys'}
 	),
@@ -254,7 +282,7 @@ local global_keys = awful.util.table.join(
 		{},
 		'XF86AudioPrev',
 		function()
-			awful.spawn('mpc prev', false)
+			awful.spawn('playerctl previous', false)
 		end,
 		{description = 'previous music', group = 'hotkeys'}
 	),
@@ -262,7 +290,7 @@ local global_keys = awful.util.table.join(
 		{},
 		'XF86AudioPlay',
 		function()
-			awful.spawn('mpc toggle', false)
+			awful.spawn('playerctl play-pause', false)
 		end,
 		{description = 'play/pause music', group = 'hotkeys'}
 
@@ -316,7 +344,7 @@ local global_keys = awful.util.table.join(
 		{description = 'dropdown application', group = 'launcher'}
 	),
 	awful.key(
-		{modkey},
+		{modkey, 'Shift'},
 		'm',
 		function()
 			if awful.screen.focused().musicpop then
@@ -511,7 +539,7 @@ local global_keys = awful.util.table.join(
 				_G.right_panel_mode = 'today_mode'
 			end
 		end,
-		{description = 'open today pane', group = 'launcher'}
+		{description = 'open today panel', group = 'launcher'}
 	),
 	awful.key(
 		{modkey},
