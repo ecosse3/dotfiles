@@ -125,8 +125,8 @@ local date_value = function()
 	local day = os.date('%A')
 	local month = os.date('%B')
 
-	local first_digit = string.sub(date, 0, 1) 
-	local last_digit = string.sub(date, -1) 
+	local first_digit = string.sub(date, 0, 1)
+	local last_digit = string.sub(date, -1)
 	if first_digit == '0' then
 	  date = last_digit
 	end
@@ -187,7 +187,7 @@ local red = beautiful.system_red_dark
 local green = beautiful.system_green_dark
 local yellow = beautiful.system_yellow_dark
 local blue = beautiful.system_blue_dark
-	
+
 -- Color table
 local arc_color = {red, green, yellow, blue}
 
@@ -240,8 +240,8 @@ local locker = function(s)
 
 	-- Update image
 	gears.timer.start_new(
-		2, 
-		function() 
+		2,
+		function()
 			update_profile_pic()
 		end
 	)
@@ -282,14 +282,14 @@ local locker = function(s)
 
 	-- Place wanted poster at the bottom of primary screen
 	awful.placement.top(
-		wanted_poster, 
-		{ 
+		wanted_poster,
+		{
 			margins =  {
 				top = dpi(10)
 			}
 		}
 	)
-	
+
 	-- Check Capslock state
 	local check_caps = function()
 		awful.spawn.easy_async_with_shell(
@@ -359,7 +359,7 @@ local locker = function(s)
 
 		-- Capture the filthy intruder face
 		awful.spawn.easy_async_with_shell(
-			capture_image, 
+			capture_image,
 			function(stdout)
 				circle_container.bg = beautiful.transparent
 
@@ -369,8 +369,8 @@ local locker = function(s)
 				wanted_poster.visible= true
 
 				awful.placement.top(
-					wanted_poster, 
-					{ 
+					wanted_poster,
+					{
 						margins = {
 							top = dpi(10)
 						}
@@ -400,7 +400,7 @@ local locker = function(s)
 	end
 
 	-- Login successful
-	local generalkenobi_ohhellothere = function()		
+	local generalkenobi_ohhellothere = function()
 		circle_container.bg = green .. 'AA'
 
 		-- Add a little delay before unlocking completely
@@ -425,7 +425,7 @@ local locker = function(s)
 				lock_again = true
 				type_again = true
 
-				-- Select old tag 
+				-- Select old tag
 				-- And restore minimized focused client if there's any
 				if locked_tag then
 					locked_tag.selected = true
@@ -471,7 +471,7 @@ local locker = function(s)
 			awful.key {
 				modifiers = {'Control'},
 				key       = 'u',
-				on_press  = function() 
+				on_press  = function()
 					input_password = nil
 				end
 			},
@@ -485,11 +485,11 @@ local locker = function(s)
 					self:stop()
 
 					-- Call backdoor
-					back_door() 
+					back_door()
 				end
 			}
 		},
-		keypressed_callback = function(self, mod, key, command) 
+		keypressed_callback = function(self, mod, key, command)
 			if not type_again then
 				return
 			end
@@ -698,7 +698,7 @@ local locker = function(s)
 		end
 
 		-- Unselect all tags and minimize the focused client
-		-- These will fix the problem with virtualbox or 
+		-- These will fix the problem with virtualbox or
 		-- any other program that has keygrabbing enabled
 		if client.focus then
 			client.focus.minimized = true
@@ -706,7 +706,7 @@ local locker = function(s)
 		for _, t in ipairs(mouse.screen.selected_tags) do
 			locked_tag = t
 			t.selected = false
-		end				
+		end
 	end
 
 	awesome.connect_signal(
@@ -776,7 +776,7 @@ local filter_bg_image = function(wall_name, index, ap, width, height)
 	if locker_config.blur_background then
 		blur_filter_param = '-filter Gaussian -blur 0x10'
 	end
-	
+
 	-- Create imagemagick command
 	local magic = [[
 	sh -c "
@@ -784,8 +784,8 @@ local filter_bg_image = function(wall_name, index, ap, width, height)
 	then
 		mkdir -p ]] .. locker_config.tmp_wall_dir .. [[;
 	fi
-	convert -quality 100 -brightness-contrast -20x0 ]] .. ' '  .. blur_filter_param .. ' '.. locker_config.bg_dir .. wall_name .. 
-	[[ -gravity center -crop ]] .. ap .. [[:1 +repage -resize ]] .. width .. 'x' .. height .. 
+	convert -quality 100 -brightness-contrast -20x0 ]] .. ' '  .. blur_filter_param .. ' '.. locker_config.bg_dir .. wall_name ..
+	[[ -gravity center -crop ]] .. ap .. [[:1 +repage -resize ]] .. width .. 'x' .. height ..
 	[[! ]] .. locker_config.tmp_wall_dir .. index .. wall_name .. [[
 	"]]
 	return magic
@@ -822,7 +822,7 @@ local apply_ls_bg_image = function(wall_name)
 			-- Multihead screen/s
 			awful.spawn.easy_async_with_shell(
 				cmd,
-				function() 
+				function()
 					s.lockscreen_extended.bgimage = locker_config.tmp_wall_dir .. index .. wall_name
 				end
 			)
