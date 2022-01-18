@@ -46,14 +46,14 @@ local build_social_button = function(website)
 	}
 
 	local website_url = nil
-	if website == 'facebook' then
-		website_url = 'https://facebook.com'
+	if website == 'messenger' then
+		website_url = 'https://messenger.com'
 
 	elseif website == 'reddit' then
 		website_url = 'https://reddit.com'
 
-	elseif website == 'twitter' then
-		website_url = 'https://twitter.com'
+	elseif website == 'github' then
+		website_url = 'https://github.com'
 
 	elseif website == 'instagram' then
 		website_url = 'https://instagram.com'
@@ -102,8 +102,8 @@ local social_layout = wibox.widget {
 	layout = wibox.layout.fixed.horizontal,
 	spacing = dpi(5),
 	build_social_button('reddit'),
-	build_social_button('facebook'),
-	build_social_button('twitter'),
+	build_social_button('messenger'),
+	build_social_button('github'),
 	build_social_button('instagram'),
 }
 
