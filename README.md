@@ -5,12 +5,7 @@
 ![Follow](https://img.shields.io/github/followers/ecosse3?label=Please%20follow%20%20to%20support%20my%20work&style=social)
 
 ## Screenshots
-![](./screenshots/terminals.png)
-![](./screenshots/spotify.png)
-![](./screenshots/ranger.png)
-![](./screenshots/chrome.png)
-![](./screenshots/clean_desktop.png)
-![](./screenshots/current/lightdm.jpg)
+![](./screenshots/current/desktop.png)
 ![](./screenshots/current/lightdm2.png)
 
 ## Some details
