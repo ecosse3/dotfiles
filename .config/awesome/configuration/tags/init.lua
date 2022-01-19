@@ -5,24 +5,28 @@ local icons = require('theme.icons')
 local apps = require('configuration.apps')
 
 local tags = {
+  -- 1
 	{
 		type = 'internet',
 		icon = icons.web_browser_minimal,
 		default_app = apps.default.web_browser,
 		gap = beautiful.useless_gap
 	},
+  -- 2
 	{
 		type = 'terminal',
 		icon = icons.terminal_minimal,
 		default_app = apps.default.terminal,
 		gap = beautiful.useless_gap
 	},
+  -- 3
 	{
 		type = 'code',
 		icon = icons.neovim_minimal,
 		default_app = apps.default.text_editor,
 		gap = beautiful.useless_gap
 	},
+  -- 4
 	{
 		type = 'files',
 		icon = icons.file_manager,
@@ -30,6 +34,14 @@ local tags = {
 		gap = beautiful.useless_gap,
 		layout = awful.layout.suit.tile
 	},
+  -- 5
+	{
+	  type = 'social',
+	  icon = icons.social_minimal,
+	  default_app = 'discord',
+	  gap = beautiful.useless_gap
+	},
+  -- 6
 	{
 		type = 'multimedia',
 		icon = icons.spotify_minimal,
@@ -37,25 +49,14 @@ local tags = {
 		gap = beautiful.useless_gap,
 		layout = awful.layout.suit.floating
 	},
-	{
-	  type = 'social',
-	  icon = icons.social_minimal,
-	  default_app = 'discord',
-	  gap = beautiful.useless_gap
-	},
+  -- 7
 	{
 		type = 'graphics',
 		icon = icons.gimp_minimal,
 		default_app = apps.default.graphics,
 		gap = beautiful.useless_gap
 	},
-	-- {
-	-- 	type = 'sandbox',
-	-- 	icon = icons.sandbox,
-	-- 	default_app = apps.default.sandbox,
-	-- 	layout = awful.layout.suit.max,
-	-- 	gap = 0
-	-- },
+  -- 8
 	{
 		type = 'any',
 		icon = icons.development_minimal,
