@@ -15,13 +15,13 @@ local create_xdg_widgets = function()
 	return wibox.widget {
 		layout = wibox.layout.align.vertical,
 	  	{
-			separator,
-			require('widget.xdg-folders.home')(),
-			require('widget.xdg-folders.documents')(),
-			require('widget.xdg-folders.downloads')(),
+			-- separator,
+			-- require('widget.xdg-folders.home')(),
+			-- require('widget.xdg-folders.documents')(),
+			-- require('widget.xdg-folders.downloads')(),
 			-- require('widget.xdg-folders.pictures')(),
 			-- require('widget.xdg-folders.videos')(),
-			separator,
+			-- separator,
 			require('widget.xdg-folders.trash')(),
 			layout = wibox.layout.fixed.vertical,
 	  	},
