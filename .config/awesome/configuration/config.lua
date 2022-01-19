@@ -64,8 +64,8 @@ return {
 			-- Leave this table empty for full auto scheduling
 			wallpaper_schedule = {
 				['00:00:00'] = 'midnight-wallpaper.jpg',
-				['06:22:00'] = 'morning-wallpaper.jpg',
-				['12:00:00'] = 'noon-wallpaper.jpg',
+				['06:00:00'] = 'morning-wallpaper.jpg',
+				['14:00:00'] = 'noon-wallpaper.jpg',
 				['19:00:00'] = 'night-wallpaper.jpg'
 				-- Example of just using auto-scheduling with keywords
 				--[[
