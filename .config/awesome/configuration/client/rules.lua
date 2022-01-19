@@ -125,17 +125,15 @@ ruled.client.connect_signal(
 			}
 		}
 
-		-- Browsers and chats
+		-- Browsers
 		ruled.client.append_rule {
 			id = 'internet',
 			rule_any = {
 				class = {
 					'firefox',
 					'Tor Browser',
-					'discord',
 					'Chromium',
 					'Google-chrome',
-					'TelegramDesktop'
 				}
 			},
 			properties = {
@@ -195,12 +193,33 @@ ruled.client.connect_signal(
 					'dolphin',
 					'ark',
 					'Nemo',
-					'File-roller'
+					'File-roller',
+          'org.gnome.Nautilus'
 				}
 			},
 			properties = {
 				tag = '4',
 				switch_to_tags = true
+			}
+		}
+
+		-- Social/Chats
+		ruled.client.append_rule {
+			id = 'multimedia',
+			rule_any = {
+				class = {
+					'discord',
+					'Spotify',
+					'TelegramDesktop',
+          'Skype',
+          'Microsoft Teams - Preview',
+          'Signal'
+				}
+			},
+			properties = {
+				tag = '5',
+				switch_to_tags = false,
+				placement = awful.placement.centered
 			}
 		}
 
@@ -214,7 +233,7 @@ ruled.client.connect_signal(
 				}
 			},
 			properties = {
-				tag = '5',
+				tag = '6',
 				switch_to_tags = true,
 				placement = awful.placement.centered
 			}
