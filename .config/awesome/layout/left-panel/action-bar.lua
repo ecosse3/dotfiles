@@ -45,7 +45,7 @@ return function(s, panel, action_bar_width)
 	panel:connect_signal(
 		'opened',
 		function()
-			menu_icon.menu_btn:set_image(gears.surface(icons.close_small))
+			menu_icon.menu_btn:set_image(gears.surface(icons.close_long_minimal))
 		end
 	)
 
@@ -63,7 +63,7 @@ return function(s, panel, action_bar_width)
 		{
 			require('widget.search-apps')(),
 			tag_list(s),
-			require("widget.xdg-folders")(),
+			require("widget.xdg-folders")(), -- trash only
 			layout = wibox.layout.fixed.vertical,
 		},
 		nil,

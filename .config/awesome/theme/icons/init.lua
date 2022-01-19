@@ -6,9 +6,10 @@ return {
 
 	-- Action Bar
 	close_small         = dir .. 'tag-list/' .. 'close-small.svg',
+	close_long_minimal  = dir .. 'tag-list/' .. 'close-long-minimal.svg',
   cog_minimal         = dir .. 'tag-list/' .. 'cog-minimal.svg',
 	development         = dir .. 'tag-list/' .. 'development.svg',
-	development_minimal         = dir .. 'tag-list/' .. 'development-minimal.svg',
+	development_minimal = dir .. 'tag-list/' .. 'development-minimal.svg',
 	file_manager        = dir .. 'tag-list/' .. 'file-manager.svg',
 	games               = dir .. 'tag-list/' .. 'games.svg',
 	gimp_minimal        = dir .. 'tag-list/' .. 'gimp-minimal.svg',
