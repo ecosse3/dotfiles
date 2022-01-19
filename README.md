@@ -1,4 +1,4 @@
-# i3 & neovim dotfiles
+# awesomewm/i3 & neovim dotfiles
 
 [![Project Status: Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 ![Stars](https://img.shields.io/github/stars/ecosse3/dotfiles?label=%E2%AD%90%20Stars)
@@ -16,7 +16,7 @@
 ## Some details
 
 -   **OS**: Manjaro
--   **WM**: i3-gaps
+-   **WM**: awesome (previously i3)
 -   **Shell**: oh-my-zsh
 -   **Terminal**: Kitty
 -   **File Manager**: Ranger for terminal, Nautilus for GUI
@@ -41,9 +41,10 @@ Almost all dependencies you can download from `yaourt` or `yay`
 | Dependency                                                                         | Description                                                 | Why/Where is it needed?         |
 |------------------------------------------------------------------------------------|-------------------------------------------------------------|---------------------------------|
 | `i3-gaps`                                                                          | Window manager                                              | (explains itself)               |
+| `awesome-git`                                                                      | Window manager                                              | (explains itself)               |
 | `polybar`                                                                          | Status bar                                                  | (explains itself)               |
 | `rofi`                                                                             | Window switcher, application launcher and dmenu replacement | (explains itself)               |
-| `compton` / `picom`                                                                | X Compositor                                                | Makes transparency to windows   |
+| `picom`                                                                | X Compositor                                                | Makes transparency to windows   |
 | `lm_sensors`                                                                       | CPU temperature sensor                                      | CPU temperature widgets         |
 | `pulseaudio`, `libpulse`                                                           | Sound system **(Installed by default on most distros)**     | Volume widgets and keybinds     |
 | `mpd`                                                                              | Server-side application for playing music                   | Music widgets                   |
@@ -63,6 +64,7 @@ Almost all dependencies you can download from `yaourt` or `yay`
 ##### Icon fonts
 
 -   **Font Awesome 5**
+-   **Inter Regular**
 -   **NotoEmoji Nerd**
 -   **Faba** (for dunst notifications)
 
