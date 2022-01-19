@@ -1,4 +1,4 @@
-# awesomewm/i3 & neovim dotfiles
+# awesomewm / i3 & neovim dotfiles
 
 [![Project Status: Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 ![Stars](https://img.shields.io/github/stars/ecosse3/dotfiles?label=%E2%AD%90%20Stars)
