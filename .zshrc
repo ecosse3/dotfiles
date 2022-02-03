@@ -75,7 +75,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git sudo zsh-syntax-highlighting zsh-autosuggestions you-should-use zsh-z ssh-agent)
+plugins=(git sudo zsh-syntax-highlighting zsh-autosuggestions you-should-use zsh-z vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -111,6 +111,7 @@ alias lg="lazygit"
 alias clear_teams_cache="rm -rf Application\ Cache/Cache/* blob_storage/* Cache/* Code\ Cache/js/* databases/* GPUCache/* IndexedDB/* Local\ Storage/*"
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
+alias ssh="kitty +kitten ssh"
 
 # I'm retarded so I need this
 alias :q='exit'
@@ -127,10 +128,17 @@ alias rnlios="npx react-native log-ios"
 alias rnemulator="emulator -avd Pixel_XL_API_30"
 
 
+# Sources
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+eval $(keychain --eval --quiet id_rsa)
+
+
+# Custom commands
 
 # search and install packages with fzf
 yi() {
@@ -185,6 +193,14 @@ load-nvmrc
 
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
+# Find SSH agent automatically
+~/.scripts/ssh-find-agent.sh -a
+if [ -z "$SSH_AUTH_SOCK" ]
+then
+   eval $(ssh-agent) > /dev/null
+   ssh-add -l >/dev/null || alias ssh='ssh-add -l >/dev/null || ssh-add && unalias ssh; ssh'
+fi
+
 # PATHs
 export PATH="$ANDROID_HOME/emulator:$PATH"
 export PATH="/home/ecosse/.gem/ruby/2.7.0/bin:$PATH"
@@ -192,9 +208,12 @@ export PATH="$PATH:$(yarn global bin)"
 export GOPATH="$HOME/go"
 export GOROOT="/usr/lib/go"
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
+export KEYTIMEOUT=30
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+
+# THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/home/ecosse/.sdkman"
 [[ -s "/home/ecosse/.sdkman/bin/sdkman-init.sh" ]] && source "/home/ecosse/.sdkman/bin/sdkman-init.sh"
-
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
