@@ -75,7 +75,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git sudo zsh-syntax-highlighting zsh-autosuggestions you-should-use zsh-z vi-mode)
+plugins=(git sudo zsh-syntax-highlighting zsh-autosuggestions you-should-use zsh-z)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -112,6 +112,7 @@ alias clear_teams_cache="rm -rf Application\ Cache/Cache/* blob_storage/* Cache/
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
 alias ssh="kitty +kitten ssh"
+alias icat="kitty +kitten icat --align=left"
 
 # I'm retarded so I need this
 alias :q='exit'
@@ -127,7 +128,6 @@ alias rnios="npx react-native run-ios"
 alias rnlios="npx react-native log-ios"
 alias rnemulator="emulator -avd Pixel_XL_API_30"
 
-
 # Sources
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -137,6 +137,12 @@ alias rnemulator="emulator -avd Pixel_XL_API_30"
 
 eval $(keychain --eval --quiet id_rsa)
 
+# Vim oh-my-zsh configuration
+# bindkey -M menuselect 'h' vi-backward-char
+# bindkey -M menuselect 'j' vi-down-line-or-history
+# bindkey -M menuselect 'k' vi-up-line-or-history
+# bindkey -M menuselect 'l' vi-forward-char
+# bindkey -v '^?' backward-delete-char
 
 # Custom commands
 
@@ -210,7 +216,7 @@ export GOROOT="/usr/lib/go"
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
-export KEYTIMEOUT=30
+export KEYTIMEOUT=20
 
 
 # THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
