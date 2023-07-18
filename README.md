@@ -1,8 +1,23 @@
-# awesomewm / i3 & neovim dotfiles
+# dotfiles
 
 [![Project Status: Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 ![Stars](https://img.shields.io/github/stars/ecosse3/dotfiles?label=%E2%AD%90%20Stars)
 ![Follow](https://img.shields.io/github/followers/ecosse3?label=Please%20follow%20%20to%20support%20my%20work&style=social)
+
+# macOS:
+
+Current daily setup.
+
+<details>
+<summary>Expand macOS dotfiles</summary>
+</details>
+
+# AwesomeWM & i3 ():
+
+Those dotfiles for Awesome & i3 are not actively maintained.
+
+<details>
+<summary>Expand AwesomeWM & i3 dotfiles</summary>
 
 ## Screenshots
 ![](./screenshots/current/desktop.png)
@@ -162,3 +177,4 @@ I use `super` AKA Windows key as my main modifier.
 -   `super + shift + m` - Move current workspace to another monitor
 
 -   ... And many many more.
+</details>
