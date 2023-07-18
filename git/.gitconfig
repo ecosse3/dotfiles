@@ -1,0 +1,34 @@
+[credential]
+  helper = cache --timeout=3600
+
+[core]
+  pager = delta
+  editor = nvim
+
+[delta]
+  navigate = true  # use n and N to move between diff sections
+  features = line-numbers decorations
+  whitespace-error-style = 22 reverse
+
+[diff]
+  colorMoved = default
+
+[delta "decorations"]
+  commit-decoration-style = bold yellow box ul
+  file-style = bold yellow ul
+  file-decoration-style = none
+
+[gpg]
+  program = /opt/homebrew/bin/gpg
+
+[init]
+  defaultbranch = main
+
+[interactive]
+  diffFilter = delta --color-only
+
+[merge]
+  conflictstyle = diff3
+
+[push]
+  autoSetupRemote = true
