@@ -1,0 +1,69 @@
+gui:
+  theme:
+    activeBorderColor:
+      - red
+      - bold
+    inactiveBorderColor:
+      - white
+    optionsTextColor:
+      - blue
+    selectedLineBgColor:
+      - '#203354' # set to `default` to have no background colour
+    selectedRangeBgColor:
+      - blue
+    cherryPickedCommitBgColor:
+      - cyan
+    cherryPickedCommitFgColor:
+      - blue
+    unstagedChangesColor:
+      - red
+  log:
+    showWholeGitGraph: true
+git:
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never --24-bit-color=never
+  log:
+        # one of date-order, author-date-order, topo-order.
+    # topo-order makes it easier to read the git log graph, but commits may not
+    # appear chronologically. See https://git-scm.com/docs/git-log#_commit_ordering
+    order: 'topo-order'
+    # one of always, never, when-maximised
+    # this determines whether the git graph is rendered in the commits panel
+    showGraph: 'always'
+    # displays the whole git graph by default in the commits panel (equivalent to passing the `--all` argument to `git log`)
+    showWholeGraph: false
+git:
+    commitPrefixes:
+      lb-mobile-app: # This is repository folder name
+        pattern: "^\\w+\\/(\\w+[^-]*-[^-]*)"
+        replace: "[$1] "
+      lb-web-app: # This is repository folder name
+        pattern: "\\w+\\/(\\w+[^-]*-[^-]*)"
+        replace: "[$1] "
+      codeandpepper-careers: # This is repository folder name
+        pattern: "\\w+\\/(\\w+[^-]*-[^-]*)"
+        replace: "[$1] "
+customCommands:
+  - key: 'b'
+    prompts:
+      - type: 'menu'
+        title: 'What kind of branch is it? (from {{ index .SelectedLocalBranch.Name }})'
+        options:
+          - name: 'bug'
+            value: 'bug'
+          - name: 'feature'
+            value: 'feature'
+          - name: 'hotfix'
+            value: 'hotfix'
+            description: 'If there is a need to fix a blocker, do a temporary patch, apply a critical framework or configuration change that should be handled immediately.'
+          - name: 'experimental'
+            value: 'experimental'
+            description: 'Any new feature or idea that is not part of a release or a sprint. A branch for playing around.'
+      - type: 'input'
+        title: 'What is the {{ index .PromptResponses 0 }} ID?'
+        initialValue: ''
+    command: "git checkout -b {{ index .PromptResponses 0 }}/{{ index .PromptResponses 1 }}"
+    context: 'localBranches'
+    loadingText: 'creating branch'
+
