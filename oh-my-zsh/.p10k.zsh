@@ -350,10 +350,10 @@
   typeset -g POWERLEVEL9K_VCS_UNTRACKED_ICON='?'
 
   # Behind icon.
-  typeset -g POWERLEVEL9K_VCS_BEHIND_ICON='\uF0045'
+  typeset -g POWERLEVEL9K_VCS_BEHIND_ICON='󰁅'
 
   # Ahead icon.
-  typeset -g POWERLEVEL9K_VCS_AHEAD_ICON='\uF005D'
+  typeset -g POWERLEVEL9K_VCS_AHEAD_ICON='󰁝'
 
   # Formatter for Git status.
   #
