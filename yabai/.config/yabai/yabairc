@@ -1,0 +1,60 @@
+# globals
+yabai -m config                               \
+  mouse_follows_focus          on             \
+  focus_follows_mouse          off            \
+  window_origin_display        default        \
+  window_placement             second_child   \
+  window_shadow                on             \
+  window_animation_duration    0.1            \
+  window_animation_frame_rate  120            \
+  window_opacity_duration      0.0            \
+  active_window_opacity        2.0            \
+  normal_window_opacity        0.90           \
+  window_opacity               on             \
+  window_border                on             \
+  insert_feedback_color        0xffd75f5f     \
+  active_window_border_color   0xff7793d1     \
+  normal_window_border_color   0xff555555     \
+  window_border_width          1              \
+  split_ratio                  0.50           \
+  split_type                   auto           \
+  auto_balance                 off            \
+  layout                       bsp            \
+
+# padding
+yabai -m config top_padding 48
+# yabai -m config top_padding 10
+yabai -m config bottom_padding 14
+# yabai -m config bottom_padding 10
+yabai -m config left_padding 10
+yabai -m config right_padding 10
+yabai -m config window_gap 12
+
+# modifier for clicking and dragging with mouse
+yabai -m config mouse_modifier alt
+# set modifier + left-click drag to move window
+yabai -m config mouse_action1 move
+# set modifier + right-click drag to resize window
+yabai -m config mouse_action2 resize
+
+# when window is dropped in center of another window, swap them (on edges it will split it)
+yabai -m mouse_drop_action swap
+
+# Sketchybar
+yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus"
+yabai -m signal --add event=window_created action="sketchybar --trigger windows_on_spaces"
+yabai -m signal --add event=window_destroyed action="sketchybar --trigger windows_on_spaces"
+
+# Ignore
+yabai -m rule --add app="^System Settings$" manage=off
+yabai -m rule --add app="^Calculator$" manage=off
+yabai -m rule --add app="^Karabiner-Elements$" manage=off
+yabai -m rule --add app="^Urban VPN Desktop$" manage=off
+yabai -m rule --add app="^qemu-system-aarch64$" manage=off
+yabai -m rule --add app="^VLC$" manage=off
+yabai -m rule --add app="^Calendar$" manage=off
+yabai -m rule --add app="^Raycast$" title="Raycast Settings" manage=off
+yabai -m rule --add app="^Xcode$" title="Archives" manage=off
+yabai -m rule --add app="^Preview$" manage=off
+yabai -m rule --add app="^Discord$" title="Discord Updater" manage=off
+yabai -m rule --add app="^Accessibility Inspector$" manage=off
