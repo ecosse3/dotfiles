@@ -33,17 +33,16 @@ git:
     showGraph: 'always'
     # displays the whole git graph by default in the commits panel (equivalent to passing the `--all` argument to `git log`)
     showWholeGraph: false
-git:
-    commitPrefixes:
-      lb-mobile-app: # This is repository folder name
-        pattern: "^\\w+\\/(\\w+[^-]*-[^-]*)"
-        replace: "[$1] "
-      lb-web-app: # This is repository folder name
-        pattern: "\\w+\\/(\\w+[^-]*-[^-]*)"
-        replace: "[$1] "
-      codeandpepper-careers: # This is repository folder name
-        pattern: "\\w+\\/(\\w+[^-]*-[^-]*)"
-        replace: "[$1] "
+  commitPrefixes:
+    lb-mobile-app: # This is repository folder name
+      pattern: "^\\w+\\/(\\w+[^-]*-[^-]*)"
+      replace: "[$1] "
+    lb-web-app: # This is repository folder name
+      pattern: "\\w+\\/(\\w+[^-]*-[^-]*)"
+      replace: "[$1] "
+    codeandpepper-careers: # This is repository folder name
+      pattern: "\\w+\\/(\\w+[^-]*-[^-]*)"
+      replace: "[$1] "
 customCommands:
   - key: 'b'
     prompts:
