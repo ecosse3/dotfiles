@@ -41,10 +41,6 @@ ctrl + alt - k : yabai -m window --resize top:0:-50; \
 ctrl + alt - l : yabai -m window --resize right:50:0; \
                   yabai -m window --resize left:50:0
 
-# move window to prev and next space
-hyper - p : yabai -m window --space prev;
-hyper - n : yabai -m window --space next;
-
 # move window to space #
 shift + alt - 1 : yabai -m window --space 1;
 shift + alt - 2 : yabai -m window --space 2;
