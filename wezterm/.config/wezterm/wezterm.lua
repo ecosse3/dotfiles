@@ -181,8 +181,6 @@ wezterm.on("gui-startup", function(cmd)
     args = cmd.args
   end
 
-  local project_dir = wezterm.home_dir .. "/Projects/blanket"
-
   --  ╭──────────────────────────────────────────────────────────╮
   --  │ Spawns default session                                   │
   --  ╰──────────────────────────────────────────────────────────╯
