@@ -187,45 +187,6 @@ wezterm.on("gui-startup", function(cmd)
   local default_tab, default_pane, default_window = mux.spawn_window({
     workspace = "default",
   })
-
-  --  ╭──────────────────────────────────────────────────────────╮
-  --  │ Spawns "Blanket"                                         │
-  --  ╰──────────────────────────────────────────────────────────╯
-  -- right split
-  local blanket_tab, blanket_pane, blanket_window = mux.spawn_window({
-    workspace = "blanket",
-    cwd = project_dir,
-    args = args,
-  })
-  -- mux.rename_workspace(wezterm.mux.get_active_workspace(), "nvim")
-  blanket_pane:send_text("fnm use && npm start -- --reset-cache\n")
-
-  -- left split
-  local top_split = blanket_pane:split({
-    direction = "Left",
-    size = 0.95,
-    cwd = project_dir,
-  })
-  top_split:send_text("nvim\n")
-
-  --  ╭──────────────────────────────────────────────────────────╮
-  --  │   second tab                                             │
-  --  ╰──────────────────────────────────────────────────────────╯
-  -- left split
-  local nvim_tab, nvim_pane = blanket_window:spawn_tab({})
-  nvim_pane:send_text("wezterm cli send-text 'npm run ios && clear' && clear\n")
-
-  -- right split
-  local right_split = nvim_pane:split({
-    direction = "Right",
-    size = 0.5,
-    cwd = project_dir,
-  })
-  right_split:send_text("wezterm cli send-text 'npm run android && exit' && clear\n")
-  nvim_pane:activate()
-
-  -- I want to startup in the default workspace
-  mux.set_active_workspace("default")
 end)
 
 --  ╭──────────────────────────────────────────────────────────╮
