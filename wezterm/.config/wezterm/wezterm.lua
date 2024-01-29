@@ -35,6 +35,8 @@ config.keys = {
   -- Tab management
   { mods = "CMD",       key = "j", action = act.ActivateTabRelative(-1) },
   { mods = "CMD",       key = "k", action = act.ActivateTabRelative(1) },
+  { mods = "CMD",       key = 't', action = act.SpawnCommandInNewTab { cwd = wezterm.home_dir } },
+  { mods = "CMD",       key = 'y', action = act.SpawnTab 'CurrentPaneDomain' },
 
   -- Panes
   { mods = "CMD|SHIFT", key = "h", action = act.SplitHorizontal({ args = {} }) },
