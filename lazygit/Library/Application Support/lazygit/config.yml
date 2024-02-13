@@ -43,6 +43,9 @@ git:
     codeandpepper-careers: # This is repository folder name
       pattern: "\\w+\\/(\\w+[^-]*-[^-]*)"
       replace: "[$1] "
+    gaia-lens-web: # This is repository folder name
+      pattern: "(\\w+-\\d+).*" 
+      replace: "[$1] "
 customCommands:
   - key: 'b'
     prompts:
@@ -65,4 +68,11 @@ customCommands:
     command: "git checkout -b {{ index .PromptResponses 0 }}/{{ index .PromptResponses 1 }}"
     context: 'localBranches'
     loadingText: 'creating branch'
-
+  - key: '<c-j>'
+    command: "/bin/bash -c 'branch_name={{.SelectedLocalBranch.RefName}}; parsed_name=$(echo \"$branch_name\" | sed -E \"s/.*\\/([A-Z]+-[0-9]+).*/\\1/\"); open https://gaialens.atlassian.net/browse/$parsed_name'"
+    context: 'localBranches'
+    description: 'Load specific issue in Jira'
+    loadingText: 'Opening Jira...'
+os:
+  editPreset: 'nvim-remote'
+  edit: "nvr --remote-send '<C-\\><C-n><CMD>q<CR><Esc><C-l><CMD>lua vim.cmd(\"e \" .. GIT_CWD() .. {{filename}})<CR>'"
