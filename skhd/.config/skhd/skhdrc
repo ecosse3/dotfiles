@@ -19,17 +19,22 @@ hyper - x : yabai -m space --mirror x-axis
 # toggle window float
 hyper - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
 
+# toggle sticky
+hyper - s : yabai -m window --toggle sticky ; \
+                 yabai -m window --toggle topmost ;
+
 # maximize a window
 hyper - f : yabai -m window --toggle zoom-fullscreen
+shift + alt - f : yabai -m window --toggle native-fullscreen
 
 # balance out tree of windows (resize to occupy same area)
 hyper - b : yabai -m space --balance
 
 # move window and split
-shift + alt - j : yabai -m window --warp south
-shift + alt - k : yabai -m window --warp north
-shift + alt - h : yabai -m window --warp west
-shift + alt - l : yabai -m window --warp east
+# shift + alt - j : yabai -m window --warp south
+# shift + alt - k : yabai -m window --warp north
+# shift + alt - h : yabai -m window --warp west
+# shift + alt - l : yabai -m window --warp east
 
 # resize window
 ctrl + alt - h : yabai -m window --resize left:-49:0; \
@@ -51,6 +56,9 @@ shift + alt - 6 : yabai -m window --space 6;
 shift + alt - 7 : yabai -m window --space 7;
 
 # stop/start/restart yabai
-ctrl + alt - q : brew services stop yabai
-ctrl + alt - s : brew services start yabai
-ctrl + alt - r : brew services restart yabai
+ctrl + alt - q : yabai --stop-service
+ctrl + alt - s : yabai --start-service
+ctrl + alt - r : yabai --restart-service
+
+# focus next display
+hyper - m : yabai -m display --focus next || yabai -m display --focus prev
