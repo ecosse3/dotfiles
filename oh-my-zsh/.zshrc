@@ -109,16 +109,24 @@ eval "$(fzf --zsh)"
 #  │ Aliases                                                  │
 #  ╰──────────────────────────────────────────────────────────╯
 alias sozsh="source ~/.zshrc"
-alias v="nvim"
+
+alias v="neovide --no-multigrid &"
+# alias v="nvim --listen /tmp/nvimsocket"
 alias vi="nvim"
 alias vim="nvim"
-alias l="colorls -lA --sd"
-alias ls="colorls"
+
+alias l="eza -lA --icons=auto --git"
+alias ls="eza --icons=auto --git"
+alias lt="eza --tree --level=2 --long --icons --git"
 alias lg="lazygit"
 alias icat="kitty +kitten icat"
 alias iosdevices="xcrun xctrace list devices"
 alias pn=pnpm
 alias emulator="emulator -avd Pixel_6_Pro_API_31"
+alias gpge="gpg --encrypt --sign --armor -r"
+alias yd="yarn dev"
+alias y="yazi"
+alias ghcs="gh copilot suggest"
 
 # I'm retarded so I need this
 alias :q='exit'
