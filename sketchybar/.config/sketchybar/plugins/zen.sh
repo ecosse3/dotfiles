@@ -15,6 +15,7 @@ zen_on() {
              --set ical drawing=off                          \
              --set bluetooth.alias drawing=off               \
              --set wifi.alias drawing=off                    \
+             --set ip_address drawing=off                    \
              --set brew drawing=off
 }
 
@@ -32,6 +33,7 @@ zen_off() {
              --set ical drawing=on                          \
              --set bluetooth.alias drawing=on               \
              --set wifi.alias drawing=on                    \
+             --set ip_address drawing=on                    \
              --set brew drawing=on
 }
 

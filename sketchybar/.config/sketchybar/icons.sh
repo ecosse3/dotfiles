@@ -45,3 +45,8 @@ VOLUME_66=􀊧
 VOLUME_33=􀊥
 VOLUME_10=􀊡
 VOLUME_0=􀊣
+
+# Network Icons
+VPN=􀎡
+WIFI=􀙇
+DISCONNECTED=􀙈

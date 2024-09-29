@@ -68,6 +68,9 @@ case $@ in
 "Chromium" | "Google Chrome" | "Google Chrome Canary")
   icon_result=":google_chrome:"
   ;;
+"Arc")
+  icon_result=":google_chrome:"
+  ;;
 "zoom.us")
   icon_result=":zoom:"
   ;;
@@ -89,7 +92,7 @@ case $@ in
 "WebStorm")
   icon_result=":web_storm:"
   ;;
-"Neovide" | "MacVim" | "Vim" | "VimR")
+"neovide" | "MacVim" | "Vim" | "VimR")
   icon_result=":vim:"
   ;;
 "Sublime Text")
@@ -359,7 +362,7 @@ case $@ in
 "Podcasts")
   icon_result=":podcasts:"
   ;;
-"Alacritty" | "Hyper" | "iTerm2" | "kitty" | "Terminal" | "WezTerm")
+"Alacritty" | "Hyper" | "iTerm2" | "kitty" | "Terminal" | "WezTerm" | "wezterm")
   icon_result=":terminal:"
   ;;
 "Tor Browser")
@@ -382,3 +385,5 @@ case $@ in
   ;;
 esac
 echo $icon_result
+
+
