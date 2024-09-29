@@ -153,23 +153,64 @@ function brew() {
   fi
 }
 
-# Sessions
-blanket ()
-{
-  export PROJECT_DIR=$1
-  nohup kitty --session ~/.config/kitty/sessions/blanket.conf & disown
-  exit
-}
-
-update-wezterm ()
-{
+function update-wezterm () {
   brew upgrade --cask wezterm-nightly --no-quarantine --greedy-latest
 }
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# GaiaLens
+gl_add_network() {
+  if [ "$#" -ne 2 ]; then
+    echo "Usage: gl_add_network INSTANCE_NAME IP_NAME"
+    return 1
+  fi
 
-eval "$(rbenv init - zsh)"
+  local project_id=gaialens-300
+  local instance_name="$1"
+  local name="$2"
+
+  # Get an access token for authentication
+  local access_token=$(gcloud auth print-access-token)
+
+  # Get the public IP of the current machine
+  local new_ip=$(curl -s ipinfo.io/ip)
+
+  # Validate the IP address
+  if [[ -z "$new_ip" || ! "$new_ip" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+    echo "Error: Invalid or empty IP address."
+    return 1
+  fi
+
+  # Fetch existing authorized networks
+  local existing_networks=$(curl -s \
+    "https://sqladmin.googleapis.com/sql/v1beta4/projects/$project_id/instances/$instance_name?fields=settings/ipConfiguration/authorizedNetworks" \
+    -H "Authorization: Bearer $access_token")
+
+  local updated_networks="$existing_networks"
+  # Check if an entry with the same name exists
+  local existing_entry=$(echo $existing_networks | jq -r --arg name "$name" '.settings.ipConfiguration.authorizedNetworks[] | select(.name == $name)')
+
+  if [ -n "$existing_entry" ]; then
+    # Update the existing entry
+    updated_networks=$(echo $existing_networks | jq --arg name "$name" --arg ip "$new_ip" \
+                       '.settings.ipConfiguration.authorizedNetworks |= map(if .name == $name then .value = $ip else . end)')
+  else
+    # Prepare the new network entry
+    local new_entry="{\"kind\": \"sql#aclEntry\", \"name\": \"$name\", \"value\": \"$new_ip\"}"
+
+    # Add the new entry to the existing list
+    updated_networks=$(echo $existing_networks | jq --argjson new_entry "$new_entry" \
+                       '.settings.ipConfiguration.authorizedNetworks += [$new_entry]')
+  fi
+
+  echo "Your IP address is $new_ip"
+
+  # Update the Cloud SQL instance with the modified authorized networks
+  curl -X PATCH \
+    -H "Authorization: Bearer $access_token" \
+    -H "Content-Type: application/json" \
+    -d "$updated_networks" \
+    "https://sqladmin.googleapis.com/sql/v1beta4/projects/$project_id/instances/$instance_name"
+}
 
 # https://egeek.me/2020/04/18/enabling-locate-on-osx/
 if which glocate > /dev/null; then
@@ -182,10 +223,11 @@ fi
 
 alias loaddb="gupdatedb --localpaths=$HOME --prunepaths=/Volumes --output=$HOME/locatedb"
 
-# Exports
-export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+#  ╭──────────────────────────────────────────────────────────╮
+#  │ Exports                                                  │
+#  ╰──────────────────────────────────────────────────────────╯
+
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export ANDROID_SDK_ROOT=$ANDROID_HOME
 export PATH=$PATH:$ANDROID_HOME/emulator
