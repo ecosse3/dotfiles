@@ -9,20 +9,16 @@ gui:
       - blue
     selectedLineBgColor:
       - '#203354' # set to `default` to have no background colour
-    selectedRangeBgColor:
-      - blue
     cherryPickedCommitBgColor:
       - cyan
     cherryPickedCommitFgColor:
       - blue
     unstagedChangesColor:
       - red
-  log:
-    showWholeGitGraph: true
 git:
   paging:
     colorArg: always
-    pager: delta --dark --paging=never --24-bit-color=never
+    pager: delta --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
   log:
         # one of date-order, author-date-order, topo-order.
     # topo-order makes it easier to read the git log graph, but commits may not
@@ -44,6 +40,9 @@ git:
       pattern: "\\w+\\/(\\w+[^-]*-[^-]*)"
       replace: "[$1] "
     gaia-lens-web: # This is repository folder name
+      pattern: "(\\w+-\\d+).*" 
+      replace: "[$1] "
+    Pivot-Budget: # This is repository folder name
       pattern: "(\\w+-\\d+).*" 
       replace: "[$1] "
 customCommands:
@@ -73,6 +72,18 @@ customCommands:
     context: 'localBranches'
     description: 'Load specific issue in Jira'
     loadingText: 'Opening Jira...'
+  - key: "<c-a>" # ctrl + a
+    description: "pick AI commit"
+    command: 'git commit -m "{{.Form.Msg}}"'
+    context: "files"
+    prompts:
+      - type: "menuFromCommand"
+        title: "ai Commits"
+        key: "Msg"
+        command: "bunx @m7medvision/lazycommit@latest"
+        filter: '^(?P<number>\d+)\.\s(?P<message>.+)$'
+        valueFormat: "{{ .message }}"
+        labelFormat: "{{ .number }}: {{ .message | green }}"
 os:
   editPreset: 'nvim-remote'
-  edit: "nvr --remote-send '<C-\\><C-n><CMD>q<CR><Esc><C-l><CMD>lua vim.cmd(\"e \" .. GIT_CWD() .. {{filename}})<CR>'"
+  edit: "nvr --remote-send '<C-\\><C-n><CMD>q<CR><Esc><C-l><CMD>lua vim.cmd(\"e \" .. {{filename}})<CR>'"
