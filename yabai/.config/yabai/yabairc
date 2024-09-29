@@ -22,13 +22,13 @@ yabai -m config                               \
   layout                       bsp            \
 
 # padding
-yabai -m config top_padding 48
-# yabai -m config top_padding 10
+yabai -m config top_padding 60
+# yabai -m config top_padding 30
 yabai -m config bottom_padding 14
 # yabai -m config bottom_padding 10
 yabai -m config left_padding 10
 yabai -m config right_padding 10
-yabai -m config window_gap 12
+yabai -m config window_gap 20
 
 # modifier for clicking and dragging with mouse
 yabai -m config mouse_modifier alt
@@ -45,6 +45,9 @@ yabai -m signal --add event=window_focused action="sketchybar --trigger window_f
 yabai -m signal --add event=window_created action="sketchybar --trigger windows_on_spaces"
 yabai -m signal --add event=window_destroyed action="sketchybar --trigger windows_on_spaces"
 
+# start neovide in fullscreen mode by default
+yabai -m signal --add app='^Neovide$' event=window_created action='wid=$(yabai -m query --windows | jq ".[] | select(.app==\"Neovide\") | .id") && yabai -m window ${wid} --toggle zoom-fullscreen && yabai -m window --focus ${wid}'
+
 # Ignore
 yabai -m rule --add app="^System Settings$" manage=off
 yabai -m rule --add app="^Calculator$" manage=off
@@ -58,3 +61,9 @@ yabai -m rule --add app="^Xcode$" title="Archives" manage=off
 yabai -m rule --add app="^Preview$" manage=off
 yabai -m rule --add app="^Discord$" title="Discord Updater" manage=off
 yabai -m rule --add app="^Accessibility Inspector$" manage=off
+yabai -m rule --add title="(Copy|Bin|About This Mac|Info)" manage=off
+yabai -m rule --add app="^eqMac$" manage=off
+yabai -m rule --add app="^Finder$" manage=off
+yabai -m rule --add app="^Surfshark$" manage=off
+# float all windows by default whose title ends in `' Preferences'`
+yabai -m rule --add title=' Preferences$' manage=off
