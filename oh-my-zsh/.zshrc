@@ -250,6 +250,8 @@ export PATH="$PNPM_HOME:$PATH"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+# aws
+export AWS_DEFAULT_PROFILE=hb-sst
 
 # fnm
 export PATH="/Users/lukasz.kurpiewski/Library/Caches/fnm_multishells/68052_1679473264013/bin":$PATH
