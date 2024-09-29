@@ -103,6 +103,8 @@ config.keys = {
 --  ╰──────────────────────────────────────────────────────────╯
 
 config.enable_kitty_keyboard = true
+config.front_end = "WebGpu"
+config.max_fps = 144
 config.window_padding = {
   left = 0,
   right = 0,
