@@ -253,18 +253,6 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # aws
 export AWS_DEFAULT_PROFILE=hb-sst
 
-# fnm
-export PATH="/Users/lukasz.kurpiewski/Library/Caches/fnm_multishells/68052_1679473264013/bin":$PATH
-export FNM_ARCH="arm64"
-export FNM_MULTISHELL_PATH="/Users/lukasz.kurpiewski/Library/Caches/fnm_multishells/68052_1679473264013"
-export FNM_LOGLEVEL="info"
-export FNM_VERSION_FILE_STRATEGY="local"
-export FNM_DIR="/Users/lukasz.kurpiewski/Library/Application Support/fnm"
-export FNM_NODE_DIST_MIRROR="https://nodejs.org/dist"
-rehash
-
-# automatically load ssh keys into the ssh-agent and store passphrases in your keychain on reboot
-ssh-add --apple-use-keychain ~/.ssh/id_rsa 2> /dev/null
-
-# Fig post block. Keep at the bottom of this file.
-[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
+# Amazon Q post block. Keep at the bottom of this file.
+[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
+export PATH="$(brew --prefix grep)/libexec/gnubin:$PATH"
