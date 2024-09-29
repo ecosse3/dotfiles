@@ -132,6 +132,18 @@ alias ghcs="gh copilot suggest"
 alias :q='exit'
 alias :wq='exit'
 
+#  ╭──────────────────────────────────────────────────────────╮
+#  │ Functions                                                │
+#  ╰──────────────────────────────────────────────────────────╯
+function ya() {
+    tmp="$(mktemp -t "yazi-cwd.XXXXX")"
+    yazi --cwd-file="$tmp"
+    if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+        cd -- "$cwd"
+    fi
+    rm -f -- "$tmp"
+}
+
 # Sketchybar interactivity overloads
 function brew() {
   command brew "$@" 
