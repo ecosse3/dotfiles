@@ -235,18 +235,18 @@ export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export GPG_TTY=$(tty)
-export EDITOR='nvim'
-export VISUAL='nvim'
-export OPENAI_API_KEY="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"
-
+export OPENAI_API_KEY=$(pass show secrets/open-api-key)
+export VISUAL="nvim"
+export EDITOR="nvim"
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
 # pnpm
 export PNPM_HOME="/Users/lukasz.kurpiewski/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 # pnpm end
-
 # bun completions
 [ -s "/Users/lukasz.kurpiewski/.bun/_bun" ] && source "/Users/lukasz.kurpiewski/.bun/_bun"
-
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
