@@ -85,27 +85,29 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-# export MANPATH="/usr/local/man:$MANPATH"
+#  ╭──────────────────────────────────────────────────────────╮
+#  │ Eval                                                     │
+#  ╰──────────────────────────────────────────────────────────╯
+eval "$(rbenv init - zsh)"
+eval "$(zoxide init zsh)"
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# fnm
+eval "$(fnm env)"
+# automatically load ssh keys into the ssh-agent and store passphrases in your keychain on reboot (macOS)
+eval "$(ssh-add --apple-use-keychain ~/.ssh/id_rsa 2> /dev/null)"
+source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
+source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+# ╭──────────────────────────────────────────────────────────╮
+# │ fzf                                                      │
+# ╰──────────────────────────────────────────────────────────╯
+# Set up fzf key bindings and fuzzy completion
+eval "$(fzf --zsh)"
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-
-# Aliases
+#  ╭──────────────────────────────────────────────────────────╮
+#  │ Aliases                                                  │
+#  ╰──────────────────────────────────────────────────────────╯
 alias sozsh="source ~/.zshrc"
 alias v="nvim"
 alias vi="nvim"
