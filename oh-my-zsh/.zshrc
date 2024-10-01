@@ -110,7 +110,7 @@ eval "$(fzf --zsh)"
 #  ╰──────────────────────────────────────────────────────────╯
 alias sozsh="source ~/.zshrc"
 
-alias v="neovide --no-multigrid &"
+alias v="neovide"
 # alias v="nvim --listen /tmp/nvimsocket"
 alias vi="nvim"
 alias vim="nvim"
