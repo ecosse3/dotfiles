@@ -1,4 +1,5 @@
 gui:
+  mouseEvents: false
   theme:
     activeBorderColor:
       - red
@@ -16,11 +17,11 @@ gui:
     unstagedChangesColor:
       - red
 git:
-  paging:
-    colorArg: always
-    pager: delta --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
+  pagers:
+    - colorArg: always
+      pager: delta --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
   log:
-        # one of date-order, author-date-order, topo-order.
+    # one of date-order, author-date-order, topo-order.
     # topo-order makes it easier to read the git log graph, but commits may not
     # appear chronologically. See https://git-scm.com/docs/git-log#_commit_ordering
     order: 'topo-order'
@@ -31,31 +32,37 @@ git:
     showWholeGraph: false
   commitPrefixes:
     lb-mobile-app: # This is repository folder name
-      pattern: "^\\w+\\/(\\w+[^-]*-[^-]*)"
-      replace: "[$1] "
-    lb-web-app: # This is repository folder name
-      pattern: "\\w+\\/(\\w+[^-]*-[^-]*)"
-      replace: "[$1] "
-    codeandpepper-careers: # This is repository folder name
-      pattern: "\\w+\\/(\\w+[^-]*-[^-]*)"
-      replace: "[$1] "
-    gaia-lens-web: # This is repository folder name
-      pattern: "(\\w+-\\d+).*" 
-      replace: "[$1] "
-    Pivot-Budget: # This is repository folder name
-      pattern: "(\\w+-\\d+).*" 
-      replace: "[$1] "
+      - pattern: "^\\w+\\/(\\w+[^-]*-[^-]*)"
+        replace: "[$1] "
+    lb-web-app:
+      - pattern: "\\w+\\/(\\w+[^-]*-[^-]*)"
+        replace: "[$1] "
+    codeandpepper-careers:
+      - pattern: "\\w+\\/(\\w+[^-]*-[^-]*)"
+        replace: "[$1] "
+    # Pattern for Jira issues in branch names, e.g. "feature/PROJ-1234-add-new-feature" will extract "PROJ-1234"
+    gaia-lens-web:
+      - pattern: "(\\w+)\\/(\\w+-\\d+).*"
+        replace: "$1($2): "
+    cas-marketplace:
+      - pattern: "(\\w+)\\/(\\w+-\\d+).*"
+        replace: "$1($2): "
+    Pivot-Budget:
+      - pattern: "(\\w+-\\d+).*"
+        replace: "[$1] "
 customCommands:
   - key: 'b'
     prompts:
       - type: 'menu'
         title: 'What kind of branch is it? (from {{ index .SelectedLocalBranch.Name }})'
         options:
-          - name: 'bug'
-            value: 'bug'
+          - name: 'bug fix'
+            value: 'fix'
           - name: 'feature'
-            value: 'feature'
-          - name: 'hotfix'
+            value: 'feat'
+          - name: 'chore'
+            value: 'chore'
+          - name: 'hot fix'
             value: 'hotfix'
             description: 'If there is a need to fix a blocker, do a temporary patch, apply a critical framework or configuration change that should be handled immediately.'
           - name: 'experimental'
@@ -73,17 +80,10 @@ customCommands:
     description: 'Load specific issue in Jira'
     loadingText: 'Opening Jira...'
   - key: "<c-a>" # ctrl + a
-    description: "pick AI commit"
-    command: 'git commit -m "{{.Form.Msg}}"'
-    context: "files"
-    prompts:
-      - type: "menuFromCommand"
-        title: "ai Commits"
-        key: "Msg"
-        command: "bunx @m7medvision/lazycommit@latest"
-        filter: '^(?P<number>\d+)\.\s(?P<message>.+)$'
-        valueFormat: "{{ .message }}"
-        labelFormat: "{{ .number }}: {{ .message | green }}"
+    description: "Pick AI commit"
+    command: aicommit2
+    context: files
+    output: terminal
 os:
   editPreset: 'nvim-remote'
-  edit: "nvr --remote-send '<C-\\><C-n><CMD>q<CR><Esc><C-l><CMD>lua vim.cmd(\"e \" .. {{filename}})<CR>'"
+  # edit: "nvr --remote-send '<C-\\><C-n><CMD>q<CR><Esc><C-l><CMD>lua vim.cmd(\"e \" .. {{filename}})<CR>'"
