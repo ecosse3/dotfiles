@@ -8,3 +8,15 @@ neovim-bin = "/usr/local/bin/nvim"
 frame = "full"
 title-hidden = true
 tabs = true
+
+[font]
+normal = ["FiraCode Nerd Font"]
+size = 16.0
+hinting = "full"
+edging = "antialias"
+
+[font.features]
+"FiraCode Nerd Font" = ["+liga", "+calt"]
+
+[box-drawing]
+mode = "native"
