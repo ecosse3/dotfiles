@@ -1,5 +1,6 @@
-# Amazon Q pre block. Keep at the top of this file.
-[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
+# Kiro CLI pre block. Keep at the top of this file.
+[[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh"
+if [[ ":$FPATH:" != *":/Users/lukasz.kurpiewski/.zsh/completions:"* ]]; then export FPATH="/Users/lukasz.kurpiewski/.zsh/completions:$FPATH"; fi
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -79,7 +80,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git sudo zsh-syntax-highlighting zsh-autosuggestions you-should-use zsh-fzf-history-search)
+plugins=(git sudo zsh-syntax-highlighting you-should-use zsh-fzf-history-search kimi-cli)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -96,12 +97,6 @@ eval "$(zoxide init zsh)"
 eval "$(fnm env)"
 # automatically load ssh keys into the ssh-agent and store passphrases in your keychain on reboot (macOS)
 eval "$(ssh-add --apple-use-keychain ~/.ssh/id_rsa 2> /dev/null)"
-source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
-source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
-
-# ╭──────────────────────────────────────────────────────────╮
-# │ fzf                                                      │
-# ╰──────────────────────────────────────────────────────────╯
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --zsh)"
 
@@ -110,10 +105,26 @@ eval "$(fzf --zsh)"
 #  ╰──────────────────────────────────────────────────────────╯
 alias sozsh="source ~/.zshrc"
 
-alias v="neovide"
-# alias v="nvim --listen /tmp/nvimsocket"
 alias vi="nvim"
 alias vim="nvim"
+
+# Open file(s) in running Neovide instance, or launch a new one
+function v() {
+  local socket="/tmp/neovide.pipe"
+  if nvr --servername "$socket" --nostart --remote-expr 'v:true' &>/dev/null; then
+    # Existing Neovide is running — send files to it
+    if [ $# -eq 0 ]; then
+      nvr --servername "$socket" --nostart
+    else
+      nvr --servername "$socket" --nostart "$@"
+    fi
+  else
+    # No running Neovide — clean stale socket and launch new one
+    rm -f "$socket"
+    neovide --frame buttonless "$@" &
+    disown
+  fi
+}
 
 alias l="eza -lA --icons=auto --git"
 alias ls="eza --icons=auto --git"
@@ -124,9 +135,12 @@ alias iosdevices="xcrun xctrace list devices"
 alias pn=pnpm
 alias emulator="emulator -avd Pixel_6_Pro_API_31"
 alias gpge="gpg --encrypt --sign --armor -r"
-alias yd="yarn dev"
-alias y="yazi"
+alias yd="yarn dev --concurrency 20"
+alias ydt="yarn dev:turbo --concurrency 20"
 alias ghcs="gh copilot suggest"
+alias "gl-bastion"="ssh l.kurpiewski@35.210.101.108 -NL 51821:localhost:51821"
+alias serena="uvx --from git+https://github.com/oraios/serena serena"
+alias bu="brew update && brew upgrade"
 
 # I'm retarded so I need this
 alias :q='exit'
@@ -135,7 +149,7 @@ alias :wq='exit'
 #  ╭──────────────────────────────────────────────────────────╮
 #  │ Functions                                                │
 #  ╰──────────────────────────────────────────────────────────╯
-function ya() {
+function y() {
     tmp="$(mktemp -t "yazi-cwd.XXXXX")"
     yazi --cwd-file="$tmp"
     if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
@@ -223,19 +237,37 @@ fi
 
 alias loaddb="gupdatedb --localpaths=$HOME --prunepaths=/Volumes --output=$HOME/locatedb"
 
+# ╭──────────────────────────────────────────────────────────╮
+# │ Completions                                              │
+# ╰──────────────────────────────────────────────────────────╯
+
+source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
+source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
+
+fpath+=("$HOME/.cargo/completions/zsh")
+autoload -Uz compinit
+compinit
 
 #  ╭──────────────────────────────────────────────────────────╮
 #  │ Exports                                                  │
 #  ╰──────────────────────────────────────────────────────────╯
 
+export GPG_TTY=$(tty)
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export ANDROID_SDK_ROOT=$ANDROID_HOME
+export PATH="$HOME/.cargo/bin:$PATH"
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
-export GPG_TTY=$(tty)
-export OPENAI_API_KEY=$(pass show secrets/open-api-key)
+export PATH="/Users/lukasz.kurpiewski/.codeium/windsurf/bin:$PATH"
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH=/Users/Shared/DBngin/postgresql/17.0/bin:$PATH
+export PATH=/Users/lukasz.kurpiewski/.opencode/bin:$PATH
+export PATH="$(brew --prefix grep)/libexec/gnubin:$PATH"
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
 export VISUAL="nvim"
 export EDITOR="nvim"
 export LC_ALL=en_US.UTF-8
@@ -243,16 +275,12 @@ export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 # pnpm
 export PNPM_HOME="/Users/lukasz.kurpiewski/Library/pnpm"
-export PATH="$PNPM_HOME:$PATH"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
 # pnpm end
-# bun completions
-[ -s "/Users/lukasz.kurpiewski/.bun/_bun" ] && source "/Users/lukasz.kurpiewski/.bun/_bun"
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-# aws
-export AWS_DEFAULT_PROFILE=hb-sst
+export TSM_MUX_BACKEND="wezterm"
 
-# Amazon Q post block. Keep at the bottom of this file.
-[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
-export PATH="$(brew --prefix grep)/libexec/gnubin:$PATH"
+[ -s "/Users/lukasz.kurpiewski/.bun/_bun" ] && source "/Users/lukasz.kurpiewski/.bun/_bun"
+[[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh"
