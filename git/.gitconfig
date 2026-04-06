@@ -11,7 +11,11 @@
   whitespace-error-style = 22 reverse
 
 [diff]
+  tool = nvim_difftool
   colorMoved = default
+
+[difftool "nvim_difftool"]
+  cmd = nvim -c \"packadd nvim.difftool\" -c \"DiffTool $LOCAL $REMOTE\"
 
 [delta "decorations"]
   commit-decoration-style = bold yellow box ul
