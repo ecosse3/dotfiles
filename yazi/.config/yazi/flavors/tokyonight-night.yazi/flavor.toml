@@ -2,7 +2,7 @@
 
 # : Manager {{{
 
-[manager]
+[mgr]
 cwd = { fg = "#a9b1d6", italic = true }
 
 # Hovered
@@ -19,11 +19,6 @@ marker_cut      = { fg = "#f7768e", bg = "#f7768e" }
 marker_marked   = { fg = "#bb9af7", bg = "#bb9af7" }
 marker_selected = { fg = "#7aa2f7", bg = "#7aa2f7" }
 
-# Tab
-tab_active   = { fg = "#c0caf5", bg = "#292e42" }
-tab_inactive = { fg = "#3b4261", bg = "#1a1b26" }
-tab_width    = 1
-
 # Count
 count_copied   = { fg = "#c0caf5", bg = "#41a6b5" }
 count_cut      = { fg = "#c0caf5", bg = "#db4b4b" }
@@ -32,6 +27,11 @@ count_selected = { fg = "#c0caf5", bg = "#3d59a1" }
 # Border
 border_symbol = "│"
 border_style  = { fg = "#27a1b9" }
+
+# Tab
+[tabs]
+active   = { fg = "#15161e", bg = "#7aa2f7" }
+inactive = { fg = "#7aa2f7", bg = "#3b4261" }
 
 # : }}}
 
@@ -54,13 +54,16 @@ unset_alt   = { fg = "#9d7cd8", bg = "#3b4261" }
 # : Status bar {{{
 
 [status]
+overall   = { fg = "#c0caf5", bg = "#16161e" }
 separator_open    = ""
 separator_close   = ""
+# sep_left  = { open = "", close = "" }
+# sep_right = { open = "", close = "" }
 
 # Progress
-progress_label  = { fg = "#a9b1d6", bold = true }
-progress_normal = { fg = "#1a1b26" }
-progress_error  = { fg = "#f7768e" }
+progress_label  = { fg = "#c0caf5", bold = true }
+progress_normal = { fg = "#1a1b26", bg = "#292e42" }
+progress_error  = { fg = "#f7768e", bg = "#292e42" }
 
 # Permissions
 perm_type  = { fg = "#7aa2f7" }
@@ -95,9 +98,9 @@ selected = { bg = "#283457" }
 
 # : Completion {{{
 
-[completion]
+[cmp]
 border   = { fg = "#0db9d7" }
-active   = { fg = "#c0caf5", bg = "#283457" }
+active   = { fg = "#c0caf5", bg = "#343a55" }
 inactive = { fg = "#c0caf5" }
 
 icon_file    = ""
@@ -173,6 +176,7 @@ icon_info = ""
 [help]
 on      = { fg = "#9ece6a" }
 run     = { fg = "#bb9af7" }
+desc    = { fg = "#7dcfff" }
 hovered = { bg = "#292e42" }
 footer  = { fg = "#c0caf5", bg = "#1a1b26" }
 
@@ -205,7 +209,8 @@ rules = [
 	{ name = "*", is = "exec"  , fg = "#9ece6a" },
 
 	# Fallback
-	{ name = "*/", fg = "#7aa2f7" }
+	{ name = "*/", fg = "#7aa2f7" },
+	{ name = "*", fg = "#c0caf5" }
 ]
 
 # : }}}
